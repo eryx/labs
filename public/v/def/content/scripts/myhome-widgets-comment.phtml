@@ -1,0 +1,12 @@
+<?php defined('SK_ENTRY') or die('Access Denied!'); ?>
+<div class="nodeRightBar">
+    <h4><?=$this->lang->_('Recent')?> <?=$this->lang->_('Comments')?></h4>
+    <ul>
+        <?php foreach ($this->commentListRecent as $comment): ?>
+        <li>
+            <div class="info"><img src="<?=$this->tplPath?>/img/comment.png" border="0" align="absmiddle" /> <?=$comment['username']?>@<?php echo date('Y-m-d', strtotime($comment['created']));?></div>
+            <p><a href="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->subModule?>/archives/<?=$comment['nodeid']?>.html"><?=$comment['body']?></a></p>
+        </li>
+        <?php endforeach;?>
+    </ul>  
+</div>

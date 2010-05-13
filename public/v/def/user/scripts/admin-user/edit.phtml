@@ -1,0 +1,90 @@
+<?php 
+defined('SK_ENTRY') or die('Access Denied!');
+
+include $this->getScriptPath('admin-nav.phtml'); 
+include $this->getScriptPath('message-general.phtml');
+?>
+<!-- TinyMCE/ -->
+<script type="text/javascript" src="<?=$this->basePath?>/js/tinymce/tiny_mce.js"></script>
+<script type="text/javascript" src="<?=$this->basePath?>/js/editor.js"></script>
+<script type="text/javascript">
+
+tinymceInitOptions['content_css'] = "<?=$this->basePath?>/js/editor.css";
+tinyMCE.init(tinymceInitOptions);
+
+</script>
+<!-- /TinyMCE -->
+
+<div class="navindex_title"><?=$this->lang->_('')?>User Profile</div>
+
+<form id="adminUserEdit" name="adminUserEdit" action="<?=$this->basePath?>/user/admin-user/save" method="post" >
+<input id="userid" name="userid" type="hidden" value="<?=$this->profile->userid?>" />
+	<table width="100%" border="0" cellpadding="0" cellspacing="8" >
+  		<tr>
+    		<td width="20%" align="right" ><b><?=$this->lang->_('Name')?></b></td>
+    		<td width="20px"></td>
+    		<td ><input id="name" name="name" type="text" size="16" value="<?=$this->profile->name?>" /></td>
+  		</tr>
+  		<tr>
+    		<td align="right" ><b><?=$this->lang->_('Gender')?></b></td>
+    		<td></td>
+    		<td>
+    			<?=$this->lang->_('Male')?> <input id="gender" name="gender" type="radio" value="1" <?php if ($this->profile->gender == 1) { echo 'checked="checked"'; } ?> />
+        		<?=$this->lang->_('Female')?> <input name="gender" type="radio" value="0" <?php if ($this->profile->gender == 0) { echo 'checked="checked"'; } ?> />   
+    		</td>
+  		</tr>
+  		<tr>
+    		<td align="right" ><b><?=$this->lang->_('Birthday')?></b></td>
+    		<td></td>
+    		<td ><input id="birthday" name="birthday" type="text" size="16" value="<?=$this->profile->birthday?>" /> <?=$this->lang->_('Example')?></b> 1970-01-01</td>
+  		</tr>
+  		<tr>
+    		<td align="right" ><b><?=$this->lang->_('Email')?></b></td>
+    		<td></td>
+    		<td ><input id="email" name="email" type="text" size="30" value="<?=$this->profile->email?>" /></td>
+  		</tr>
+  		<tr>
+    		<td align="right" ><b><?=$this->lang->_('Address')?></b></td>
+    		<td></td>
+    		<td ><input id="address" name="address" type="text" size="30" value="<?=$this->profile->address?>" /></td>
+  		</tr>
+        <tr>
+    		<td align="right" ><b><?=$this->lang->_('Role')?></b></td>
+    		<td></td>
+    		<td >
+                <select id="roles" name="roles">
+    		        <?php foreach ($this->roles as $role): ?> 
+    		        <option value="<?=$role['roleid']?>" <?php if ($this->profile->roles == $role['roleid']) { echo 'selected'; } ?>><?=$role['name']?> </option>
+    		        <?php endforeach;?>
+                </select>
+            </td>
+  		</tr>
+  		<tr>
+    		<td align="right" ><b><?=$this->lang->_('Homepage name')?></b></td>
+    		<td></td>
+    		<td ><input id="home_name" name="home_name" type="text" size="30" value="<?=$this->profile->home_name?>" /></td>
+  		</tr>
+ 		<tr>
+    		<td align="right" valign="top" ><b><?=$this->lang->_('About')?></b></td>
+    		<td></td>
+    		<td >
+    		<div id="switchEditorsBar" class="hideIfNoJs">	
+	                <a href="javascript:;" onclick="richEditor.go('aboutme', 'tinymce');">[Visual]</a>
+                    <a href="javascript:;" onclick="richEditor.go('aboutme', 'html');">[HTML]</a>
+                </div>
+                <textarea id="aboutme" name="aboutme" style="width:100%" cols="80" rows="18" ><?=$this->profile->aboutme?></textarea>
+            </td>
+  		</tr>
+  		<tr>
+    		<td></td>
+    		<td></td>
+    		<td ><input class="input_button" type="submit" name="submit" value="<?=$this->lang->_('Save')?>" /></td>
+  		</tr>
+  	</table>
+</form>
+
+<script>
+    document.getElementById('switchEditorsBar').className = '';
+    tinyMCE.execCommand("mceAddControl", false, 'aboutme');
+</script>
+

@@ -1,0 +1,7 @@
+<div style="height:10px;"></div>
+<ul class="editorPluginNav">
+    <li><a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-editorplugin/upload/" <?php if(in_array($this->action, array('upload', 'doupload'))) {echo 'class="current"';}?>>From Computer</a></li>
+    <li><a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-editorplugin/list/" <?php if($this->action == 'list') {echo 'class="current"';}?>>Media Library</a></li>
+    <li><a href="javascritp:;" onclick="window.close();">Close</a></li>
+</ul>
+

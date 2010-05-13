@@ -1,0 +1,54 @@
+# $Id: .htaccess 831 2010-03-18 15:03:51Z evorui $
+#
+
+SetEnv APPLICATION_ENV development
+
+# Don't show directory listings for URLs which map to a directory.
+Options -Indexes
+
+# Forbidden
+<FILES ~ ".(ini|phtml)$">
+    Order allow,deny
+    Deny from all
+</FILES>
+
+# Turn on short tags in php
+<IfModule mod_php5.c>
+
+# Disable register globals which means nothing in php6
+php_flag register_globals off
+ 
+# Disable magic quotes which means nothing in php6
+php_flag magic_quotes_gpc off
+
+# Turn on short tags in php
+php_value "short_open_tag" "on"
+
+# Make sure the default timezone is set
+php_value date.timezone "Asia/Shanghai"
+
+# Disable automatic session start but handled by program
+# e.g. Zend_Session::start()
+php_flag session.auto_start off
+
+# Gzip output
+php_flag zlib.output_compression on
+php_value zlib.output_compression_level 9
+
+</IfModule>
+
+# Various rewrite rules.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+#RewriteCond %{HTTP_HOST} ^yoursite.com [NC] 
+#RewriteRule ^(.*)$ http://www.yoursite.com/$1 [L,R=301] 
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+    
+</IfModule>
+

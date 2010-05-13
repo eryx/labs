@@ -1,0 +1,30 @@
+<?php include $this->getScriptPath('myhome-htmlheader.phtml'); ?>
+<div id="bodywrap">
+    <div id="bodycontent">    
+    
+        <?php include $this->getScriptPath('myhome-topnav.phtml'); ?>
+        <?php include $this->getScriptPath('userhome-header.phtml'); ?>
+    
+        <div class="myhomeCenterFrame">
+            <div class="pageDepthNavBox">
+                <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/"><img src="<?=$this->tplPath?>/img/house.png" align="absmiddle" /> <b><?=$this->lang->_('My Home')?></b></a>
+                &#8250;&#8250; <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/term/list/"><img src="<?=$this->tplPath?>/img/tag_blue.png" align="absmiddle" /> <b><?=$this->lang->_('Tags')?></b></a>
+            </div>
+
+            <div id="node-term-list">
+                <p>
+	                <?php foreach ($this->termList as $term): ?>
+                    <a href="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->subModule?>/node/list/term/<?=$term['term_name']?>" class="term<?=$term['wcount']?>"><?=$term['term_name']?></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php endforeach; ?>
+                </p>
+            </div>
+
+        </div>
+        
+    
+    </div>
+</div>
+<?php
+include $this->getScriptPath('general-footer.phtml');
+include $this->getScriptPath('htmlfooter.phtml');
+?>

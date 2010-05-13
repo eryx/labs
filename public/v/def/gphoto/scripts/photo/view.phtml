@@ -1,0 +1,57 @@
+<?php 
+$this->headLink()->appendStylesheet($this->tplPath.'/css/myhome.css');
+include $this->getScriptPath('htmlheader.phtml'); 
+?>
+
+<div id="bodywrap">
+    <div id="bodycontent">    
+        
+        <?php include $this->getScriptPath('topnav.phtml'); ?>
+        <?php include $this->getScriptPath('userhome-header.phtml'); ?>
+        
+        <div class="myhomeCenterFrame">
+            <ul id="myhome-subnav">
+                <li class="current"><?=$this->lang->_('Picasa Web Albums')?></li>
+            </ul>
+            
+            <!-- pageDepthNavBox/ -->
+            <div class="pageDepthNavBox">
+                <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>"><img src="<?=$this->tplDefPath?>/img/house.png" align="absmiddle" /> <b><?=$this->lang->_('My Home')?></b></a>
+                &#8250;&#8250; <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/"><img src="<?=$this->tplPath?>/img/google_picasa.png" align="absmiddle" /> <b><?=$this->lang->_('Photo')?></b></a>
+                &#8250;&#8250; <a href="<?=$this->photo['backHref']?>"><img src="<?=$this->tplPath?>/img/folder_image.png" align="absmiddle" /> <?=$this->photo['album']['title']?></a>
+                &#8250;&#8250; <img src="<?=$this->tplPath?>/img/picture.png" align="absmiddle" /> <?=$this->photo['title']?>
+            </div>
+            <!-- /pageDepthNavBox -->
+
+
+            <div class="photoView">                
+                <h4>
+                    <img src="<?=$this->tplPath?>/img/pictures.png" /> Photo <?=$this->photo['navCurrent']?> of <?=$this->photo['navCount']?> 
+                    / <img src="<?=$this->tplPath?>/img/picture.png" /> <?=$this->photo['media_width']?> x <?=$this->photo['media_height']?> pixels - <?=$this->photo['size_formated']?>
+                    / <img src="<?=$this->tplPath?>/img/picture_save.png" /> <a href="<?=$this->photo['download_url']?>" target="_blank">Download</a>
+                </h4>
+                
+                <?php if (isset($this->photoPrev['photoid'])) { ?>
+                <a href="<?=$this->photoPrev['href']?>">
+                    <img class="imgBox" src="<?=$this->photoPrev['thumb_media_url']?>" title="<?=$this->photoNext['title']?>" /><b>&#8249;</b>
+                </a>
+                <?php } ?>
+                    
+                <img class="imgBox" src="<?=$this->photo['thumb_media_url']?>" title="<?=$this->photo['title']?>" />
+                
+                <?php if (isset($this->photoNext['photoid'])) { ?>
+                <a href="<?=$this->photoNext['href']?>">
+                    <b>&#8250;</b><img class="imgBox" src="<?=$this->photoNext['thumb_media_url']?>" title="<?=$this->photoNext['title']?>" />
+                </a>
+                <?php } ?>
+                
+                <p><?=$this->photo['summary']?></p>
+
+            </div>
+                        
+        </div>
+    </div>
+</div>
+
+<?php include $this->getScriptPath('general-footer.phtml'); ?>
+<?php include $this->getScriptPath('htmlfooter.phtml'); ?>

@@ -1,0 +1,25 @@
+<?php
+defined('SK_ENTRY') or die('Access Denied!');
+
+$this->headLink()->appendStylesheet($this->tplPath.'/css/myhome.css');
+include $this->getScriptPath('htmlheader.phtml');
+?>
+<div id="bodywrap">
+    <div id="bodycontent">    
+        <?php include $this->getScriptPath('topnav.phtml'); ?>
+        <?php include $this->getScriptPath('userhome-header.phtml'); ?>
+        <div class="myhomeCenterFrame">
+            <ul id="myhome-subnav">
+                <li class="current"><?=$this->lang->_('About me')?></li>
+            </ul>
+            <table id="user-aboutme" width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="140px" valign="top"><img src="<?=$this->profile['icon']['normal']?>" /></td>
+                    <td align="left" class="myintro"><?=$this->profile['aboutme']?></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<?php include $this->getScriptPath('general-footer.phtml'); ?>
+<?php include $this->getScriptPath('htmlfooter.phtml'); ?>

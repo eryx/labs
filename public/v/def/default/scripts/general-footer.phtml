@@ -1,0 +1,9 @@
+<!-- footer/ -->
+<?php
+$gdb = Zend_Registry::get('gdb');
+//print_r($gdb->getProfiler()->getQueryProfiles());
+?>
+<div id="footer">
+    <p>Powered by <a href="http://smartkit.sourceforge.net" target="_blank"><?=$this->sys['name']?></a> &nbsp;&nbsp;|&nbsp;&nbsp; Version <?=$this->sys['version']?> r<?=$this->sys['revision']?> &nbsp;&nbsp;|&nbsp;&nbsp; Queries <?=$gdb->getProfiler()->getTotalNumQueries()?>@<?=$gdb->getProfiler()->getTotalElapsedSecs()?></p>
+</div>
+<!-- /footer -->

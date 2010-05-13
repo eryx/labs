@@ -1,0 +1,4 @@
+<ul class="managesubnav" style="text-align: right;">
+    <li><a href="<?=$this->basePath?>/user/admin/" <?php if ($this->module == 'user') {echo 'class="current"';} ?>><?=$this->lang->_("User management")?></a></li>
+    <li><a href="<?=$this->basePath?>/system/admin-module/" <?php if ($this->controller == 'admin-module') {echo 'class="current"';} ?>><?=$this->lang->_("Module management")?></a></li>
+</ul>

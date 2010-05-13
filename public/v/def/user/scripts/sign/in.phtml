@@ -1,0 +1,39 @@
+<?php
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="center_box">
+    <div class="navindex_title"><?=$this->lang->_('Sign in')?></div>
+
+    <form id="user_login_form" name="user_login_form" action="<?=$this->baseModulePath?>/sign/auth" method="post">
+    <table width="100%" border="0" cellpadding="0" cellspacing="14">
+        <tr>
+            <td width="30%" align="right"><b><?=$this->lang->_('Username')?></b></td>
+            <td>
+                <input id="username" name="username" type="text" />
+                <script>document.user_login_form.username.focus();</script>
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><b><?=$this->lang->_('Password')?></b></td>
+            <td><input id="password" name="password" type="password"/></td>
+        </tr>
+        <tr>
+            <td align="right"></td>
+            <td><input type="checkbox" id="persistent" name="persistent" value="1" />  <?=$this->lang->_('Remember me on this computer')?></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input class="input_button" type="submit" name="Submit" value="<?=$this->lang->_('Sign in')?>" /></td>
+        </tr>
+        <tr>
+            <td align="right"></td>
+            <td>
+                <a href="<?=$this->baseModulePath?>/sign/up"><?=$this->lang->_('Sign up for ID')?></a><br />
+                <a href="<?=$this->baseModulePath?>/sign/pwd"><?=$this->lang->_('Forget your ID or password')?></a>
+            </td>
+        </tr>
+    </table>
+    </form> 
+</div>
+

@@ -1,0 +1,74 @@
+<?php
+$this->headLink()->appendStylesheet($this->tplDefPath.'/css/home.css');
+$this->headLink()->appendStylesheet($this->tplPath.'/css/index.css');
+
+include $this->getScriptPath('htmlheader.phtml');
+?>
+<div id="bodywrap">
+    <div id="bodycontent">
+
+        <?php include $this->getScriptPath('topnav.phtml'); ?>
+        <?php include $this->getScriptPath('home-header.phtml'); ?>
+        
+        <?php include $this->getScriptPath('message-general.phtml'); ?>
+        
+        <div class="centerbox index_banner" style="background: url('<?=$this->tplPath?>/img/header_topic.gif') repeat-x;">
+            <div class="index_banner_notice">
+                <div class="signup_title">Ready to get started ?</div>
+                <div class="signup_box"><a class="signup_link" href="<?=$this->basePath?>/user/sign/in">Create an account &#187;</a></div>
+            </div>
+        </div>
+        
+        <div class="centerbox">
+        
+            <div class="contentbox portal_list">
+        
+                <ul class="list_node">
+                    <li class="ul_title">Recent</li>
+                    <?php foreach ($this->node_new as $node): ?>
+                    <li>
+                        <img src="<?=$node['icon']['small']?>" title="<?=$node['username']?>" />
+                        <a href="<?=$node['href']?>" target="_blank"> <?=$node['title']?></a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+
+                <ul class="list_node">
+                    <li class="ul_title">Hot</li>
+                    <?php foreach ($this->node_hot as $node): ?>
+                    <li>
+                        <img src="<?=$node['icon']['small']?>" title="<?=$node['username']?>" />
+                        <a href="<?=$node['href']?>" target="_blank"> <?=$node['title']?></a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+                
+            </div>
+    
+            <div class="sidebox">
+                <dl class="sideitem">
+                    <dt>Search</dt>
+                    <dd>
+                        <form id="searchform" action="<?=$this->moduleUri?>/node?">
+                        <input class="searchquery" name="q" value="" size="15" /> 
+                        <input class="searchbutton" type="submit" value="Go" /> 
+                        </form>
+                    </dd> 
+                </dl>
+                
+                <dl class="sideitem">
+                    <dt class="tit">Tags</dt>
+                    <dd class="term_list">
+                        <?php foreach ($this->term_list as $term): ?>
+                        <a href="<?=$this->basePath?>/<?=$this->module?>/node/?term=<?=$term['term_name']?>" class="t<?=$term['wcount']?>"><?=$term['term_name']?></a>
+                        <?php endforeach; ?>        
+                    </dd>
+                </dl>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+<?php include $this->getScriptPath('general-footer.phtml'); ?>
+<?php include $this->getScriptPath('htmlfooter.phtml'); ?>

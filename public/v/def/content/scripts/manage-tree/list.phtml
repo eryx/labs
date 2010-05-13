@@ -1,0 +1,41 @@
+<?php 
+include $this->getScriptPath('manage-nav.phtml'); 
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('Manage')?> <?=$this->lang->_('Categories')?> (<a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-tree/new" align="absmiddle" >Add new</a>)</div>
+
+<style type="text/css">
+.item_list tr td {padding: 2px; border-bottom:#c6d9e9 1px solid;}
+.item_list .draggAbleOdd {background-color: #e4f2fd;}
+.item_list .draggAbleEven {background-color: #ffffff;}
+</style>
+<table class="item_list" width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<tr>
+		<td><b><?=$this->lang->_('Name')?><b></td>
+		<td><b><?=$this->lang->_('Weight')?><b></td>
+		<td></td>
+	</tr>
+    <?php
+    $even = 'Even';
+    foreach ($this->treelist as $tree) 
+    {
+        $even = ($even == 'Even') ? 'Odd' : 'Even';
+        $draggAble = 'draggAble'.$even;
+    ?>
+	<tr class="<?php echo $draggAble;?>">
+		<td style="padding-left: <?php echo 30 * $tree['depth'] + 5; ?>px;">
+            <img src="<?=$this->tplPath?>/img/folder.png" align="absmiddle" />
+            <a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-tree/edit/treeid/<?=$tree['treeid']?>"><b><?=$tree['name']?></b> (<?=$tree['count_publish']?>)</a>
+        </td>
+		<td style="padding-left: <?php echo 30 * $tree['depth']?>px;"><?=$tree['ordering']?></td>
+		<td align="right">
+		    <a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-tree/delete/treeid/<?=$tree['treeid']?>" class="aButtonText"><?=$this->lang->_('Delete')?></a>
+		    <a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-tree/edit/treeid/<?=$tree['treeid']?>" class="aButtonText"><?=$this->lang->_('Edit')?></a>
+		</td>
+	</tr>
+	<?php } ?>
+</table>
+
+
+

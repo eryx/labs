@@ -1,0 +1,19 @@
+<!-- topnav/ -->
+<table id="topnav" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="left" id="topnavsite">
+	        <a href="<?=$this->basePath?>/"><?=$this->lang->_('Home')?></a>
+        </td>
+        <td align="right" id="topnavuser">
+        <?php if ($this->user['isLogin']) { ?>
+            <a href="<?=$this->user['homeUrl']?>"><?=$this->lang->_('My home')?></a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?=$this->user['manageUrl']?>"><?=$this->lang->_('Manage')?></a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?=$this->user['logoutUrl']?>"><?=$this->lang->_('Sign out')?></a>
+        <?php } else { ?>
+            <a href="<?=$this->user['regUrl']?>"><?=$this->lang->_('Sign up')?></a>
+            &nbsp;&nbsp;|&nbsp;&nbsp; <a href="<?=$this->user['loginUrl']?>"><?=$this->lang->_('Sign in')?></a>
+        <?php } ?>
+        </td>
+    </tr>
+</table>
+<!-- /topnav -->

@@ -1,0 +1,8 @@
+<?php defined('SK_ENTRY') or die('Access Denied!'); ?>
+<ul class="managesubnav" style="text-align: right;">
+    <li><a href="<?=$this->basePath?>/user/manage-home" <?php if ($this->controller == 'manage-home') {echo 'class="current"';} ?>><?=$this->lang->_("My home")?></a></li>
+    <li><a href="<?=$this->basePath?>/user/manage-profile" <?php if ($this->controller == 'manage-profile' && $this->action == 'form') {echo 'class="current"';} ?>><?=$this->lang->_("My profile")?></a></li>
+    <li><a href="<?=$this->basePath?>/user/manage-picture" <?php if ($this->controller == 'manage-picture') {echo 'class="current"';} ?>><?=$this->lang->_("My picture")?></a></li>
+    <li><a href="<?=$this->basePath?>/user/manage-profile/pwd" <?php if ($this->controller == 'manage-profile' && $this->action == 'pwd') {echo 'class="current"';} ?>><?=$this->lang->_("Change password")?></a></li>
+    <li><a href="<?=$this->basePath?>/user/manage-module/list" <?php if ($this->controller == 'manage-module') {echo 'class="current"';} ?>><?=$this->lang->_("My modules")?></a></li>
+</ul>

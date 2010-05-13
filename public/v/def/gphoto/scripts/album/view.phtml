@@ -1,0 +1,36 @@
+<?php 
+$this->headLink()->appendStylesheet($this->tplPath.'/css/myhome.css');
+include $this->getScriptPath('htmlheader.phtml'); 
+?>
+
+<div id="bodywrap">
+    <div id="bodycontent">    
+        
+        <?php include $this->getScriptPath('topnav.phtml'); ?>
+        <?php include $this->getScriptPath('userhome-header.phtml'); ?>
+        
+        <div class="myhomeCenterFrame">
+            <ul id="myhome-subnav">
+                <li class="current"><?=$this->lang->_('Picasa Web Albums')?></li>
+            </ul>
+            
+            <!-- pageDepthNavBox/ -->
+            <div class="pageDepthNavBox">
+                <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>"><img src="<?=$this->tplDefPath?>/img/house.png" align="absmiddle" /> <b><?=$this->lang->_('My Home')?></b></a>
+                &#8250;&#8250; <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/"><img src="<?=$this->tplPath?>/img/google_picasa.png" align="absmiddle" /> <b><?=$this->lang->_('Photo')?></b></a>
+                &#8250;&#8250; <img src="<?=$this->tplPath?>/img/folder_image.png" align="absmiddle" /> <?=$this->album['title']?>
+            </div>
+            <!-- /pageDepthNavBox -->
+            
+            <ul class="photoList">
+                <?php foreach ($this->photoList as $photo): ?> 
+                <li><a href="<?=$photo['href']?>"><img src="<?=$photo['media_url']?>" /></a></li>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<?php include $this->getScriptPath('general-footer.phtml'); ?>
+<?php include $this->getScriptPath('htmlfooter.phtml'); ?>

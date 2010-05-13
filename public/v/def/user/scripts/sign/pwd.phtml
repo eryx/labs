@@ -1,0 +1,35 @@
+<?php
+include $this->getScriptPath('message-general.phtml'); 
+?>
+<div class="center_box">
+    <div class="navindex_title"><?=$this->lang->_('Forget your ID or password')?></div>
+
+    <form id="user_forgotpw_form" name="user_forgotpw_form" action="<?=$this->baseModulePath?>/sign/pwddo" method="post">
+    <table width="100%" border="0" cellpadding="0" cellspacing="14">
+        <tr>
+            <td width="30%" align="right"><?=$this->lang->_('Username')?> :</td>
+            <td>
+                <input id="username" name="username" type="text" size="20" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><?=$this->lang->_('Email')?> :</td>
+            <td>
+                <input id="email" name="email" type="text" size="40" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input class="input_button" type="submit" name="Submit" value="<?=$this->lang->_('Next')?>" /></td>
+        </tr>
+        <tr>
+            <td align="right"></td>
+            <td>
+                <a href="<?=$this->baseModulePath?>/sign"><?=$this->lang->_('Sign in')?></a><br />
+                <a href="<?=$this->baseModulePath?>/sign/up"><?=$this->lang->_('Sign up for ID')?></a>            
+            </td>
+        </tr>
+    </table>
+    </form> 
+</div>
+<script>document.user_forgotpw_form.username.focus();</script>

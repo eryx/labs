@@ -1,0 +1,59 @@
+<?php include $this->getScriptPath('myhome-htmlheader.phtml'); ?>
+<div id="bodywrap">
+<div id="bodycontent">
+<?php 
+include $this->getScriptPath('myhome-topnav.phtml');
+include $this->getScriptPath('userhome-header.phtml');
+?>
+<div class="myhomeCenterFrame">
+    
+    <?php include $this->getScriptPath('message-general.phtml'); ?>
+    
+       <div id="node-view">
+           <div class="node-header">
+            
+               <h1 class="node-title"><?=$this->node['title']?></h1>
+               <div class="node-info">
+                   <img src="<?=$this->tplPath?>/img/date.png" align="absmiddle" title="<?=$this->lang->_('Created')?>" /> <?=$this->node['created']?>&nbsp;&nbsp;
+                   <img src="<?=$this->tplPath?>/img/comments.png" align="absmiddle" title="<?=$this->lang->_('Comments')?>" /> <?=$this->lang->_('Comments')?> (<?=$this->node['count_comment']?>)&nbsp;&nbsp;
+                <img src="<?=$this->tplPath?>/img/folder_page.png" align="absmiddle" title="<?=$this->lang->_('Views')?>" /> <?=$this->lang->_('Views')?> (<?=$this->node['count_access']?>)&nbsp;&nbsp;
+                <img src="<?=$this->tplPath?>/img/folder.png" align="absmiddle" title="<?=$this->lang->_('Category')?>" /> <?=$this->trees[$this->node['treeid']]['name']?>  
+                <?php if ($this->node['allowDelete']) { ?>
+                <img src="<?=$this->tplPath?>/img/page_delete.png" align="absmiddle" /> <a href="<?=$this->userHomeModuleUri?>/node/delete/?nodeid=<?=$this->node['nodeid']?>"><?=$this->lang->_('Delete')?></a>
+                <?php } ?>              
+            </div>
+           </div>
+           <div class="nodeEntry"><?=$this->node['body']?></div>
+        <div class="clear_both">
+            <img src="<?=$this->tplPath?>/img/tag_blue.png" align="absmiddle" title="<?=$this->lang->_('Tags')?>" /> <?=$this->lang->_('Tags')?>:
+            <?php foreach ((array)$this->node['termList'] as $term): ?> 
+                   &nbsp;&nbsp;<a href="<?=$this->userHomeModuleUri?>/node/list?term=<?=$term?>"><?=$term?></a>
+               <?php endforeach; ?>
+        </div>
+    </div>
+    
+    <div id="node-comment-list">
+        <h3><?=$this->lang->_('Comments list')?></h3>      
+        <?php foreach ($this->commentList as $comment): ?>      
+           <div class="node-comment-view" id="node-comment-<?=$comment['comid']?>">
+            <div><img src="<?=$this->tplPath?>/img/comment.png" align="absmiddle" /> <b><?=$comment['username']?></b></div>
+            <p><?=$comment['body']?></p>
+            <div class="nodeCommentInfo">
+                <?=$comment['created']?>
+                <?php if ($comment['allowDelete']) { ?>
+                    <a href="<?=$this->userHomeModuleUri?>/comment/delete/?nodeid=<?=$this->node['nodeid']?>&comid=<?=$comment['comid']?>" class="aButtonText"><?=$this->lang->_('Delete')?></a>
+                <?php } ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    
+    <?php include $this->getScriptPath('myhome-comment-form.phtml'); ?>
+
+</div>
+</div>
+</div>
+<?php
+include $this->getScriptPath('general-footer.phtml');
+include $this->getScriptPath('htmlfooter.phtml');
+?>

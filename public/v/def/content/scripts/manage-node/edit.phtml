@@ -1,0 +1,196 @@
+<?php 
+$this->headLink()->appendStylesheet($this->tplPath.'/css/manage.css');
+
+include $this->getScriptPath('manage-nav.phtml'); 
+
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title">
+    <?php echo $this->node['nodeid'] > 0 ? $this->lang->_('Edit') : $this->lang->_('Add new'); ?>
+</div>
+
+<!-- TinyMCE/ -->
+<script type="text/javascript" src="<?=$this->basePath?>/js/tinymce/tiny_mce.js"></script>
+<script type="text/javascript" src="<?=$this->basePath?>/js/editor.js"></script>
+<script type="text/javascript">
+
+// init for media plugin
+var current_media_plugin = 'body';
+
+// init for rich editor
+tinymceInitOptions['content_css'] = "<?=$this->basePath?>/js/editor.css";
+tinyMCE.init(tinymceInitOptions);
+
+//tinyMCE.execCommand("mceAddControl", false, 'body');
+//tinyMCE.execCommand("mceAddControl", false, 'summary');
+
+
+// insert medias
+
+mediaplugin = {
+    insert : function(text) {
+        if (current_media_plugin == 'summary') {
+            richEditor.go('summary', 'tinymce');
+            tinyMCE.execCommand('mceInsertContent', false, text);
+        } else {
+            richEditor.go('body', 'tinymce');
+            tinyMCE.execCommand('mceInsertContent', false, text);
+        }
+    }
+}
+
+</script>
+<!-- /TinyMCE -->
+
+
+<form id="node_new" name="node_new" action="<?=$this->basePath?>/<?=$this->subModule?>/manage-node/save" method="post">
+<input id="nodeid" name="nodeid" type="hidden" value="<?=$this->node['nodeid']?>" />
+<input id="revid" name="revid" type="hidden" value="<?=$this->node['revid']?>" />
+<input id="ordering" name="ordering" type="hidden" value="1" />
+
+<table width="100%" class="edit_frame" border="0" cellpadding="0" cellspacing="0">
+<tr>
+    <td>
+        <!-- node title -->
+        <div class="edit_item edit_item_title"><?=$this->lang->_('Title')?> <font color="red">*</font></div>
+        <input class="edit_item_input" id="title" name="title" type="text" size="70" value="<?=$this->node['title']?>" />
+
+        <!-- node summary -->
+        <div id="auto_summary_box" class="hideIfNoJs">
+            <div class="edit_item_left edit_item_info">
+                <div id="auto_summary_title" class="hideIfNoJs">
+                    <span class="edit_item_title"><?=$this->lang->_('Summary')?></span> 
+                    <span id="summary_media_box" class="hideIfNoJs"><a href="javascript:;"  onclick="current_media_plugin = 'summary'; openWindow('<?=$this->basePath?>/media/manage-editorplugin/?target=summary', 'upload', '800', '700')">[Insert Images]</a></span>
+                </div>
+            </div>
+            <div class="edit_item_right edit_item_info">
+                <input type="checkbox" id="auto_summary" name="auto_summary" onchange="changeAutoSummary()" value="1" <?php if (strlen($this->node['summary']) == 0) {echo 'checked';} ?> /> Auto Summary
+                <span id="summary_richeditor_ctrl" class="hideIfNoJs">
+                    <a href="javascript:;" onclick="richEditor.go('summary', 'tinymce');">[Visual]</a>
+                    <a href="javascript:;" onclick="richEditor.go('summary', 'html');">[HTML]</a>
+                </span>
+            </div>
+            
+            <div id="auto_summary_text" class="clear_both hideIfNoJs"><textarea style="width:100%" id="summary" name="summary" rows="10"><?=$this->node['summary']?></textarea></div>                    
+        </div>
+        
+        <div class="clear_both" />
+        <!-- node content -->
+        <div class="edit_item_left edit_item_info">
+            <span class="edit_item_title"><?=$this->lang->_('Content')?> <font color="red">*</font></span> 
+            <span id="body_media_box" class="hideIfNoJs"><a href="javascript:;"  onclick="current_media_plugin = 'body'; openWindow('<?=$this->basePath?>/media/manage-editorplugin/?target=body', 'upload', '800', '700')">[Insert Images]</a></span>
+        </div>
+        <div class="edit_item_right edit_item_info">
+            <div id="body_richeditor_ctrl" class="hideIfNoJs">
+                <a href="javascript:;" onclick="richEditor.go('body', 'tinymce');">[Visual]</a>
+                <a href="javascript:;" onclick="richEditor.go('body', 'html');">[HTML]</a>
+            </div>
+        </div> 
+        <div class="clear_both"><textarea style="width:100%" id="body" name="body" rows="30"><?=$this->node['body']?></textarea></div>
+    </td>
+    
+    <td width="30px"></td>
+    
+    <td width="280px" valign="top">
+        <div class="edit_option_box">
+            <div class="edit_option_title">Publish</div>
+            <div class="edit_option_list">
+                <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                    
+                    <tr>
+                        <td align="right"><?=$this->lang->_('Allow')?> <?=$this->lang->_('Comment')?></td>
+                        <td>
+                        <input type="checkbox" id="allow_comment" name="allow_comment" value="1" <?php if ($this->node['allow_comment']) {echo 'checked';} ?> />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right"><?=$this->lang->_('Status')?></td>
+                        <td>
+                        <select id="status" name="status">
+                        <option value="1" <?php if ($this->node['status'] == 1) {echo 'selected';}?>> <?=$this->lang->_('Publish')?> </option>
+                        <option value="2" <?php if ($this->node['status'] == 2) {echo 'selected';}?>> <?=$this->lang->_('Draft')?> </option>
+                        <option value="3" <?php if ($this->node['status'] == 3) {echo 'selected';}?>> <?=$this->lang->_('Private')?> </option>
+                        </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+                
+            <div class="edit_button_commit"><input type="submit" name="Submit" class="input_button" value="<?=$this->lang->_('Save')?>" /></div>
+        </div>
+            
+        <div class="edit_option_box">
+            <div class="edit_option_title"><?=$this->lang->_('Category')?></div>
+            <div class="edit_option_list">
+            <select id="treeid" name="treeid">
+                    <?php foreach ($this->treelist as $tree): ?> 
+                    <option value="<?=$tree['treeid']?>" <?php if ($tree['treeid'] == $this->node['treeid']) { echo 'selected'; } ?>> <?php echo ($tree['depth'] == 0 ? '/ ' : str_pad('', 3 * $tree['depth'], '.')) . $tree['name']?> </option>
+                    <?php endforeach;?>
+            </select>
+            
+            </div>
+        </div>
+        
+        <div class="edit_option_box">
+            <div class="edit_option_title"><?=$this->lang->_('Tags')?></div>
+            <div class="edit_option_list">
+            <input id="terms" name="terms" type="text" style="width:230px;" value="<?=$this->node['terms']?>"/> 
+            <br/><?=$this->lang->_('Terms-formats')?>
+            </div>
+
+        </div>
+        
+    </td>
+</tr>
+</table>
+
+</form>
+
+<br />
+
+<script>
+
+function changeAutoSummary() {
+    
+    if (document.getElementById('auto_summary').checked) {
+        
+        document.getElementById('auto_summary_title').className = 'hideIfNoJs';
+        document.getElementById('auto_summary_text').className = 'clear_both hideIfNoJs';
+        document.getElementById('summary_richeditor_ctrl').className = 'hideIfNoJs';
+
+    } else {
+    
+        document.getElementById('auto_summary_title').className = '';
+        document.getElementById('auto_summary_text').className = 'clear_both';
+        document.getElementById('summary_richeditor_ctrl').className = '';
+        
+    }
+}
+
+function openWindow(url, title, width, height, text) {
+    var nwin;        
+    if (url=='' || width=='' || height=='') {
+        return false;
+    }
+    sWidth  = screen.availWidth;
+    sHeight = screen.availHeight;
+    var l = (screen.availWidth - width) / 2;
+    var t = (screen.availHeight - height) / 2;      
+    nwin = window.open(url, title, 'left='+ l +', top='+ t +', width='+ width +', height='+ height +',scrollbars=yes,resizable=yes');
+    nwin.focus();
+}
+
+
+/** content.summary */
+document.getElementById('auto_summary_box').className = '';
+changeAutoSummary();
+
+
+/** content.body */
+document.getElementById('body_media_box').className = '';
+document.getElementById('body_richeditor_ctrl').className = '';
+tinyMCE.execCommand("mceAddControl", false, 'body');
+
+</script>
+

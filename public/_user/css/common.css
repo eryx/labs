@@ -1,0 +1,18 @@
+#signin {width:480px; margin:0 auto; clear:both;}
+#signin .title {padding-bottom:4px; margin-top:50px; font-size:20px; font-weight:bold;}
+#signin .box { 
+    padding:20px 30px 10px 30px; background-color:#ebf7ff;
+    border-top:3px solid #4e8ccf; border-bottom:2px solid #4e8ccf;
+}
+#signin td {padding:5px 0px;}
+#signin input {padding:1px 4px;}
+
+
+/** profile */
+#profile .title {padding-bottom:4px; margin-top:50px; 
+    font-size:20px; font-weight:bold;}
+#profile .box {padding:10px; border:#c6d9e9 2px solid;
+	-moz-border-radius:4px; -khtml-border-radius:4px; 
+	-webkit-border-radius:4px; border-radius:4px;}
+#profile .info {line-height:200%;}
+

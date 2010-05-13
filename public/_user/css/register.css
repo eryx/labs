@@ -1,0 +1,10 @@
+#signup {width: 580px; margin: 0 auto; clear: both;}
+#signup .title {padding-bottom: 4px; margin-top: 50px; font-size: 20px; font-weight: bold;}
+#signup .box { 
+    padding: 20px 30px 10px 30px; background-color:#ebf7ff;
+    border-top: 3px solid #4e8ccf; border-bottom: 2px solid #4e8ccf;
+}
+#signup td {padding: 2px 0px;}
+#signup input {padding: 1px 4px;}
+
+

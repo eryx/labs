@@ -1,0 +1,5 @@
+<ul class="managesubnav">
+    <li><a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-album/" <?php if ($this->controller == 'manage-album' && $this->action != 'new') {echo 'class="current"';} ?>><?=$this->lang->_('Manage albums')?></a></li>
+    <li><a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-set/" <?php if ($this->controller == 'manage-set') {echo 'class="current"';} ?>><?=$this->lang->_('Setting')?></a></li>
+</ul>
+

@@ -1,0 +1,17 @@
+<?php 
+defined('SK_ENTRY') or die('Access Denied!');
+
+$this->headLink()->appendStylesheet($this->tplDefPath.'/css/admin.css');
+
+include $this->getScriptPath('admin-nav.phtml'); 
+
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('User management')?></div>
+Manage your site's users, groups and access to site features
+
+<ul class="adminPanelIndex">
+    <li><a href="<?=$this->basePath?>/user/admin-role/">Roles</a></li>
+    <li><a href="<?=$this->basePath?>/user/admin-user/">Users</a></li>
+</ul>

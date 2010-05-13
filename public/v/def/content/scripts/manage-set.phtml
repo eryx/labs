@@ -1,0 +1,26 @@
+<?php 
+defined('SK_ENTRY') or die('Access Denied!');
+include('manage-nav.php'); 
+include $this->getScriptPath('message-general.php'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('Setting')?></div>
+
+<form action="" method="post" name="theForm" id="theForm">
+<table border="0" cellpadding="0" cellspacing="10" width="100%">
+	<tr>
+   		<td align="right" valign="top" width="20%"><?=$this->lang->_('Templates')?> :</td>
+   		<td valign="top">
+   			<input id="blog_tpl" name="blog_tpl" type="hidden" value="{$blog_tpl}" />
+   			<input name="template" type="radio" value="1" onclick="document.getElementById('blog_tpl').value = 1" {if $blog_tpl == 1}checked{/if} /> Simple Blue (default)<br />
+   			<input name="template" type="radio" value="3" onclick="document.getElementById('blog_tpl').value = 2" {if $blog_tpl == 2}checked{/if} /> Lovely Girl<br />
+   			<input name="template" type="radio" value="4" onclick="document.getElementById('blog_tpl').value = 3" {if $blog_tpl == 3}checked{/if} /> Red and Black<br />
+   			<input name="template" type="radio" value="5" onclick="document.getElementById('blog_tpl').value = 4" {if $blog_tpl == 4}checked{/if} /> Simple Green<br />
+   		</td>
+	</tr>
+	<tr>
+	    <td></td>
+	    <td><input type="submit" class="input_button" value="<?=$this->lang->_('Save')?>" /></td>
+	</tr>
+</table>
+</form>

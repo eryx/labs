@@ -1,0 +1,34 @@
+<?php 
+include $this->getScriptPath('admin-nav.phtml');
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('Module management')?></div>
+
+<form id="system_module" name="system_module" action="<?=$this->basePath?>/<?=$this->subModule?>/admin-module/save" method="post">
+<table class="tblist" width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<tr>
+		<td><b><?=$this->lang->_('Name')?></b></td>
+		<td><b><?=$this->lang->_('Enabled')?></b></td>
+		<td><b><?=$this->lang->_('Description')?></b></td>
+	</tr>
+    <?php 
+    $even = 'Even';
+    foreach ($this->modules as $module): 
+    ?> 
+	<tr class="draggAble<?php echo $even = ($even == 'Even') ? 'Odd' : 'Even';?>">
+		<td><?=$module['name']?></td>
+        
+		<td>
+		    <input type="checkbox" id="isenabled-<?=$module['moduleid']?>" name="isenabled-<?=$module['moduleid']?>" value="1" <?php if ($module['isenabled']) {echo 'checked="checked"';} ?> <?php if ($module['isrequired']) {echo 'disabled="disabled"';} ?> />		    
+		</td>
+        <td>
+            <?=$module['description']?>
+		</td>
+	</tr>
+	<?php endforeach; ?> 
+</table>
+<br />
+<input type="submit" name="Submit" class="input_button" value="<?=$this->lang->_('Save configuration')?>" />
+</form>
+

@@ -1,0 +1,19 @@
+<?php
+$this->headLink()->appendStylesheet($this->tplDefPath.'/css/home.css');
+$this->headLink()->appendStylesheet($this->tplPath.'/css/myhome.css');
+include $this->getScriptPath('htmlheader.phtml');
+?>
+<div id="bodywrap">
+    <div id="bodycontent"> 
+        <?php include $this->getScriptPath('topnav.phtml'); ?>
+        <?php include $this->getScriptPath('home-header.phtml'); ?>
+        
+        <div class="myhomeCenterFrame">
+            <?php echo $this->layout()->content; ?>
+        </div>
+
+    </div>
+</div>
+
+<?php include $this->getScriptPath('general-footer.phtml'); ?>
+<?php include $this->getScriptPath('htmlfooter.phtml'); ?>

@@ -1,0 +1,14 @@
+<ul class="pager">
+    <li><?php echo $this->lang->_('Items').' '.$pager['itemFrom'].' - '.$pager['itemTo'].' of '.$pager['itemCount']; ?></li>    
+    <?php if (isset($pager['first'])) { ?>
+    <li><a href="<?=$pagerUrl?>&p=<?=$pager['first']?>"><?=$this->lang->_('First')?></a></li>
+    <?php } if (isset($pager['previous'])) { ?>
+    <li><a href="<?=$pagerUrl?>&p=<?=$pager['previous']?>"><?=$this->lang->_('Previous')?></a></li>
+    <?php } foreach ($pager['list'] as $page) { ?>
+    <li><a href="<?=$pagerUrl?>&p=<?=$page['page']?>" <?php if ($page['isCurrent']) {echo 'class="current"';}?>><?=$page['page']?></a></li>
+    <?php } if (isset($pager['next'])) { ?>
+    <li><a href="<?=$pagerUrl?>&p=<?=$pager['next']?>"><?=$this->lang->_('Next')?></a></li>
+    <?php } if (isset($pager['last'])) { ?>
+    <li><a href="<?=$pagerUrl?>&p=<?=$pager['last']?>"><?=$this->lang->_('Last')?></a></li>
+    <?php } ?>
+</ul>

@@ -1,0 +1,78 @@
+<?php
+$this->headLink()->appendStylesheet($this->tplDefPath.'/css/home.css');
+$this->headLink()->appendStylesheet($this->tplPath.'/css/node.css');
+include $this->getScriptPath('htmlheader.phtml');
+?>
+<div id="bodywrap">
+    <div id="bodycontent">
+
+        <?php include $this->getScriptPath('topnav.phtml'); ?>
+        <?php include $this->getScriptPath('home-header.phtml'); ?>
+        
+        <div class="centerbox">
+
+            <div class="sidebox">
+                
+                <div class="menubox">
+                    <div class="menutit">Content</div>
+                    <ul>
+                    <?php foreach ($this->menu as $item): ?>
+                        <li><a href="<?=$this->moduleUri?>/node?m=<?=$item['submodule']?>"><?=$item['name']?></a></li>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="contentbox">
+                <?php include $this->getScriptPath('message-general.phtml'); ?>
+                
+                <div class="nodesearch" style="background: url('<?=$this->tplPath?>/img/bgcloud.png');">
+                    <form id="formNodeSearch" action="<?php echo $this->searchAction;?>">
+                        <div class="tit"><?=$this->lang->_('Search')?></div>
+                        <input class="text" name="q" value="<?php echo $this->searchKeyword;?>" size="20" />
+                        <input type="submit" value="Go" />
+                    </form>
+                </div>
+            
+            
+                <dl class="nodelist">
+                    <?php foreach ($this->node_list as $node): ?>
+                    <dt><a href="<?=$node['href']?>"  target="_blank"> <?=$node['title']?></a> <span class="cgray">[<?=$this->menu[$node['module']]['name']?>]</span></dt>
+                    <dd>
+                        <div class="nodeinfo">
+                            <img src="<?=$node['icon']['small']?>" title="<?=$node['username']?>" width="18px" height="18px"/> <a href="<?=$this->basePath.'/home/'.$node['username']?>"><b><?=$node['username']?></b></a> on <?php echo date('Y-m-d', strtotime($node['created']));?>
+                            
+                            <?php if (count($node['termList']) > 0) { ?>
+                                <img src="<?=$this->tplPath?>/img/tag_blue.png" align="absmiddle" /> 
+                            
+                            <?php }
+                            foreach ((array)$node['termList'] as $term) { ?> 
+                            &nbsp;<a href="<?=$node['termHref']?>=<?=$term?>"><?=$term?></a>
+                            <?php } ?>
+                        </div>
+                        
+
+                        <div class="nodebody"><?=$node['body']?></div>
+                    
+                        <div class="bottominfo">
+                            <a href="<?=$node['href']?>" target="_blank">&#187; <?=$this->lang->_('Views')?> (<?=$node['count_access']?>)</a>
+                        </div>
+                    </dd>
+                    <?php endforeach; ?>
+                    
+                    <dd>
+                    <?php 
+                    $pager = $this->nodePager;
+                    $pagerUrl = $this->nodeUrl;
+                    include $this->getScriptPath('pager.phtml');
+                    ?>
+                    </dd>
+                    
+                </dl>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<?php include $this->getScriptPath('general-footer.phtml'); ?>
+<?php include $this->getScriptPath('htmlfooter.phtml'); ?>

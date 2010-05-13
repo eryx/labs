@@ -1,0 +1,25 @@
+<table id="header" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="left" valign="midlle">
+            <div style="padding-left:10px;"><img id="logo" src="<?=$this->tplDefPath?>/img/logo.png" /></div>
+            <ul class="headernav">
+                <?php foreach ($this->manageNav as $nav): ?>
+                <li><a href="<?=$nav['navHref']?>" <?php if ($nav['isCurrent']) {echo 'class="current"';}?>><?=$nav['name']?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </td>
+        <td align="right" valign="bottom">
+            <ul class="headernav">
+                <?php
+                // tmp
+                $user = Kit_Util_Session::getUser();
+                if (Kit_Util_Acl::isAllowed($user->roles, 'user', 'admin_access')) {
+                ?>
+                <li><a href="<?=$this->basePath?>/admin" <?php if ($this->module == 'admin' || substr($this->controller, 0, 5) == 'admin') {echo 'class="current"';} ?>>Administer</a></li>
+                <?php } ?>
+                <li><a href="<?=$this->basePath?>/user/manage" <?php if ($this->module == 'user' && substr($this->controller, 0, 6) == 'manage') {echo 'class="current"';} ?>>Profile</a></li>
+            </ul>
+        </td>
+    </tr>
+</table>
+

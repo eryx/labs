@@ -1,0 +1,160 @@
+<?php 
+$this->headLink()->appendStylesheet($this->tplPath.'/css/editorplugin.css');
+
+include $this->getScriptPath('htmlheader.phtml'); 
+include $this->getScriptPath('manage-editorplugin-nav.phtml');
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<script>
+
+function mediaShow(id) {
+    document.getElementById('media-'+ id).className = 'displayNone';
+    document.getElementById('media-button-'+ id).className = 'displayNone';
+    document.getElementById('media-show-'+ id).className = '';
+    document.getElementById('media-show-button-'+ id).className = '';
+}
+
+function mediaHide(id) {
+    document.getElementById('media-'+ id).className = '';
+    document.getElementById('media-button-'+ id).className = '';
+    document.getElementById('media-show-'+ id).className = 'displayNone';
+    document.getElementById('media-show-button-'+ id).className = 'displayNone';
+}
+
+function mediaInsert(id) {
+
+    var text = null;
+    src = document.getElementById('media_image_srcweb_'+ id).value;
+    obj = document.getElementsByName('media_image_size_'+ id);
+    obj_align = document.getElementsByName('media_image_align_'+ id);
+    align_style = 'alignnone';
+    for (i = 0; i < obj.length; i++) { 
+        if (obj[i].checked) {
+            for (j = 0; j < obj_align.length; j++) { 
+                if (obj_align[j].checked) {
+                    align_style = obj_align[j].value;
+                }    
+            }    
+        
+            if (align_style != 'alignnone') {
+                text = '<a href="'+ src +'" target="_blank"><img class="'+align_style+'" src="'+ obj[i].value +'" /\></a>';
+            } else {
+                text = '<a href="'+ src +'" target="_blank"><img src="'+ obj[i].value +'" /\></a>';
+            }
+        }
+    }
+    
+    if (text == null) {
+        alert('Please select the size');
+    } else {
+        mediaInsertParent(text);
+    }
+}
+function mediaInsertParent(text) {
+
+    if (window.opener) {
+        window.opener.mediaplugin.insert(text);
+    } else {
+        alert("window.opener has closed");
+    }
+    window.close();
+}
+</script>
+
+<div class="editorPluginBody">
+<table class="tblist" width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<tr>
+		<td align="left"><b><?=$this->lang->_('Name')?></b></td>
+		<td align="right"></td>
+	</tr>
+    <?php 
+    $even = 'Even';
+    foreach ($this->mediaList as $media) {
+    ?> 
+	<tr class="draggAble<?php echo $even = ($even == 'Even') ? 'Odd' : 'Even';?>">
+		<td align="left">
+	        <div id="media-<?=$media['mediaid']?>">
+	            <a href="javascript:;" onclick="mediaShow(<?=$media['mediaid']?>)"><img src="<?=$media['iconsrc']?>" width="40px" height="40px" /> <?=$media['media_name']?></a>
+	        </div>
+	        <div id="media-show-<?=$media['mediaid']?>" class="displayNone">
+	            <div class="editorPluginArea">
+	                <div class="editorPluginAreaL">
+	                    <img src="<?=$media['iconsrc']?>" />
+	                </div>
+	                <div class="editorPluginAreaR">
+	                    <h3><?=$media['media_name']?></h3>
+	                    <div><?=$media['media_mime']?> (<?=$media['media_size_formated']?>)</div><br />
+	                    <div><?=$media['created']?></div><br />
+	                    <h3><?=$this->lang->_('Alignment')?></h3>
+	                    <ul class="editorPluginAlign">
+	                        <li>
+	                            <input type="radio" name="media_image_align_<?=$media['mediaid']?>" value="alignnone" /> 
+	                            <img src="<?=$this->tplDefPath?>/img/align-none.png" border="0" /> <b>None</b>
+	                        </li>
+	                        <li>
+	                            <input type="radio" name="media_image_align_<?=$media['mediaid']?>" value="alignleft" /> 
+	                            <img src="<?=$this->tplDefPath?>/img/align-left.png" border="0" /> <b>Left</b>
+	                        </li>
+	                        <li>
+	                            <input type="radio" name="media_image_align_<?=$media['mediaid']?>" value="aligncenter" /> 
+	                            <img src="<?=$this->tplDefPath?>/img/align-center.png" border="0" /> <b>Center</b>
+	                        </li>
+	                        <li>
+	                            <input type="radio" name="media_image_align_<?=$media['mediaid']?>" value="alignright" checked="checked" /> 
+	                            <img src="<?=$this->tplDefPath?>/img/align-right.png" border="0" /> <b>Right</b>
+	                        </li>
+	                    </ul>
+	                    
+	                    <div class="clear_both" />
+	                    <?php if (count($media['ims']) > 0) { ?>
+	                    <h3><?=$this->lang->_('Size')?></h3>
+	                    <ul class="editorPluginSize">
+	                        <?php foreach ($media['ims'] as $key => $value) { ?>
+	                        <li>
+	                            <input type="radio" name="media_image_size_<?=$media['mediaid']?>" value="<?=$value['value']?>" /> 
+	                            <span><b><?=$value['name']?></b> <br />(<?=$value['w']?>x<?=$value['h']?>)</span>
+	                        </li>
+	                        <?php } ?>
+	                    </ul>
+	                    <input type="hidden" id="media_image_srcweb_<?=$media['mediaid']?>" value="<?=$media['srcweb']?>" />
+	                    <input type="button" onclick="mediaInsert(<?=$media['mediaid']?>)" class="input_button" value="<?=$this->lang->_('Insert media')?>" />
+	                    <?php } ?>
+	                </div>
+	            </div>
+	        </div>
+		</td>
+		<td align="right">
+		    <div id="media-button-<?=$media['mediaid']?>">
+		        <a href="javascript:;" onclick="mediaShow(<?=$media['mediaid']?>)" class="aButtonText"><?=$this->lang->_('Show')?></a>
+		    </div>
+		    <div id="media-show-button-<?=$media['mediaid']?>" class="displayNone">
+		        <a href="javascript:;" onclick="mediaHide(<?=$media['mediaid']?>)" class="aButtonText"><?=$this->lang->_('Hide')?></a>
+		    </div>
+		</td>
+	</tr>
+	<?php } ?> 
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+	    <td>
+            <?php 
+                $pager = $this->mediaPager;
+                $pagerUrl = $this->mediaUrl;
+                include $this->getScriptPath('pager.phtml'); 
+            ?>
+        </td> 
+    </tr>
+</table>
+
+</div>
+
+<?php
+
+if ($this->mediaid > 0) {
+    echo '<script>mediaShow('.$this->mediaid.')</script>';
+}
+
+include $this->getScriptPath('htmlfooter.phtml');
+?>

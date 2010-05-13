@@ -1,0 +1,23 @@
+<?php 
+defined('SK_ENTRY') or die('Access Denied!');
+ 
+include $this->getScriptPath('manage-nav.phtml'); 
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('My home')?></div>
+
+<form id="user_home_form" name="user_home_form" action="<?=$this->basePath?>/user/manage-home/update" method="post">
+<table border="0" cellpadding="0" cellspacing="10" width="100%">
+	<tr>
+	    <td width="20%" align="right" ><?=$this->lang->_('My home page name')?> :</td>
+    	<td width="20px"></td>
+   		<td ><input id="home_name" name="home_name" type="text" size="30" value="<?=$this->home_name?>"></td>
+	</tr>
+	<tr>
+	    <td></td>
+	    <td></td>
+	    <td><input type="submit" name="submit" class ="input_button" value="<?=$this->lang->_('Save')?>" /></td>
+	</tr>
+</table>
+</form>

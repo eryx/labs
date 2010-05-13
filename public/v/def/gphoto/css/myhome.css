@@ -1,0 +1,18 @@
+.albumList {margin:0; padding:0; text-align:center; width:100%;}
+.albumList li {
+    float:left; margin-left:10px; width:150px; height:260px;
+    text-align:left; overflow:hidden; list-style:none;
+}
+.albumList li img {border:#aaaaaa 1px solid;}
+.albumList li .albumInfo {color:#464646; line-height:120%;}
+
+.photoList {margin:0; padding:0; text-align:center; width:100%;}
+.photoList li {float:left; margin-left:10px; width:150px; height:180px; list-style:none;}
+.photoList li img {border:#aaaaaa 1px solid;}
+
+
+.photoView {text-align:center; width:100%;}
+.photoView .imgBox {border:#aaaaaa 1px solid;}
+
+
+

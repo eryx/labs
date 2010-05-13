@@ -1,0 +1,11 @@
+<?php defined('SK_ENTRY') or die('Access Denied!'); ?>
+<div class="nodeRightBar">
+    <h4><?=$this->lang->_('Search')?></h4>
+    <p>
+        <form id="formNodeSearch" action="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->subModule?>/node/list/">
+        <img src="<?=$this->tplPath?>/img/magnifier.png" align="absmiddle" />
+        <input name="q" value="<?php echo $this->searchKeyword;?>" size="15" />
+        <input type="submit" value="<?=$this->lang->_('Search')?>" />
+        </form>
+    </p>
+</div>

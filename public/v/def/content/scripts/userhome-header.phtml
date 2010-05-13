@@ -1,0 +1,22 @@
+<?php defined('SK_ENTRY') or die('Access Denied!'); ?>
+<div id="myhome-header" style="background: url(<?=$this->tplDefPath?>/img/navline-px.png) #e4f2fd bottom repeat-x;">
+    <div class="myhomeCenterFrame">
+        <h2 id="myhome-name"><?=$this->profile['home_name']?></h2>
+        <ul id="myhome-nav">
+            <?php foreach ($this->myHomeNav as $nav): ?>
+		    <li><a href="<?=$nav['navHref']?>" <?php if ($nav['isCurrent']) {echo 'class="current"';}?>><?=$nav['name']?></a></li>
+		    <?php endforeach; ?>
+		    <li><a href="<?=$this->myHomeUri?>/user/about" <?php if ($this->module == 'user') {echo 'class="current"';} ?>>About</a></li>
+	    </ul>
+	</div>
+</div>
+
+<ul id="myhome-subnav">
+    <li><a href="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->userModule['submodule']?>/" <?php if ($this->controller == 'index') {echo 'class="current"';}?>><?=$this->lang->_('Home')?></a></li>		
+    <li><a href="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->userModule['submodule']?>/node/list/" <?php if ($this->controller == 'node' && $this->action == 'list') {echo 'class="current"';}?>><?=$this->lang->_('Explore')?></a></li>
+    <li><a href="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->userModule['submodule']?>/tree/list/" <?php if ($this->controller == 'tree' && $this->action == 'list') {echo 'class="current"';}?>><?=$this->lang->_('Categories')?></a></li>
+    <li><a href="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->userModule['submodule']?>/archives/" <?php if ($this->controller == 'archives') {echo 'class="current"';}?>><?=$this->lang->_('Archives')?></a></li>
+    <li><a href="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->userModule['submodule']?>/term/list/" <?php if ($this->controller == 'term') {echo 'class="current"';}?>><?=$this->lang->_('Tags')?></a></li>
+    <li><a href="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->userModule['submodule']?>/rss" target="_blank"><?=$this->lang->_('RSS')?></a></li>		
+</ul>
+

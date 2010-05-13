@@ -1,0 +1,24 @@
+<?php 
+$this->headLink()->appendStylesheet($this->tplPath.'/css/editorplugin.css');
+
+include $this->getScriptPath('htmlheader.phtml'); 
+include $this->getScriptPath('manage-editorplugin-nav.phtml');
+include $this->getScriptPath('message-general.phtml'); 
+?>
+<div class="editorPluginBody">
+    <b>Add media files from your computer, Choose files to upload</b>
+    
+    <br /><br />
+    
+    <form id="formMediaUpload" name="formMediaUpload" enctype="multipart/form-data" action="<?=$this->basePath?>/media/manage-editorplugin/doupload" method="post">
+        <input id="attachment" name="attachment" size="40" type="file" />
+  	    <input class="input_button" type="submit" value="<?=$this->lang->_('Upload')?>" />
+    </form>
+    
+    <br /><br />
+    
+    <p>You can upload a JPG, GIF, or PNG file. (Maximum size of 500KB) Do not upload photos containing children, pets, cartoons, celebrities, nudity, artwork or copyrighted images.</p>
+</div>
+<?php
+include $this->getScriptPath('htmlfooter.phtml');
+?>

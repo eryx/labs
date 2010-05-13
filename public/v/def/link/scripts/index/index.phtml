@@ -1,0 +1,55 @@
+<?php 
+$this->headLink()->appendStylesheet($this->tplPath.'/css/myhome.css');
+include $this->getScriptPath('htmlheader.phtml'); 
+?>
+<div id="bodywrap">
+    <div id="bodycontent">    
+        
+        <?php include $this->getScriptPath('topnav.phtml'); ?>
+        <?php include $this->getScriptPath('userhome-header.phtml'); ?>
+        
+        <div class="myhomeCenterFrame">
+            <br />
+            <!-- pageDepthNavBox/ -->
+            <div class="pageDepthNavBox">
+
+            <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/"><img src="<?=$this->tplPath?>/img/house.png" align="absmiddle" /> <b><?=$this->lang->_('My Home')?></b></a>
+
+            &#8250;&#8250; <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/"><img src="<?=$this->tplPath?>/img/folder_magnify.png" align="absmiddle" /> <b><?=$this->lang->_('Categories')?></b></a>
+
+            <?php foreach ($this->listTreeNav as $item) { ?> 
+            &nbsp;/&nbsp;<a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/?treeid=<?php echo $item['treeid'];?>"><b><?php echo $item['name'].'</b>('.$item['count_publish'].')';?></a>
+            <?php } ?>
+
+            <!-- pageDepthSubNavBox/ -->
+            <?php if (count($this->listTreeBranch) > 0) { ?>
+            <div class="pageDepthSubNavBox">
+
+            <?php foreach ($this->listTreeBranch as $item) { ?>
+            <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/?treeid=<?php echo $item['treeid'];?>"><img src="<?=$this->tplPath?>/img/folder.png" align="absmiddle" /> <b><?php echo $item['name'].'</b>('.$item['count_publish'].')';?></a>&nbsp;&nbsp; 
+            <?php } ?>
+
+            </div>
+            <?php } ?>
+            <!-- /pageDepthSubNavBox -->
+
+            </div>
+            <!-- /pageDepthNavBox -->
+
+            <div id="link-list">
+                <?php foreach ($this->linkList as $byTree): ?>
+                <div class="link-tree-name"><img src="<?=$this->tplPath?>/img/folder.png" align="absmiddle" /> <?=$byTree['tree_name']?></div>
+                <ul>
+                    <?php foreach ($byTree['links'] as $link): ?>
+                    <li><img src="<?=$this->tplPath?>/img/world_link.png" align="absmiddle" /> <a href="<?=$link['body']?>" target="_blank"><?=$link['title']?> <font color="#ccc" ><?=$link['body']?></a></font></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+include $this->getScriptPath('general-footer.phtml');
+include $this->getScriptPath('htmlfooter.phtml');
+?>

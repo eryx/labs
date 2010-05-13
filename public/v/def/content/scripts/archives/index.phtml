@@ -1,0 +1,33 @@
+<?php include $this->getScriptPath('myhome-htmlheader.phtml'); ?>
+<div id="bodywrap">
+    <div id="bodycontent">    
+    <?php include $this->getScriptPath('myhome-topnav.phtml'); ?>
+    <?php include $this->getScriptPath('userhome-header.phtml'); ?>
+    <div class="myhomeCenterFrame">
+        <div class="pageDepthNavBox">
+            <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/"><img src="<?=$this->tplPath?>/img/house.png" align="absmiddle" /> <b><?=$this->lang->_('My Home')?></b></a>
+            &#8250;&#8250;<a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/archives/"><img src="<?=$this->tplPath?>/img/date_magnify.png" align="absmiddle" /> <b><?=$this->lang->_('Archives')?></b></a>
+        </div>
+
+        <?php foreach ($this->archivesList as $year => $archives): ?>
+        <div class="nodeArchives">
+            <div class="hinfo">
+                <h3><a href="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->subModule?>/node/list/date/<?=$year?>"><?=$year?></a></h3>
+            </div>
+            <p>
+	            <?php foreach ($archives as $value): ?>
+                <a href="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->subModule?>/node/list/date/<?=$year.'-'.$value['month']?>"><?=$year.'-'.$value['month']?> (<?=$value['count']?>)</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <?php endforeach; ?>
+            </p>
+            <div class="binfo"></div>
+        </div>
+        <?php endforeach; ?>
+
+
+        </div>
+    </div>
+</div>
+<?php
+include $this->getScriptPath('general-footer.phtml');
+include $this->getScriptPath('htmlfooter.phtml');
+?>

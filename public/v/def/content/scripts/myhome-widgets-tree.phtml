@@ -1,0 +1,11 @@
+<?php defined('SK_ENTRY') or die('Access Denied!'); ?>
+<div class="nodeRightBar">
+    <h4><?=$this->lang->_('Categories')?></h4>
+    <ul>
+        <?php foreach ($this->trees as $tree) { ?> 
+        <li style="padding-left: <?php echo 20 * $tree['depth']?>px">
+            <img src="<?=$this->tplPath?>/img/folder.png" align="absmiddle" />
+            <a href="<?=$this->basePath?>/home/<?=$this->profile['username']?>/<?=$this->subModule?>/node/list/treeid/<?=$tree['treeid']?>"><b><?=$tree['name']?></b></a></li>
+        <?php } ?>
+    </ul>
+</div>

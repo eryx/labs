@@ -1,0 +1,46 @@
+/** nav style */
+ul.editorPluginNav {
+	margin-top:0px; padding:0px 10px 0px 10px; list-style:none;
+	border-bottom:#c6d9e9 1px solid; text-align: left;
+}
+ul.editorPluginNav li {
+   	display:inline;
+	line-height:200%;
+	list-style:none;
+	text-align:center;
+	white-space:nowrap;
+}
+ul.editorPluginNav a {
+    padding:5px 7px;
+	text-decoration:none;
+	font-size:12pt; font-weight:bolder; color:#0063dc;
+}
+ul.editorPluginNav a:hover {color:#d54e21; text-decoration:underline;}
+ul.editorPluginNav a.current {
+    background-color:#ffffff; color:#d54e21;
+	-moz-border-radius-topleft:4px;
+	-khtml-border-top-left-radius:4px;
+	-webkit-border-top-left-radius:4px;
+	border-top-left-radius:4px;
+	-moz-border-radius-topright:4px;
+	-khtml-border-top-right-radius:4px;
+	-webkit-border-top-right-radius:4px;
+	border-top-right-radius:4px;
+	border:#c6d9e9 1px solid;
+	border-bottom-color:#ffffff;
+}
+
+.editorPluginBody {padding:10px; text-align:left;}
+.editorPluginBody img {border:#aaaaaa 1px solid;}
+
+.editorPluginArea {width: 660px;}
+.editorPluginAreaL {clear: left; float: left; width: 160px;}
+.editorPluginAreaR {clear: right; float: right; width: 500px;}
+
+ul.editorPluginSize {margin:0; padding:0; width:100%;}
+ul.editorPluginSize li {float:left; margin-left:10px; list-style:none; width:100px;}
+
+ul.editorPluginAlign {margin:0; padding:0; width:100%;}
+ul.editorPluginAlign li {float:left; margin-left:10px; margin-right:20px; list-style:none;}
+ul.editorPluginAlign img {border:0px;}
+

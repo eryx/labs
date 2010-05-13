@@ -1,0 +1,6 @@
+<?php defined('SK_ENTRY') or die('Access Denied!'); ?>
+<ul class="managesubnav">
+    <li><a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-node/" <?php if ($this->controller == 'manage-node') {echo 'class="current"';} ?>>Contents</a></li>
+    <li><a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-tree/" <?php if ($this->controller == 'manage-tree') {echo 'class="current"';} ?>>Categories</a></li>
+</ul>
+

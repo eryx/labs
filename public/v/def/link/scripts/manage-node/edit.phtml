@@ -1,0 +1,53 @@
+<?php 
+include $this->getScriptPath('manage-nav.phtml'); 
+
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('Add/Edit')?></div>
+
+<form id="node_new" name="node_new" action="<?=$this->baseModulePath?>/manage-node/save" method="post">
+    <input id="nodeid" name="nodeid" type="hidden" value="<?=$this->node['nodeid']?>" />
+    <input id="revid" name="revid" type="hidden" value="<?=$this->node['revid']?>" />
+    <input id="status" name="status" type="hidden" value="1" />
+    <input id="terms" name="terms" type="hidden" value="" />
+    <input id="allow_comment" name="allow_comment" type="hidden" value="1" />
+    <table width="100%" border="0" cellpadding="0" cellspacing="8">
+    	<tr>
+    		<td align="right" width="120px"><b><?=$this->lang->_('Name')?></b></td>
+    		<td><input id="title" name="title" type="text" size="30" value="<?=$this->node['title']?>"/> <?=$this->lang->_('for example')?>: <b>Weblog</b></td>
+    	</tr>
+        <tr>
+    		<td valign="top" align="right"><b><?=$this->lang->_('Location')?></b></td>
+    		<td >
+    		    <input id="body" name="body" type="text" size="50" value="<?=$this->node['body']?>" /> <?=$this->lang->_('for example')?> <b>http://www.example.com</b>
+    		</td>
+    	</tr>
+        <tr>
+    		<td align="right"><b><?=$this->lang->_('Category')?></b></td>
+    		<td >
+    		    <select id="treeid" name="treeid">
+                    <option value="1">&lt;<?=$this->lang->_('root')?>&gt;</option>
+    		        <?php foreach ($this->treelist as $tree): ?> 
+    		        <option value="<?=$tree['treeid']?>" <?php if ($tree['treeid'] == $this->node['treeid']) { echo 'selected'; } ?>><?php echo ($tree['depth'] == 0 ? '/ ' : str_pad('', 3 * $tree['depth'], '.')) . $tree['name']?></option>
+    		        <?php endforeach;?>
+                </select>
+    		</td>
+    	</tr>
+        <tr>
+		    <td align="right" valign="top"><b><?=$this->lang->_('Weight')?></b></td>
+		    <td>
+                <input id="ordering" name="ordering" type="text" size="6" maxlength="20" value="<?=$this->node['ordering']?>" />
+                <br /><?=$this->lang->_('Categories are displayed in ascending order by weight.')?>
+            </td>
+	    </tr>
+    	<tr>
+    		<td></td>
+    		<td>
+    			<input type="submit" name="Submit" class="input_button" value="<?=$this->lang->_('Save')?>" />
+    		</td>
+    	</tr>
+    </table>
+    <div class="ctitle" align="center"></div>
+</form>
+

@@ -1,0 +1,57 @@
+<?php 
+
+include $this->getScriptPath('manage-nav.phtml'); 
+
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('Manage')?> <?=$this->lang->_('Contents')?> (<a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-node/new" align="absmiddle" >Add new</a>)</div>
+
+<style type="text/css">
+.item_list tr td {padding: 3px 8px 4px 8px; border-bottom:#c6d9e9 1px solid;}
+.item_list .prlist {background-color:#e7eff7;}
+.item_list .draggAbleOdd {background-color: #e4f2fd;}
+.item_list .draggAbleEven {background-color: #ffffff;}
+</style>
+
+<table class="item_list" width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<tr>
+		<td><b><?=$this->lang->_('Title')?></b></td>
+		<td><b><?=$this->lang->_('Category')?></b></td>
+        <td><b><?=$this->lang->_('Status')?></b></td>
+		<td align="right"><b><?=$this->lang->_('Comments')?></b></td>
+		<td align="right"><b><?=$this->lang->_('Views')?></b></td>
+		<td align="right"><b><?=$this->lang->_('Created')?></b></td>
+		<td align="right"></td>
+	</tr>
+    <?php 
+    $even = 'Even';
+    foreach ($this->nodeList as $node): 
+    ?> 
+	<tr class="draggAble<?php echo $even = ($even == 'Even') ? 'Odd' : 'Even';?>">
+		<td><a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-node/edit/nodeid/<?=$node['nodeid']?>"><?=$node['title']?></a></td>
+		<td><?=$this->trees[$node['treeid']]['name']?></td>
+        <td><?=$this->lang->_($node['status_display'])?></td>
+		<td align="right"><?=$node['count_comment']?></td>
+		<td align="right"><?=$node['count_access']?></td>
+		<td align="right"><?=$node['created']?></td>
+		<td align="right">
+		    <a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-node/delete/nodeid/<?=$node['nodeid']?>" class="aButtonText"><?=$this->lang->_('Delete')?></a>
+		    <a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-node/edit/nodeid/<?=$node['nodeid']?>" class="aButtonText"><?=$this->lang->_('Edit')?></a>
+		</td>
+	</tr>
+	<?php endforeach; ?> 
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+	    <td>
+            <?php 
+                $pager = $this->nodePager;
+                $pagerUrl = $this->nodeUrl;
+                include $this->getScriptPath('pager.phtml');
+            ?>
+        </td> 
+    </tr>
+</table>
+

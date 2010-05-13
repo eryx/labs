@@ -1,0 +1,12 @@
+<div id="myhome-header" style="background: url(<?=$this->tplDefPath?>/img/navline-px.png) #e4f2fd bottom repeat-x;">
+    <div class="myhomeCenterFrame">
+        <h2 id="myhome-name"><?=$this->profile['home_name']?></h2>
+        <ul id="myhome-nav">
+            <?php foreach ($this->myHomeNav as $nav): ?>
+            <li><a href="<?=$nav['navHref']?>" <?php if ($nav['isCurrent']) {echo 'class="current"';}?>><?=$nav['name']?></a></li>
+            <?php endforeach; ?>
+            <li><a href="<?=$this->myHomeUri?>/user/about" <?php if ($this->module == 'user') {echo 'class="current"';} ?>>About</a></li>
+        </ul>
+    </div>
+</div>
+

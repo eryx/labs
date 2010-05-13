@@ -1,0 +1,39 @@
+<?php 
+defined('SK_ENTRY') or die('Access Denied!');
+
+include $this->getScriptPath('admin-nav.phtml');
+
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title">
+    <?php echo $this->role->roleid > 0 ? $this->lang->_('Edit') : $this->lang->_('Add new'); ?>
+</div>
+
+<form id="userAdminRoleEdit" name="userAdminRoleEdit" action="<?=$this->basePath?>/user/admin-role/save" method="post">
+<input id="roleid" name="roleid" type="hidden" value="<?=$this->role->roleid?>" />
+<table border="0" cellpadding="0" cellspacing="10" width="100%">
+	<tr>
+	    <td width="20%" align="right" ><b><?=$this->lang->_('Name')?></b></td>
+    	<td width="20px"></td>
+   		<td ><input id="name" name="name" type="text" size="20" value="<?=$this->role->name?>"></td>
+	</tr>
+	<tr>
+	    <td width="20%" align="right" ><b><?=$this->lang->_('Description')?></b></td>
+    	<td width="20px"></td>
+   		<td ><input id="description" name="description" type="text" size="40" value="<?=$this->role->description?>"></td>
+	</tr>
+	<tr>
+	    <td></td>
+	    <td></td>
+	    <td>
+            <input type="submit" name="submit" class ="input_button" value="<?=$this->lang->_('Save')?>" />
+            <?php if (! $this->role->islock && $this->action == 'edit') { ?>
+            <a href="<?=$this->basePath?>/<?=$this->subModule?>/admin-role/delete/?roleid=<?=$this->role->roleid?>" class="aButtonText"><?=$this->lang->_('Delete Role')?></a>
+            <?php } ?>
+        </td>
+	</tr>
+</table>
+</form>
+
+

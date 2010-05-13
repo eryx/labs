@@ -1,0 +1,97 @@
+<?php 
+defined('SK_ENTRY') or die('Access Denied!');
+
+//include $this->getScriptPath('manage-nav.php'); 
+
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('Manage')?> <?=$this->lang->_('Media')?> (<a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-node/edit" align="absmiddle" >Add new</a>)</div>
+
+<table class="tblist" width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+	    <td></td>
+	    <td></td>
+        <td><b><?=$this->lang->_('Type')?></b></td>
+		<td align="right"><b><?=$this->lang->_('Size')?></b></td>
+		<td align="right"><b><?=$this->lang->_('Created')?></b></td>
+		<td align="right"></td>
+	</tr>
+    <?php 
+    $even = 'Even';
+    foreach ($this->mediaList as $media) {
+    ?> 
+	<tr class="draggAble<?php echo $even = ($even == 'Even') ? 'Odd' : 'Even';?>">
+		<td>
+		    <div id="media-image-<?=$media['mediaid']?>">
+		        <img src="<?=$media['src_thumb']?>" width="40px" height="40px" />
+		    </div>
+		    <div id="media-image-show-<?=$media['mediaid']?>" class="displayNone">
+		        <img src="<?=$media['src_thumb']?>" />
+		    </div>
+		</td>
+		<td>
+		    <b><?=$media['media_name']?></b>
+            <div id="media-show-<?=$media['mediaid']?>" class="displayNone">
+                <div><?=$media['media_mime']?> (<?=$media['media_size_formated']?>)</div>
+	            <div><?=$media['created']?></div>
+                <?php if (isset($media['resizes']) && is_array($media['resizes']) && count($media['resizes']) > 0) { ?>
+                <b><?=$this->lang->_('Size')?></b>
+                <ul class="editorPluginSize">
+                    <?php foreach ($media['resizes'] as $key => $value) { ?>
+                    <li>
+                        <b><?=$value['name']?></b>: <?=$value['dst']?> (<?=$value['width']?>x<?=$value['height']?>)
+                    </li>
+                    <?php } ?>
+                </ul>
+                <?php } ?>
+            </div>
+		</td>
+        <td><?=$media['media_mime_display']?></td>
+        <td align="right"><?=$media['media_size_formated']?></td>
+		<td align="right"><?=$media['created_formated']?></td>
+		<td align="right">
+		    <a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-node/delete/?mediaid=<?=$media['mediaid']?>" class="aButtonText"><?=$this->lang->_('Delete')?></a>
+		    <span id="media-button-<?=$media['mediaid']?>">
+		        <a href="javascript:;" onclick="mediaShow(<?=$media['mediaid']?>)" class="aButtonText"><?=$this->lang->_('Show')?></a>
+		    </span>
+		    <span id="media-show-button-<?=$media['mediaid']?>" class="displayNone">
+		        <a href="javascript:;" onclick="mediaHide(<?=$media['mediaid']?>)" class="aButtonText"><?=$this->lang->_('Hide')?></a>
+		    </span>
+		</td>
+	</tr>
+	<?php } ?> 
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+	    <td align="center">
+            <?php 
+                $pager = $this->mediaPager;
+                $pagerUrl = $this->mediaUrl;
+                include $this->getScriptPath('pager.phtml'); 
+            ?>
+        </td> 
+    </tr>
+</table>
+
+<script>
+
+function mediaShow(id) {
+    document.getElementById('media-image-'+ id).className = 'displayNone';
+    document.getElementById('media-button-'+ id).className = 'displayNone';
+    document.getElementById('media-show-'+ id).className = '';
+    document.getElementById('media-image-show-'+ id).className = '';
+    document.getElementById('media-show-button-'+ id).className = '';
+}
+
+function mediaHide(id) {
+    document.getElementById('media-image-'+ id).className = '';
+    document.getElementById('media-button-'+ id).className = '';
+    document.getElementById('media-show-'+ id).className = 'displayNone';
+    document.getElementById('media-image-show-'+ id).className = 'displayNone';
+    document.getElementById('media-show-button-'+ id).className = 'displayNone';
+}
+
+</script>
+

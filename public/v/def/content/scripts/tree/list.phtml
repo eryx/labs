@@ -1,0 +1,42 @@
+<?php include $this->getScriptPath('myhome-htmlheader.phtml'); ?>
+
+<style type="text/css">
+.item_list tr td {padding: 1px; border-bottom:#c6d9e9 0px solid;}
+</style>
+
+<div id="bodywrap">
+    <div id="bodycontent">    
+    
+        <?php include $this->getScriptPath('myhome-topnav.phtml'); ?>
+        <?php include $this->getScriptPath('userhome-header.phtml'); ?>
+    
+        <div class="myhomeCenterFrame">
+            <div class="pageDepthNavBox">
+                <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/"><img src="<?=$this->tplPath?>/img/house.png" align="absmiddle" /> <b><?=$this->lang->_('My Home')?></b></a>
+                &#8250;&#8250; <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/tree/list/"><img src="<?=$this->tplPath?>/img/folder_explore.png" align="absmiddle" /> <b><?=$this->lang->_('Categries')?></b></a>
+            </div>
+
+            <div class="nodeMainBorder">
+            
+                <table class="item_list" width="100%" border="0" cellpadding="0" cellspacing="0" >
+                <?php foreach ($this->treelist as $tree) { ?>
+               	    <tr class="<?php echo $draggAble;?>">
+             	    	<td style="padding-left: <?php echo 30 * $tree['depth'] + 10;?>px;">
+                            <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/node/list/?treeid=<?php echo $tree['treeid']?>">
+                                <img src="<?=$this->tplPath?>/img/folder.png" align="absmiddle" /> <b><?php echo $tree['name']?></b> (<?php echo $tree['count_publish'];?>)
+                            </a>
+                        </td>
+            	    </tr>
+        	    <?php } ?>
+                </table>
+
+            </div>
+
+        </div>     
+    
+    </div>
+</div>
+<?php
+include $this->getScriptPath('general-footer.phtml');
+include $this->getScriptPath('htmlfooter.phtml');
+?>

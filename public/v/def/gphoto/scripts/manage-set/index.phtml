@@ -1,0 +1,23 @@
+<?php
+include $this->getScriptPath('manage-nav.phtml');
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('Setting your google picasa account')?></div>
+
+<form id="user_profilepw" name="user_profilepw" action="<?=$this->basePath?>/gphoto/manage-set/doset" method="post" >
+<input id="userid" name="userid" type="hidden" value="<?=$this->guser['userid']?>"/>
+	<table width="100%" border="0" cellpadding="0" cellspacing="10" >
+  		<tr>
+    		<td width="20%" align="right" ><b><?=$this->lang->_('Account')?></b></td>
+    		<td width="20px"></td>
+    		<td ><input id="guser" name="guser" type="text" value="<?=$this->guser['guser']?>"/></td>
+  		</tr>
+  		<tr>
+    		<td></td>
+    		<td></td>
+    		<td ><input class="input_button" type="submit" name="submit" value="<?=$this->lang->_('Submit')?>" /></td>
+  		</tr>
+	</table>
+</form>
+

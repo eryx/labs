@@ -1,0 +1,39 @@
+<?php 
+include $this->getScriptPath('manage-nav.phtml'); 
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?php echo $this->tree['treeid'] > 0 ? $this->lang->_('Edit') : $this->lang->_('Add new'); ?></div>
+
+<form id="tree_edit_form" name="tree_edit_form" action="<?=$this->basePath?>/<?=$this->subModule?>/manage-tree/save" method="post" >
+<input id="treeid" name="treeid" type="hidden" value="<?=$this->tree['treeid']?>" />
+<table width="100%" border="0" cellpadding="0" cellspacing="10px" >
+    <tr>
+	    <td width="160px" align="right"><b><?=$this->lang->_('Name')?></b></td>
+		<td><input id="name" name="name" type="text" size="20" maxlength="100" value="<?=$this->tree['name']?>" /></td>
+	</tr>
+    <tr>
+	    <td width="160px" align="right"><b><?=$this->lang->_('Parents')?></b></td>
+		<td>
+            <select id="parentid" name="parentid">
+                <option value="0">&lt;<?=$this->lang->_('root')?>&gt;(Weight value)</option>
+    		    <?php foreach ($this->treelist as $item): ?> 
+    		    <option value="<?php echo $item['treeid'];?>" <?php echo ($this->tree['parentid'] == $item['treeid']) ? 'selected' : ''; ?>> <?php echo ($item['depth'] == 0 ? '/ ' : str_pad('', 3 * $item['depth'], '.')) . $item['name'] .' ('.$item['ordering'].')';?> </option>
+    		    <?php endforeach;?>
+            </select>
+        </td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b><?=$this->lang->_('Weight')?></b></td>
+		<td >
+            <input id="ordering" name="ordering" type="text" size="6" maxlength="20" value="<?=$this->tree['ordering']?>" />
+            <br /><?=$this->lang->_('Categories are displayed in ascending order by weight.')?>
+        </td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input class="input_button" type="submit" value="<?=$this->lang->_('Save')?>" /></td>
+	</tr>
+</table>
+</form>
+

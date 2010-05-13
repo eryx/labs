@@ -1,0 +1,95 @@
+<?php
+$this->headScript()->appendFile('/_default/jquery/js/jquery-1.4.2.min.js');
+$this->headScript()->appendFile('/_default/jquery/js/jquery-ui-1.8.1.custom.min.js');
+?>
+
+	<style type="text/css">
+	#sortable1, #sortable2, #sortable3 { list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; background: #eee; padding: 5px; width: 200px;}
+	#sortable1 li, #sortable2 li, #sortable3 li { margin: 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+	ul {min-height:40px;}
+	</style>
+	<script type="text/javascript">
+	
+	</script>
+<script>
+//		$('#layout').html($("#layout").html() + data);
+
+/*
+$.ajax({
+  url: '/wcm/modeler/block?vpath=entry/list',
+  success: function(data) {
+    $('#layout').html($("#layout").html() + data);
+  }
+});
+*/
+
+
+$(document).ready(function() {  
+    $("#layout_add").click(function() {
+        $.ajax({
+            url: '/wcm/modeler/block?vpath=entry/list',
+            success: function(data) {
+//              $('#layout').html($("#layout").html() + data);
+              $('#layout').append(data);
+              
+              $("ul.sidebar").sortable({connectWith:'ul'});
+              $("ul.sidebar2").sortable({connectWith:'ul'});
+              $("ul.content").sortable({connectWith:'ul'});
+		
+		
+            }
+        });
+        
+
+	})
+});
+
+
+    $(function() {
+		$("ul.droptrue").sortable({
+			connectWith: 'ul'
+		});
+
+		$("ul.dropfalse").sortable({
+			connectWith: 'ul',
+			dropOnEmpty: false
+		});
+
+		$("#sortable1, #sortable2, #sortable3").disableSelection();
+	});
+</script>
+
+<table width="100%">
+<tr>
+<td width="120px" valign="top">
+    <ul>
+        <li><a id="layout_add" href="#">Add Layout</a></li>
+        <li><a id="block_add" href="#">Add Block</a></li>
+    </ul>
+</td>
+<td id="layout" style="margin:10px; border:1px solid #ccc;min-width:1024px;">
+</td>
+</tr>
+</table>
+
+<div class="demo">
+
+<ul id="sortable1" class='droptrue'>
+	<li>Item 3</li>
+	<li class="ui-state-default">Item 4</li>
+	<li class="ui-state-default">Item 5</li>
+</ul>
+
+<ul id="sortable2" class='droptrue'>
+	<li class="ui-state-highlight">Item 3</li>
+	<li class="ui-state-highlight">Item 4</li>
+	<li class="ui-state-highlight">Item 5</li>
+</ul>
+
+<ul id="sortable3" class='droptrue'>
+</ul>
+
+</div>
+
+
+

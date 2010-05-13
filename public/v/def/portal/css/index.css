@@ -1,0 +1,205 @@
+/** Center block */
+.centerbox {
+	clear: both;
+	margin: auto;
+	text-align: left;
+	width: 980px;
+	color: #000099;
+}
+
+.contentbox {
+	clear: left;
+	float: left;
+	width: 700px;
+}
+
+.sidebox {
+	clear: right;
+	float: right;
+	width: 260px;
+}
+
+/** banner */
+.index_banner {
+    width: 980px;
+    height: 180px;
+    margin-top:30px; 
+    margin-bottom:10px;
+}
+
+.index_banner_notice {
+    clear: right;
+    float: right;
+    padding: 45px;
+    text-align: center;
+}
+
+.index_banner_notice .signup_title {
+    font-size: 26px;
+    color: #ffffff;
+}
+
+.index_banner_notice .signup_box {
+    clear: both;
+    margin-top:40px;
+}
+
+.index_banner_notice .signup_link {
+    padding: 5px 15px;
+    -moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+    border: 1px #cccccc solid;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #d54e21;
+}
+
+
+
+.portal_list {
+	clear: both;
+	margin-bottom: 5px;
+}
+
+.portal_list ul {
+	list-style-type: none;
+	margin-right:10px;
+	padding: 0px;
+}
+
+.portal_list .ul_title {
+    padding: 10px 0 1px 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+    border-bottom: 2px #c6d9e9 solid;
+}
+
+ul.list_node {
+	float: left;
+	list-style-type: none;
+	width: 340px;
+}
+
+ul.list_node li * {
+	vertical-align: top;
+}
+
+ul.list_node li {
+	float: left;
+	width: 340px;
+	padding: 3px 0px 3px 0px;
+	line-height: 1.3em;
+	list-style-type: none;
+	text-align: left;
+}
+
+ul.list_node li img {
+	float: left;
+	width: 32px;
+	height: 32px;
+	margin-right: 10px;
+	border: 1px #e5e5e5 solid;
+	padding: 2px;
+}
+
+ul.list_node li a {
+	float: left;
+	width: 280px;
+	color: #21759b;
+}
+
+
+dl.sideitem {
+	padding: 6px;
+	margin: 5px 0px;
+	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	border: #c6d9e9 1px solid;
+	line-height: 260%;
+}
+
+dl.sideitem dt {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+    border-bottom: 2px #c6d9e9 solid;
+}
+
+dl.sideitem dd {
+    margin: 0px;
+    padding: 10px 0px;
+}
+
+#searchform input {
+    padding: 2px;
+    font-weight: bold;
+}
+input.searchquery {
+    width: 160px;
+}
+input.searchbutton {
+    max-width: 40px;
+}
+
+.term_list a {
+	padding: 2px;
+}
+
+.term_list .t0 {
+	font-size: 90%;
+	font-weight: 100;
+}
+
+.term_list .t1 {
+	font-size: 100%;
+	font-weight: 200;
+}
+
+.term_list .t2 {
+	font-size: 110%;
+	font-weight: 250;
+}
+
+.term_list .t3 {
+	font-size: 120%;
+	font-weight: 300;
+}
+
+.term_list .t4 {
+	font-size: 130%;
+	font-weight: 550;
+}
+
+.term_list .t5 {
+	font-size: 140%;
+	font-weight: 400;
+}
+
+.term_list .t6 {
+	font-size: 150%;
+	font-weight: 450;
+}
+
+.term_list .t7 {
+	font-size: 160%;
+	font-weight: 500;
+}
+
+.term_list .t8 {
+	font-size: 170%;
+	font-weight: 550;
+}
+
+.term_list .t9 {
+	font-size: 180%;
+	font-weight: 600;
+}
+
+

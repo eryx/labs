@@ -1,0 +1,21 @@
+<?php
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('Add new')?></div>
+
+<h2><?=$this->lang->_('Upload a file')?> ?</h2>
+<p>You can upload a JPG, GIF, or PNG file. (Maximum size of 500KB) Do not upload photos containing children, pets, cartoons, celebrities, nudity, artwork or copyrighted images.</p>
+<form id="formUserMediaUpload" name="formUserMediaUpload" enctype="multipart/form-data" action="<?=$this->basePath?>/media/manage-node/upload" method="post">
+  	<table border="0" cellpadding="0" cellspacing="8" >
+  	    <tr>
+  	        <td><b>Select file: </b></td>
+  	        <td><input id="attachment" name="attachment" size="40" type="file" /></td>
+  	    </tr>
+  	    <tr>
+  	        <td></td>
+  	        <td><input class="input_button" type="submit" value="<?=$this->lang->_('Submit')?>" />
+  	    </tr>
+  	</table>
+</form>
+

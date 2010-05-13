@@ -1,0 +1,31 @@
+<?php 
+include $this->getScriptPath('manage-nav.phtml');
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title">Manage <font size="2">(<img src="<?=$this->tplPath?>/img/arrow_refresh.png" align="absmiddle" /> <a href="<?=$this->basePath?>/<?=$this->subModule?>/manage-album/update/"><b>Update from Google Picasa Service</b></a>)</font></div>
+
+<style type="text/css">
+.item_list tr td {padding: 3px 8px 4px 8px; border-bottom:#e7eff7 1px solid;}
+.item_list .prlist {background-color:#e7eff7;}
+</style>
+
+<table class="item_list" width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<tr>
+	    <td width="10px"></td>
+    	<td><b><?=$this->lang->_('Title')?></b></td>
+    	<td><b><?=$this->lang->_('Number Photos')?></b></td>
+    	<td><b><?=$this->lang->_('Date')?></b></td>
+		<td width="10px"></td>
+	</tr>
+    <?php foreach ($this->albumList as $album): ?> 
+	<tr>
+	    <td></td>
+		<td><a href="<?=$this->basePath?>/home/<?=$this->session->username?>/<?=$this->subModule?>/album/view/?albumid=<?=$album['albumid']?>" target="_blank"><?=$album['title']?></a></td>
+		<td><?=$album['num_photos']?></td>
+		<td><?=date("Y-m-d", strtotime($album['gtimestamp']))?></td>
+        <td></td>
+	</tr>
+	<?php endforeach; ?> 
+</table>
+

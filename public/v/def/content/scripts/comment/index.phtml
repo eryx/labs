@@ -1,0 +1,21 @@
+<?php include $this->getScriptPath('myhome-htmlheader.phtml'); ?>
+<div id="bodywrap">
+<div id="bodycontent">
+
+    <?php include $this->getScriptPath('myhome-topnav.phtml'); ?>
+    <?php include $this->getScriptPath('userhome-header.phtml'); ?>
+    <div class="myhomeCenterFrame">
+    
+        <?php 
+        include $this->getScriptPath('message-general.phtml');
+        include $this->getScriptPath('myhome-comment-form.phtml');
+        ?>
+
+    </div>
+
+</div>
+</div>
+<?php
+include $this->getScriptPath('general-footer.phtml');
+include $this->getScriptPath('htmlfooter.phtml');
+?>

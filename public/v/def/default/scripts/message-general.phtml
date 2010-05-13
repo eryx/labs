@@ -1,0 +1,39 @@
+<?php 
+
+if (isset($this->message)) 
+{
+
+    switch ($this->message['type']) {
+        case 'error':
+            $msgItemBackgroundColor = '#ffebe8';
+            $msgItemBorderColor = '#cc0000';
+            break;
+        default :
+            $msgItemBackgroundColor = '#f0f8ff';
+            $msgItemBorderColor = '#c6d9e9';            
+   }
+?>
+
+<style>
+.msgItem {
+    margin: 5px 0px 5px 0px; 
+    background-color: <?php echo $msgItemBackgroundColor; ?>; 
+    border: <?php echo $msgItemBorderColor; ?> 2px solid;
+}
+.msgItemBody {font-weight: bold;}
+</style>
+
+<div class="centerbox">
+<table class="msgItem" width="100%" border="0" cellspacing="0" cellpadding="2px">
+    <tr>
+      	<td align="center" width="30px">
+      	    <img src="<?=$this->tplDefPath?>/img/<?=$this->message['type']?>-small.png" border="0" />
+      	</td>
+      	<td class="msgItemBody">
+      	    <?=$this->message['body']?>
+      	</td>
+    </tr>
+</table>
+</div>
+
+<?php } ?>

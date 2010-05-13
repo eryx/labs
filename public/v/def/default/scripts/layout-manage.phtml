@@ -1,0 +1,16 @@
+<?php include $this->getScriptPath('htmlheader.phtml'); ?>
+<div id="bodywrap">
+    <div id="bodycontent">
+    <?php
+    include $this->getScriptPath('topnav.phtml');
+    include $this->getScriptPath('layout-manage-header.phtml');
+    ?>
+    <div id="layoutcontent">
+        <?php echo $this->layout()->content;?>
+    </div>
+    </div>
+</div>
+<?php
+include $this->getScriptPath('general-footer.phtml');
+include $this->getScriptPath('htmlfooter.phtml');
+?>

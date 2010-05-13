@@ -1,0 +1,11 @@
+<div id="home-header" style="background: url(<?=$this->tplDefPath?>/img/navline-px.png) #e4f2fd bottom repeat-x;">
+    <div class="fix-centerbox">
+        <img id="logo" src="<?=$this->tplDefPath?>/img/logo.png" />
+        <ul id="homenav">
+            <li><a href="<?=$this->basePath?>/portal" <?php if ($this->subModule == 'portal' && $this->controller == 'index') {echo 'class="current"';}?>><?=$this->lang->_('Home')?></a></li>
+            <li><a href="<?=$this->basePath?>/portal/node" <?php if ($this->subModule == 'portal' && $this->controller == 'node') {echo 'class="current"';}?>><?=$this->lang->_('Explore')?></a></li>
+            <li><a href="<?=$this->basePath?>/user/sign/up" <?php if ($this->subModule == 'user' && $this->controller == 'register') {echo 'class="current"';}?>><?=$this->lang->_('Register')?></a></li>
+        </ul>
+    </div>
+</div>
+

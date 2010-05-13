@@ -1,0 +1,116 @@
+<?php include $this->getScriptPath('myhome-htmlheader.phtml'); ?>
+<div id="bodywrap">
+    <div id="bodycontent">
+
+        <?php include $this->getScriptPath('myhome-topnav.phtml'); ?>
+        <?php include $this->getScriptPath('userhome-header.phtml'); ?>
+        
+        <!-- myhomeCenterFrame/ -->
+        <div class="myhomeCenterFrame">
+            <?php 
+            include $this->getScriptPath('message-general.phtml');
+            ?>
+
+            <!-- pageDepthNavBox/ -->
+
+            <div class="pageDepthNavBoxBlue">
+                <form id="formNodeSearch" action="<?php echo $this->searchAction;?>">
+                <img src="<?=$this->tplPath?>/img/magnifier.png" align="absmiddle" />
+                <b><?=$this->lang->_('Search')?></b>
+                <input name="q" value="<?php echo $this->searchKeyword;?>" size="30" />
+                <input type="submit" value="<?=$this->lang->_('Search')?>" />
+                </form>
+            </div>
+
+            <div class="pageDepthNavBox">
+        
+            <a href="<?=$this->userHomeModuleUri?>/"><img src="<?=$this->tplPath?>/img/house.png" align="absmiddle" /> <b><?=$this->lang->_('My Home')?></b></a>
+
+            &#8250;&#8250; <a href="<?=$this->userHomeModuleUri?>/node/list/"><img src="<?=$this->tplPath?>/img/magnifier.png" align="absmiddle" /> <b><?=$this->lang->_('Explore')?></b></a>
+
+            <?php 
+            if (isset($this->listArchivesNav) && count($this->listArchivesNav) > 0) {
+                $item = $this->listArchivesNav[0];
+            ?>
+            &#8250;&#8250; <a href="<?=$this->userHomeModuleUri?>/node/list/?date=<?php echo $item['date'];?>"><img src="<?=$this->tplPath?>/img/date_magnify.png" align="absmiddle" /> <b><?php echo $item['date'];?></b></a>
+            <?php
+            } 
+            if (isset($this->listArchivesNav) && count($this->listArchivesNav) == 2) {
+                $item = $this->listArchivesNav[1];
+            ?>
+            &nbsp;/&nbsp; <a href="<?=$this->userHomeModuleUri?>/node/list?date=<?php echo $item['date'];?>"><img src="<?=$this->tplPath?>/img/date.png" align="absmiddle" /> <b><?php echo $item['date'];?></b></a>
+            <?php
+            }
+
+            if (isset($this->listTreeNav) && count($this->listTreeNav) > 0) {
+            ?>
+            &#8250;&#8250; <a href="<?=$this->userHomeModuleUri?>/tree/list/"><img src="<?=$this->tplPath?>/img/folder_explore.png" align="absmiddle" /> <b><?=$this->lang->_('Categries')?></b></a>
+            <?php } ?>
+
+            <?php foreach ($this->listTreeNav as $item) { ?> 
+            &nbsp;/&nbsp;<a href="<?=$this->userHomeModuleUri?>/node/list?treeid=<?php echo $item['treeid'];?>"><b><?php echo $item['name'].'</b>('.$item['count_publish'].')';?></a>
+            <?php } ?>
+
+            <!-- pageDepthSubNavBox/ -->
+            <?php 
+            if (count($this->listArchivesBranch) > 0 || count($this->listTreeBranch) > 0) {
+            ?>
+            <div class="pageDepthSubNavBox">
+
+            <?php foreach ($this->listArchivesBranch as $item) { ?> 
+            <a href="<?=$this->userHomeModuleUri?>/node/list?date=<?php echo $item['date'];?>"><img src="<?=$this->tplPath?>/img/date.png" align="absmiddle" /> <b><?php echo $item['date'].'</b>('.$item['count'].')';?></a>&nbsp;&nbsp; 
+            <?php } ?>
+
+            <?php foreach ($this->listTreeBranch as $item) { ?>
+            <a href="<?=$this->userHomeModuleUri?>/node/list?treeid=<?php echo $item['treeid'];?>"><img src="<?=$this->tplPath?>/img/folder.png" align="absmiddle" /> <b><?php echo $item['name'].'</b>('.$item['count_publish'].')';?></a>&nbsp;&nbsp; 
+            <?php } ?>
+
+            </div>
+            <?php } ?>
+            <!-- /pageDepthSubNavBox -->
+
+            </div>
+            <!-- /pageDepthNavBox -->
+
+	        <?php foreach ($this->nodelist as $node): ?> 
+	        <div class="node-list">
+	            <div class="hinfo">
+	                <h3><a href="<?=$this->userHomeModuleUri?>/<?=$node['href']?>"> <?=$node['title']?></a></h3>
+	                <div>
+	                    <img src="<?=$this->tplPath?>/img/date.png" align="absmiddle" /> <?php echo date('Y-m-d', strtotime($node['created']));?>
+	                    <img src="<?=$this->tplPath?>/img/folder.png" align="absmiddle" /> <a href="<?=$this->userHomeModuleUri?>/node/list?treeid=<?=$node['treeid']?>"><?=$this->trees[$node['treeid']]['name']?>
+            	        <img src="<?=$this->tplPath?>/img/tag_blue.png" align="absmiddle" /> 
+            	        <?php foreach ((array)$node['termList'] as $term): ?> 
+            	        &nbsp;<a href="<?=$this->userHomeModuleUri?>/node/list?term=<?=$term?>"><?=$term?></a>
+            	        <?php endforeach; ?>
+	                </div>
+               	</div>
+       			<div class="nodeEntry"><?=$node['body']?></div>
+            	<div class="binfo clear_both">
+	                <img src="<?=$this->tplPath?>/img/comments.png" align="absmiddle" /> <a href="<?=$node['href']?>#comment-list"><?=$this->lang->_('Comments')?> (<?=$node['count_comment']?>)</a>
+                    <img src="<?=$this->tplPath?>/img/folder_page.png" align="absmiddle" /> <a href="<?=$node['href']?>"><?=$this->lang->_('Views')?> (<?=$node['count_access']?>)</a>
+                    <?php if ($node['allowDelete']) { ?>
+                    <img src="<?=$this->tplPath?>/img/page_delete.png" align="absmiddle" /> <a href="<?=$this->userHomeModuleUri?>/node/delete?nodeid=<?=$node['nodeid']?>"><?=$this->lang->_('Delete')?></a>
+                    <?php } ?>
+            	</div>
+	        </div>
+	        <?php endforeach; ?>
+              
+            <div class="centerbox">
+            <?php 
+                $pager = $this->nodePager;
+                $pagerUrl = $this->nodeUrl;
+                include $this->getScriptPath('pager.phtml'); 
+            ?>
+            </div>
+
+        </div>
+        <!-- /myhomeCenterFrame -->
+        
+        
+    </div>
+</div>
+<?php
+include $this->getScriptPath('general-footer.phtml');
+include $this->getScriptPath('htmlfooter.phtml');
+?>

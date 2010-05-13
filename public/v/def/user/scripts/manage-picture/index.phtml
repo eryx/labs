@@ -1,0 +1,32 @@
+<?php
+defined('SK_ENTRY') or die('Access Denied!');
+ 
+include $this->getScriptPath('manage-nav.phtml'); 
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('My picture')?></div>
+
+<table border="0" cellpadding="0" cellspacing="10" >
+	<tr>
+		<td valign="bottom"><img src="<?=$this->profile['icon']['normal']?>" /> <b><?=$this->lang->_('Normal size')?></b></td>
+		<td width="30px"></td>
+		<td valign="bottom"><img src="<?=$this->profile['icon']['small']?>" /> <b><?=$this->lang->_('Small size')?></b></td>
+	</tr>
+</table>
+
+<h2><?=$this->lang->_('Upload a picture')?> ?</h2>
+<p>You can upload a JPG, GIF, or PNG file. (Maximum size of 500KB) Do not upload photos containing children, pets, cartoons, celebrities, nudity, artwork or copyrighted images.</p>
+<form id="formUserPictureUpload" name="formUserPictureUpload" enctype="multipart/form-data" action="<?=$this->basePath?>/user/manage-picture/upload" method="post">
+  	<table border="0" cellpadding="0" cellspacing="8" >
+  	    <tr>
+  	        <td><b>Select picture: </b></td>
+  	        <td><input id="attachment" name="attachment" size="40" type="file" /></td>
+  	    </tr>
+  	    <tr>
+  	        <td></td>
+  	        <td><input class="input_button" type="submit" value="<?=$this->lang->_('Submit')?>" />
+  	    </tr>
+  	</table>
+</form>
+

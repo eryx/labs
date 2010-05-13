@@ -1,0 +1,53 @@
+<?php 
+defined('SK_ENTRY') or die('Access Denied!');
+
+include $this->getScriptPath('admin-nav.phtml'); 
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?=$this->lang->_('Users')?></div>
+
+<style type="text/css">
+.item_list tr td {padding: 2px; border-bottom:#c6d9e9 1px solid;}
+.item_list .draggAbleOdd {background-color: #e4f2fd;}
+.item_list .draggAbleEven {background-color: #ffffff;}
+</style>
+<table class="item_list" width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<tr>
+		<td><b><?=$this->lang->_('Username')?><b></td>
+		<td><b><?=$this->lang->_('Name')?><b></td>
+		<td><b><?=$this->lang->_('Email')?><b></td>
+        <td><b><?=$this->lang->_('Created')?><b></td>
+		<td></td>
+	</tr>
+    <?php
+    $even = 'Even';
+    foreach ($this->userList as $user) 
+    {
+        $even = ($even == 'Even') ? 'Odd' : 'Even';
+        $draggAble = 'draggAble'.$even;
+    ?>
+	<tr class="<?php echo $draggAble;?>">
+		<td>
+            <a href="<?=$this->basePath?>/<?=$this->subModule?>/admin-user/edit/?userid=<?=$user['userid']?>"><b><?=$user['username']?></b></a>
+        </td>
+		<td><?=$user['name']?></td>
+        <td><?=$user['email']?></td>
+        <td><?=$user['created']?></td>
+		<td align="right">
+		    <a href="<?=$this->basePath?>/<?=$this->subModule?>/admin-user/edit/?userid=<?=$user['userid']?>" class="aButtonText"><?=$this->lang->_('Edit profile')?></a>
+            <a href="<?=$this->basePath?>/<?=$this->subModule?>/admin-user/editpwd/?userid=<?=$user['userid']?>" class="aButtonText"><?=$this->lang->_('Reset password')?></a>
+             <a href="<?=$this->basePath?>/<?=$this->subModule?>/admin-user/editpic/?userid=<?=$user['userid']?>" class="aButtonText"><?=$this->lang->_('Edit picture')?></a>
+		</td>
+	</tr>
+	<?php } ?>
+</table>
+<div class="centerbox">
+    <?php 
+    $pager = $this->userPager;
+    $pagerUrl = $this->userUrl;
+    include $this->getScriptPath('pager.phtml');  
+    ?>
+</div>
+
+

@@ -1,0 +1,43 @@
+<?php 
+$this->headLink()->appendStylesheet($this->tplPath.'/css/myhome.css');
+include $this->getScriptPath('htmlheader.phtml'); 
+?>
+
+<div id="bodywrap">
+    <div id="bodycontent">    
+        
+        <?php include $this->getScriptPath('topnav.phtml'); ?>
+        <?php include $this->getScriptPath('userhome-header.phtml'); ?>
+        
+        <div class="myhomeCenterFrame">
+            <ul id="myhome-subnav">
+                <li class="current"><?=$this->lang->_('Picasa Web Albums')?></li>
+            </ul>
+            <!-- pageDepthNavBox/ -->
+            <div class="pageDepthNavBox">
+                <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>"><img src="<?=$this->tplDefPath?>/img/house.png" align="absmiddle" /> <b><?=$this->lang->_('My Home')?></b></a>
+                &#8250;&#8250; <a href="<?php echo $this->basePath?>/home/<?php echo $this->profile['username']?>/<?php echo $this->subModule?>/"><img src="<?=$this->tplPath?>/img/google_picasa.png" align="absmiddle" /> <b><?=$this->lang->_('Photo')?></b></a>
+            </div>
+            <!-- /pageDepthNavBox -->
+            
+            <ul class="albumList">
+                <?php foreach ($this->albumList as $album): ?> 
+                <li>
+                    <a href="<?=$album['href']?>">
+                        <img src="<?=$album['media_url']?>" />
+                        <h4><?=$album['title']?></h4>
+                    </a>
+                    <div class="albumInfo">
+                        <?php echo date("Y-m-d", strtotime($album['gtimestamp']))?><br/>
+                        <?=$album['num_photos']?> <?=$this->lang->_('Items')?>
+                    </di>
+                </li>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<?php include $this->getScriptPath('general-footer.phtml'); ?>
+<?php include $this->getScriptPath('htmlfooter.phtml'); ?>

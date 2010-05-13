@@ -1,0 +1,42 @@
+<?php 
+defined('SK_ENTRY') or die('Access Denied!');
+
+include $this->getScriptPath('admin-nav.phtml');
+
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<div class="navindex_title"><?php echo $this->lang->_('Edit permissions'); ?></div>
+
+<style type="text/css">
+.item_list tr td {padding: 3px 8px 4px 8px; border-bottom:#c6d9e9 1px solid;}
+.item_list .prlist {background-color:#e7eff7;}
+.item_list .draggAbleOdd {background-color: #e4f2fd;}
+.item_list .draggAbleEven {background-color: #ffffff;}
+</style>
+<form id="userAdminRolePermEdit" name="userAdminRolePermEdit" action="<?=$this->basePath?>/user/admin-role/permsave" method="post">
+<input id="roleid" name="roleid" type="hidden" value="<?=$this->role->roleid?>" />
+<table class="item_list" width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<tr>
+		<td><b><?=$this->lang->_('Module')?><b></td>
+		<td><b><?=$this->lang->_('Privilege')?><b></td>
+		<td><b><?=$this->role->name?><b></td>
+	</tr>
+    <?php
+    $even = 'Even';
+    foreach ($this->perms as $perm) 
+    {
+    ?>
+	<tr class="draggAble<?php echo $even = ($even == 'Even') ? 'Odd' : 'Even';?>">
+		<td><?=$perm['resource']?></td>
+		<td><?=$perm['privilege']?></td>
+		<td>
+		    <input type="checkbox" name="<?=$perm['resource']?>-<?=$perm['privilege']?>" id="<?=$perm['resource']?>-<?=$perm['privilege']?>" value="1" <?php if ($perm['isAllowed']) { echo 'checked="checked"';} ?> />
+		</td>
+	</tr>
+	<?php } ?>
+</table>
+
+<input type="submit" name="submit" class ="input_button" value="<?=$this->lang->_('Save')?>" />
+</form>
+

@@ -1,0 +1,17 @@
+<table id="topnav" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="left">
+	    <a href="<?=$this->basePath?>/">Home</a>
+    </td>
+    <td align="right">
+    <?php if ($this->session->uid != "0") { ?>
+      Hi <?=$this->session->uname?>
+      &nbsp;&nbsp;|&nbsp;&nbsp; <a href="<?=$this->basePath?>/user/manage">Account Setting</a>
+      &nbsp;&nbsp;|&nbsp;&nbsp; <a href="<?=$this->basePath?>/user/sign/out">Sign out</a>
+    <?php } else { ?>
+      <a href="<?=$this->basePath?>/user/sign/up">Sign up</a>
+      &nbsp;&nbsp;|&nbsp;&nbsp; <a href="<?=$this->basePath?>/user/sign">Sign in</a>
+    <?php } ?>
+    </td>
+  </tr>
+</table>

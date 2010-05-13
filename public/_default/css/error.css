@@ -1,0 +1,38 @@
+/** $Id$ */
+/** default/error */
+body {
+    background-color: #e4f2fd;
+    color: #003399;
+    text-align: left;
+}
+.errorbody {
+    padding: 50px;
+}
+.errorbox {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: #c6d9e9 2px solid;
+  	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	min-width: 600px;
+}
+.msgicon {
+    padding-top: 20px;
+    padding-left: 20px;
+    width: 90px;
+}
+.msgtitle {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: #c6d9e9 1px solid;
+    font-size: 26px;
+}
+.msgbody {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    line-height: 160%;
+}
+

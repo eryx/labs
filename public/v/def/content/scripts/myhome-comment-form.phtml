@@ -1,0 +1,31 @@
+<?php 
+if (isset($this->comment) && $this->comment['allow_comment'] == 1) {
+?>
+<div id="node-comment-submit">
+    <a name="comment"></a>
+    <h3 class="node-comment-htitle"><?=$this->lang->_('Leave a Comment')?></h3>
+    <form id="form_comment_submit" action="<?=$this->userHomeModuleUri?>/comment/commit?nodeid=<?=$this->comment['nodeid']?>" method="post">
+    <table width="100%" border="0" cellpadding="0" cellspacing="10">
+	    <tr>
+	        <td width="160px" align="right"><b><?=$this->lang->_('Name')?></b></td>
+	        <td><input type="text" name="username" value="<?=$this->comment['username']?>" /></td>
+	    </tr>
+	    <tr>
+            <td align="right" valign="top"><b><?=$this->lang->_('Content')?></b></td>
+            <td><textarea name="body" cols="50" rows="5"><?=$this->comment['body']?></textarea></td>
+	    </tr>
+	    <tr>
+            <td align="right" valign="top"><b><?=$this->lang->_('Verification')?></b></td>
+            <td>
+                <input type="text" name="verifycode" value="" size="6" /><?=$this->lang->_('Type the characters you see in the picture below')?><br />
+                <img src="<?=$this->verifycode_image?>" />
+            </td>
+	    </tr>
+	    <tr>
+            <td></td>
+            <td><input class="input_button" type="submit" value="<?=$this->lang->_('Submit')?>" /></td>
+	    </tr>
+    </table>
+    </form>
+</div>
+<?php } ?>

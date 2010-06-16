@@ -1,0 +1,42 @@
+<?php
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<h1>Content types</h1>
+
+<?php
+if (count($this->items) > 0) {
+?>
+<table width="100%" border="1" cellpadding="0" cellspacing="2">
+<tr>
+    <td>ID</td>
+    <td>Name</td>
+    <td>Description</td>
+    <td>Created</td>
+    <td>Updated</td>
+    <td>Operations</td>
+</tr>
+<?php
+foreach ($this->items as $item) {
+?>
+<tr>
+    <td><?php echo $item['typeid']?></td>
+    <td><?php echo $item['title']?></td>
+    <td><?php echo $item['summary']?></td>
+    <td><?php echo $item['created']?></td>
+    <td><?php echo $item['updated']?></td>
+    <td>
+        Edit 
+        <a href="/wcm/type-admin/fields?typeid=<?php echo $item['typeid']?>">Manage fields</a> 
+    </td>
+</tr>
+<?php
+}
+?>
+</table>
+<?php
+}
+?>
+<div>
+<a href="/wcm/type-admin/create">Add content type</a>
+</div>

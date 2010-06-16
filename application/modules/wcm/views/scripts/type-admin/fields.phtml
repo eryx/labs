@@ -1,0 +1,53 @@
+<?php
+include $this->getScriptPath('message-general.phtml'); 
+?>
+
+<h1>Manage fields</h1>
+<form id="type_admin_create" name="type_admin_create" action="<?=$this->basePath?>/wcm/type-admin/fieldcreate" method="post">
+<input id="typeid" name="typeid" type="hidden" value="<?php echo $this->typeid?>" />
+<table width="100%" border="1" cellpadding="0" cellspacing="2">
+<tr>
+    <td>Name</td>
+    <td>Label</td>
+    <td>Field type</td>
+    <td>Operations</td>
+</tr>
+<tr>
+    <td>title</td>
+    <td>Title</td>
+    <td>text</td>
+    <td></td>
+</tr>
+<?php
+if (count($this->items) > 0) {
+foreach ($this->items as $item) {
+?>
+<tr>
+    <td><?php echo $item['field_name']?></td>
+    <td><?php echo $item['field_label']?></td>
+    <td><?php echo $item['field_type']?></td>
+    <td>
+        <a href="/wcm/type-admin/fields?typeid=<?php echo $item['typeid']?>">Edit</a>
+    </td>
+</tr>
+<?php
+}
+}
+?>
+<tr>
+    <td><input id="field_name" name="field_name" type="text" /></td>
+    <td><input id="field_label" name="field_label" type="text" /></td>
+    <td>
+        <select id="field_type" name="field_type">
+        <?php foreach ($this->types as $type) { ?>
+        <option value ="<?php echo $type?>"><?php echo $type?></option>
+        <?php } ?>
+        </select>
+    </td>
+    <td>
+        <input type="submit" name="submit" value="Submit" />
+    </td>
+</tr>
+</table>
+</form>
+

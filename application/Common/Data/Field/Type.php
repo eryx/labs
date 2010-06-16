@@ -32,4 +32,13 @@ final class Common_Data_Field_Type
             //
         }
     }
+
+    public static function getTypes()
+    {
+        return array(
+            self::TEXT,self::TEXT_LONG,self::TEXT_SUMMARY,
+            self::NUMBER_INTEGER,
+            self::TERM_AUTO,
+        );
+    }
 }

@@ -7,6 +7,10 @@ class Wcm_EntryController extends Common_Controller_Action
     public function indexAction()
     {
     }
+    
+    public function listAction()
+    {
+    }
 
     public function viewAction()
     {

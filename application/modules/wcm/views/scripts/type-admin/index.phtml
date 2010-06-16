@@ -26,8 +26,8 @@ foreach ($this->items as $item) {
     <td><?php echo $item['created']?></td>
     <td><?php echo $item['updated']?></td>
     <td>
-        Edit 
         <a href="/wcm/type-admin/fields?typeid=<?php echo $item['typeid']?>">Manage fields</a> 
+        <a href="/wcm/layout-admin/?typeid=<?php echo $item['typeid']?>">Manage display</a> 
     </td>
 </tr>
 <?php

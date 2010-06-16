@@ -34,6 +34,11 @@ defined('SYS_ENTRY') or die('Access Denied!');
  */
 class Wcm_IndexController extends Common_Controller_Action
 {
+    public function errorAction()
+    {
+        $this->loadLayout('layout-simple');
+        $this->render('index');
+    }
     
     public function indexAction()
     {

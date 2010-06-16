@@ -13,6 +13,7 @@ $time_start = microtime(true);
 
 // Define path to application directory
 define('APPLICATION_PATH', realpath(SYS_ENTRY.'/application'));
+define('ROOT_PATH', realpath(SYS_ENTRY));
 
 // Define application environment
 defined('APPLICATION_ENV')

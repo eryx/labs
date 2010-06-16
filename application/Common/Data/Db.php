@@ -6,7 +6,7 @@ class Common_Data_Db
 {
     //
 	public static $entry = array('name' => 'entry', 'primary' => 'entryid');
-	public static $entry_type = array('name' => 'entry_type', 'primary' => 'type');
+	public static $entry_type = array('name' => 'entry_type', 'primary' => 'typeid');
 
 	//
 	public static $field_config = array('name' => 'field_config',

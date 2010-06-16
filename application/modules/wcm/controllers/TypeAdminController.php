@@ -51,8 +51,10 @@ class Wcm_TypeAdminController extends Common_Controller_Action
     public function fieldsAction()
     {
         $_fc = new Common_Data_Field_Config();
+        
         $where = array('entity_type' => $this->_params['typeid']);
         $this->view->items = $_fc->getList($where, array(), 128);
+        
         $this->view->typeid = $this->_params['typeid'];
         
         $this->view->types = Common_Data_Field_Type::getTypes();

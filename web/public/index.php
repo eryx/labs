@@ -2,74 +2,35 @@
 /**
  * SmartKit
  *
- * @copyright  Copyright (c) 2004-2009 HOOTO.COM
- * @license    http://www.gnu.org/copyleft/gpl.html
- * @version    $Id: index.php 862 2010-05-10 15:49:48Z evorui $
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @category   Index
+ * @package    Index
+ * @copyright  Copyright 2004-2010 HOOTO.COM
+ * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @version    $Id: index.php 856 2010-05-07 16:05:39Z evorui $
  */
 
-xhprof_enable();
 
-define('SYS_ENTRY', '..');
-
-$time_start = microtime(true);
-
-// Define path to application directory
-define('APPLICATION_PATH', realpath(SYS_ENTRY.'/application'));
-define('ROOT_PATH', realpath(SYS_ENTRY));
-
-// Define application environment
-defined('APPLICATION_ENV')
-    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
-
-// Ensure application|library/ is on include_path
-set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH,
-    realpath(SYS_ENTRY.'/library'),
-    get_include_path(),
-)));
+define('DS', DIRECTORY_SEPARATOR);
+define('SYS_ROOT', realpath('..'). DS);
 
 
-/** Zend_Application */
-require_once 'Zend/Application.php';  
-
-// Create application, bootstrap, and run
-$application = new Zend_Application(
-    APPLICATION_ENV, 
-    APPLICATION_PATH . '/configs/application.ini'
-);
-$application->bootstrap()
-            ->run();
-
-// Debug ...
-if (isset($_REQUEST['debug'])) {
+set_include_path(implode(PATH_SEPARATOR, 
+    array(SYS_ROOT.'library', get_include_path())));
 
 
-    $time_end = microtime(true);
-    $time = 1000 * ($time_end - $time_start);
-    echo "<pre>";
-    echo "<-- total: $time ms -->\n";
+require SYS_ROOT.'config.inc.php';
+require 'Core/Bootstrap.php';
 
-    //
-    $gdb = Zend_Registry::get('db');
-    $ret = $gdb->getProfiler()->getQueryProfiles();
-    $query = $gdb->getProfiler()->getTotalNumQueries();
-    $querytime = 1000 * $gdb->getProfiler()->getTotalElapsedSecs();
 
-    echo "<-- querys: $query in $querytime ms -->\n";
-    foreach ($ret as $v) {
-        echo $v->getQuery()."\n";
-    }
-    echo "</pre>";
-    
-    $xhprof_data = xhprof_disable();
-    
-    include_once "xhprof_lib/utils/xhprof_lib.php";
-    include_once "xhprof_lib/utils/xhprof_runs.php";
-
-    $xhprof_runs = new XHProfRuns_Default();
-    $run_id = $xhprof_runs->save_run($xhprof_data, "xhprof");
-
-    echo "<script language=\"javascript\"> 
-            window.open('http://cm.dev.com/xhprof_html/index.php?run=$run_id&source=xhprof'); 
-            </script>   ";
-
-}

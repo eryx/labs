@@ -25,17 +25,50 @@
 defined('SYS_ROOT') or die('Access Denied!');
 
 
+require_once "Core/View.php";
+
 class Core_Controller
 {
-    public $views   = array();
-
-	public $layout	= 'layout';
+    protected static $_instance = null;
+    
+    public $layout  = NULL;
+    
+    public $view    = NULL;
 	
-    public function render()
+	public function __construct()
+    {
+        $this->view = new Core_View();
+    }
+    
+    public static function getInstance()
+    {
+        if (null === self::$_instance) {
+            self::$_instance = new self();
+        }
+
+        return self::$_instance;
+    }
+    
+    public function dispatch($action)
+    {
+        $action .= 'Action';
+        
+        if (in_array($action, get_class_methods($this))) {
+            $this->$action();
+        } else {
+            //$this->__call($action, array());
+        }
+    }
+	
+    public function render($name = NULL)
 	{
-	    $layoutPath = SYS_ROOT."application/cm/views/{$this->layout}.php";
-    	$output = load::view($layoutPath, $this->views);
+    	$output = $this->view->render($name);
 
 		print $output;
 	}
+	
+	public function layout($name)
+    {
+    
+    }
 }

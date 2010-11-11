@@ -24,7 +24,7 @@
 /** ensure this file is being included by a parent file */
 defined('SYS_ROOT') or die('Access Denied!');
 
-require_once "Core/Controller.php";
+
 
 /**
  * Class IndexController
@@ -38,13 +38,16 @@ class IndexController extends Core_Controller
 {
     public function indexAction()
     {
-        $this->layout = 'layout';
-
-        $vars = array();
+        //
+        $this->view->setLayout();
         
-        $vars['feeds'][] = array('title' => 'Title 1');
-        $vars['feeds'][] = array('title' => 'Title 2');        
-        $this->views['content'] = load::view(
-            SYS_ROOT."application/cm/views/index/index.php", $vars);
+        //
+        $data['feeds'][] = array('title' => 'Title 1');
+        $data['feeds'][] = array('title' => 'Title 2');
+        $data = $this->view->load(SYS_ROOT."app/cm/views/index/index.php", $data);
+        $this->view->setViews('content', $data);
+        
+        //
+        $this->render();
     }
 }

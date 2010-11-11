@@ -21,6 +21,8 @@
  * @version    $Id: index.php 856 2010-05-07 16:05:39Z evorui $
  */
 
+define('START_TIME', microtime(true));
+define('START_MEMORY_USAGE', memory_get_usage());
 
 define('DS', DIRECTORY_SEPARATOR);
 define('SYS_ROOT', realpath('..'). DS);
@@ -33,4 +35,5 @@ set_include_path(implode(PATH_SEPARATOR,
 require SYS_ROOT.'config.inc.php';
 require 'Core/Bootstrap.php';
 
-
+echo "<div>". (microtime(true) - START_TIME) ."</div>";
+echo "<div>". (memory_get_usage() - START_MEMORY_USAGE) ."</div>";

@@ -61,37 +61,38 @@ if (ini_get('magic_quotes_gpc')) {
 	array_walk_recursive($_FILES, 'array_stripslashes_files');
 }
 
-
-class load
-{
-	public static function view($file = NULL, $vars = NULL)
-	{
-		if (is_array($vars)) {
-			foreach ($vars as $key => $value) {
-				$$key = $value;
-			}
-		}
-        unset($vars);
-
-		ob_start();
-
-		include($file);
-
-		$buffer = ob_get_contents();
-		ob_end_clean();
-		
-		return $buffer;
-	}
-}
-
 // config database session cache view routes hooks
 
-require_once SYS_ROOT."application/cm/controllers/IndexController.php";
 
-$controller = new IndexController();
-$controller->indexAction();
-$controller->render();
+if (isset($config['module'])) {
+    $module = $config['module'];
+}
 
+if (isset($config['controller'])) {
+    $controller = ucfirst($config['controller'])."Controller";
+}
 
+if (isset($config['action'])) {
+    $action = $config['action'];
+}
 
+try {
 
+    $file = SYS_ROOT ."application/{$module}/controllers/{$controller}.php";
+    
+    if (!file_exists($file)) {
+        throw new Exception();
+    }
+    
+    require_once "Core/Controller.php";
+    require_once $file;
+        
+    unset($file);
+
+    $controller = new $controller();
+    
+    $controller->dispatch($action);
+    
+} catch (Exception $e) {
+
+}

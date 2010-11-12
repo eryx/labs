@@ -47,7 +47,7 @@ class Core_View
         if (empty($path)) {
             $path = "layout";
         }
-        $this->_layout = SYS_ROOT."application/cm/views/{$path}.php";
+        $this->_layout = SYS_ROOT."app/cm/views/{$path}.php";
     }
     
     public function setViews($key, $val = NULL)
@@ -77,7 +77,7 @@ class Core_View
 	        $buffer = $this->load($this->_layout, $this->views);
 	    } else {
 	        if ($file === NULL) {
-	            $file = SYS_ROOT ."/application/cm/views/index/index.php";
+	            $file = SYS_ROOT ."/app/cm/views/index/index.php";
 	        }
 	        $buffer = $this->load($file);
 	        unset($file);

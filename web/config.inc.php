@@ -13,7 +13,7 @@ ini_set('error_reporting', E_ALL);
 
 $config = array();
 
-$config['module'] = 'cm';
-$config['controller'] = 'index';
-$config['action'] = 'index';
+$config['baseurl'] = '';
 
+$config['routes'] = array(
+);

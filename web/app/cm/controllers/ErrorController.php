@@ -14,38 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @category   Cm
- * @package    Cm_Controller
+ * @category   Def
+ * @package    Def_Controller
  * @copyright  Copyright 2010 HOOTO.COM
  * @license    http://www.apache.org/licenses/LICENSE-2.0
- * @version    $Id: IndexController.php 856 2010-05-07 16:05:39Z evorui $
+ * @version    $Id: ErrorController.php 856 2010-05-07 16:05:39Z evorui $
  */
  
 /** ensure this file is being included by a parent file */
 defined('SYS_ROOT') or die('Access Denied!');
 
+
+
 /**
- * Class IndexController
+ * Class ErrorController
  *
- * @category   Cm
- * @package    IndexController
+ * @category   Def
+ * @package    ErrorController
  * @copyright  Copyright 2010 HOOTO.COM
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  */
-class IndexController extends Core_Controller
+class ErrorController extends Core_Controller
 {
     public function indexAction()
     {
-        //
-        $this->view->setLayout();
-        
-        //
-        $data['feeds'][] = array('title' => 'Title 1');
-        $data['feeds'][] = array('title' => 'Title 2');
-        $data = $this->view->load(SYS_ROOT."app/{$this->reqs->mod}/views/{$this->reqs->ctr}/index.php", $data);
-        $this->view->setViews('content', $data);
-        
-        //
         $this->render();
     }
 }

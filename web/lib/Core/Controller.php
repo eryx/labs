@@ -29,46 +29,37 @@ require_once "Core/View.php";
 
 class Core_Controller
 {
-    protected static $_instance = null;
-    
-    public $layout  = NULL;
-    
     public $view    = NULL;
+    
+    public $reqs    = NULL;
 	
-	public function __construct()
+	public function __construct($reqs = NULL)
     {
         $this->view = new Core_View();
-    }
-    
-    public static function getInstance()
-    {
-        if (null === self::$_instance) {
-            self::$_instance = new self();
-        }
-
-        return self::$_instance;
-    }
-    
-    public function dispatch($action)
-    {
-        $action .= 'Action';
         
-        if (in_array($action, get_class_methods($this))) {
+        $this->reqs = $reqs;
+    }
+    
+    public function router()
+    {
+        
+    }
+    
+    public function dispatch()
+    {
+        $action = $this->reqs->act.'Action';
+        
+        if (method_exists($this, $action)) {
             $this->$action();
-        } else {
-            //$this->__call($action, array());
         }
     }
 	
     public function render($name = NULL)
 	{
-    	$output = $this->view->render($name);
-
-		print $output;
+	    if ($name === NULL) {
+	        $name = SYS_ROOT."app/{$this->reqs->mod}/views/{$this->reqs->ctr}/index.php";
+	    }
+	    
+    	print $this->view->render($name);
 	}
-	
-	public function layout($name)
-    {
-    
-    }
 }

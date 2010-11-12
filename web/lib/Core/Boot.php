@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @category   Core_Bootstrap
- * @package    Core_Bootstrap
+ * @category   Core_Boot
+ * @package    Core_Boot
  * @copyright  Copyright 2004-2010 HOOTO.COM
  * @license    http://www.apache.org/licenses/LICENSE-2.0
- * @version    $Id: Core_Bootstrap.php 856 2010-05-07 16:05:39Z evorui $
+ * @version    $Id: Core_Boot.php 856 2010-05-07 16:05:39Z evorui $
  */
 
 /** ensure this file is being included by a parent file */
@@ -41,7 +41,7 @@ ini_set('session.cookie_httponly', '1');
 // to ensure consistent string, dates, times and numbers handling.
 setlocale(LC_ALL, 'en_US.utf-8');
 
-  
+
 if (ini_get('magic_quotes_gpc')) {
 
 	function array_stripslashes(&$v) {
@@ -61,38 +61,34 @@ if (ini_get('magic_quotes_gpc')) {
 	array_walk_recursive($_FILES, 'array_stripslashes_files');
 }
 
-// config database session cache view routes hooks
-
-
-if (isset($config['module'])) {
-    $module = $config['module'];
-}
-
-if (isset($config['controller'])) {
-    $controller = ucfirst($config['controller'])."Controller";
-}
-
-if (isset($config['action'])) {
-    $action = $config['action'];
-}
 
 try {
 
-    $file = SYS_ROOT ."application/{$module}/controllers/{$controller}.php";
+    require_once "Core/Request.php";
+    require_once "Core/Controller.php";
+    
+    $reqs = new Core_Request();
+
+    if (isset($config['routes'])) {
+        $reqs->router($config['routes']);
+    }
+
+    $ctr = ucfirst($reqs->ctr).'Controller';
+    $file = SYS_ROOT ."app/{$reqs->mod}/controllers/{$ctr}.php";
     
     if (!file_exists($file)) {
-        throw new Exception();
+        throw new Exception($file);
     }
     
     require_once "Core/Controller.php";
     require_once $file;
-        
-    unset($file);
 
-    $controller = new $controller();
+    $controller = new $ctr($reqs);
+   
+    $controller->dispatch();
     
-    $controller->dispatch($action);
-    
+    unset($config, $reqs, $file, $controller);
+     
 } catch (Exception $e) {
-
+    echo $e->getMessage();
 }

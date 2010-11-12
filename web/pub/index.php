@@ -29,11 +29,11 @@ define('SYS_ROOT', realpath('..'). DS);
 
 
 set_include_path(implode(PATH_SEPARATOR, 
-    array(SYS_ROOT.'library', get_include_path())));
+    array(SYS_ROOT.'lib', get_include_path())));
 
 
 require SYS_ROOT.'config.inc.php';
-require 'Core/Bootstrap.php';
+require 'Core/Boot.php';
 
 echo "<div>". (microtime(true) - START_TIME) ."</div>";
 echo "<div>". (memory_get_usage() - START_MEMORY_USAGE) ."</div>";

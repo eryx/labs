@@ -49,72 +49,45 @@ class Core_Request
     
     public function router($routes = array())
     {
-        $uris = explode('/', $this->uri);
+        $uri = $this->uri == '' ? array() : explode('/', $this->uri);
+        $urc = count($uri);
+
+        /* $routes[] = array('route' => ':mod/:ctr/:act',
+            'mod' => 'cm', 'ctr' => 'index', 'act' => 'index'); */
         
-        $routes[] = array('route' => ':mod/:ctr/:act',
-            'mod' => 'cm', 'ctr' => 'index', 'act' => 'index');
-        
-        foreach ($routes as $val) {
+        foreach ($routes as $v) {
             
-            $route = explode('/', trim($val['route'], '/'));
-            
-            if (isset($route[0])) {
-            
-                if (isset($uris[0])) {
-                    if (substr($route[0], 0, 1) == ":") {
-                        $val[$route[0]] = $uris[0];
-                    } else {
-                        $val['mod'] = $uris[0];
-                    }
-                    
-                    unset($uris[0]);
-                }
-                
-                unset($route[0]);
-            }
-            
-            if (isset($route[1])) {
-            
-                if (isset($uris[1])) {
-                    if (substr($route[1], 0, 1) == ":") {
-                        $val[$route[1]] = $uris[1];
-                    } else {
-                        $val['ctr'] = $uris[1];
-                    }
-                    
-                    unset($uris[1]);
-                }
-                
-                unset($route[1]);
-                
-            }                    
-            
-            foreach ($route as $key2 => $val2) {
-                if (substr($val2, 0, 1) == ":" && isset($uris[$key2])) {
-                    $val[$val2] = $uris[$key2];
-                    unset($uris[$key2]);
-                }
-            }
-            
+            $rot = explode('/', trim($v['_route'], '/'));
+            $max = max($urc, count($rot));
+
             $pre = NULL;
-            foreach ($uris as $val2) {
-                if ($pre !== NULL) {
 
-                    $val[$pre] = $val2;
-                    $pre = NULL;
+            for ($i = 0; $i < $max; $i++) {                
                 
-                } else {
+                if (isset($rot[$i]) && isset($uri[$i])) {
+                
+                    if (rstr($rot[$i], 0, 1) == ":") {
+                        $v[rstr($rot[$i], 1)] = $uri[$i];
+                    } else if ($rot[$i] != $uri[$i]) {
+                        continue 2;
+                    }
+                
+                } else if (isset($uri[$i])) {
 
-                    $pre = $val2;
+                    if ($pre === NULL) {
+                        $pre = $uri[$i];
+                    } else {
+                        $v[$pre] = $uri[$i];
+                        $pre = NULL;       
+                    }
+                
                 }
             }
-            unset($route, $pre);
             
-            if (isset($val['mod']) && isset($val['mod']) && isset($val['mod'])) {
-                foreach ($val as $key2 => $val2) {
-                    $this->$key2 = $val2;
+            if (isset($v['mod']) && isset($v['ctr']) && isset($v['act'])) {
+                foreach ($v as $key => $val) {
+                    $this->$key = $val; // TODO XSS
                 }
-                break;
             }
         }
     }

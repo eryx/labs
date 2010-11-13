@@ -66,8 +66,8 @@ class Core_Request
                 
                 if (isset($rot[$i]) && isset($uri[$i])) {
                 
-                    if (rstr($rot[$i], 0, 1) == ":") {
-                        $v[rstr($rot[$i], 1)] = $uri[$i];
+                    if (substr($rot[$i], 0, 1) == ":") {
+                        $v[substr($rot[$i], 1)] = $uri[$i];
                     } else if ($rot[$i] != $uri[$i]) {
                         continue 2;
                     }
@@ -88,6 +88,7 @@ class Core_Request
                 foreach ($v as $key => $val) {
                     $this->$key = $val; // TODO XSS
                 }
+                break;
             }
         }
     }

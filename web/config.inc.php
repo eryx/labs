@@ -19,3 +19,7 @@ $config['routes'] = array(
     array('_route' => ':mod/:ctr/:act', '_type' => 'std', 
         'mod' => 'cm', 'ctr' => 'index', 'act' => 'index'),
 );
+
+$config['database'] = array('adapter' => 'pdo_sqlite',
+    'params' => array('dbname' => SYS_ROOT .'data/database.sqlite')
+);

@@ -18,7 +18,6 @@
  * @package    Core_View
  * @copyright  Copyright 2004-2010 HOOTO.COM
  * @license    http://www.apache.org/licenses/LICENSE-2.0
- * @version    $Id: Core_View.php 856 2010-05-07 16:05:39Z evorui $
  */
 
 /** ensure this file is being included by a parent file */

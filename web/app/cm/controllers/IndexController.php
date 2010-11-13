@@ -34,6 +34,11 @@ defined('SYS_ROOT') or die('Access Denied!');
  */
 class IndexController extends Core_Controller
 {
+    public function init()
+    {
+        $this->initdb();
+    }
+    
     public function indexAction()
     {
         //
@@ -44,6 +49,10 @@ class IndexController extends Core_Controller
         $data['feeds'][] = array('title' => 'Title 2');
         $data = $this->view->load(SYS_ROOT."app/{$this->reqs->mod}/views/{$this->reqs->ctr}/index.php", $data);
         $this->view->setViews('content', $data);
+        
+        $db = Core_Dao::factory(array('name' => 'user', 'primary' => 'uid'));
+        //$rs = $db->getList(array('uname' => 'admin'));
+        
         
         //
         $this->render();

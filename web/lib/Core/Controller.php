@@ -25,8 +25,6 @@
 defined('SYS_ROOT') or die('Access Denied!');
 
 
-require_once "Core/View.php";
-
 class Core_Controller
 {
     public $view    = NULL;
@@ -38,11 +36,19 @@ class Core_Controller
         $this->view = new Core_View();
         
         $this->reqs = $reqs;
-    }
-    
-    public function router()
-    {
         
+        $this->init();
+    }
+
+    /**
+     * Initialize object
+     *
+     * Called from {@link __construct()} as final step of object instantiation.
+     *
+     * @return void
+     */
+    public function init()
+    {
     }
     
     public function dispatch()
@@ -54,12 +60,31 @@ class Core_Controller
         }
     }
 	
-    public function render($name = NULL)
+    public function render($path = NULL)
 	{
-	    if ($name === NULL) {
-	        $name = SYS_ROOT."app/{$this->reqs->mod}/views/{$this->reqs->ctr}/index.php";
+	    if ($path === NULL) {
+	        $path = SYS_ROOT."app/{$this->reqs->mod}/views/{$this->reqs->ctr}/{$this->reqs->act}.php";
+	    } else {
+	        $path = SYS_ROOT."app/{$this->reqs->mod}/views/{$name}.php";
 	    }
 	    
-    	print $this->view->render($name);
+    	print $this->view->render($path);
+	}
+	
+	public function initdb()
+	{
+	    try {
+
+            if (isset($GLOBALS['config']['database'])) {
+                $db = Zend_Db::factory($GLOBALS['config']['database']['adapter'],
+                    $GLOBALS['config']['database']['params']);
+                Zend_Db_Table_Abstract::setDefaultAdapter($db);
+            } else {
+                throw new Exception('Can not connect to db-server');
+            }
+
+        } catch (Exception $e) {
+            $e->getMessage();
+        }	
 	}
 }

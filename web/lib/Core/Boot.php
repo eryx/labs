@@ -62,29 +62,27 @@ if (ini_get('magic_quotes_gpc')) {
 }
 
 
+function __autoload($class) {
+    $class = str_replace('_', '/', $class);          
+    require_once ($class .".php");
+}
+//spl_autoload_register('__autoload');
+      
 try {
-
-    require_once "Core/Request.php";
-    require_once "Core/Controller.php";
     
     $reqs = new Core_Request();
-
     if (isset($config['routes'])) {
         $reqs->router($config['routes']);
     }
 
     $ctr = ucfirst($reqs->ctr).'Controller';
     $file = SYS_ROOT ."app/{$reqs->mod}/controllers/{$ctr}.php";
-    
     if (!file_exists($file)) {
         throw new Exception($file);
     }
     
-    require_once "Core/Controller.php";
     require_once $file;
-
-    $controller = new $ctr($reqs);
-   
+    $controller = new $ctr($reqs);           
     $controller->dispatch();
     
     unset($config, $reqs, $file, $controller);

@@ -26,13 +26,11 @@ defined('SYS_ROOT') or die('Access Denied!');
 
 class Core_View
 {
-    private $_layout = NULL;
-    
-    private $_views  = array();
+    private $_paths  = NULL;
 
-    public function __construct()
+    /** public function __construct()
     {
-    }
+    } */
     
     public function __set($key, $val)
     {
@@ -41,17 +39,10 @@ class Core_View
         }
     }
     
-    public function setLayout($path = NULL)
+    public function setPath($path)
     {
-        if (empty($path)) {
-            $path = "layout";
-        }
-        $this->_layout = SYS_ROOT."app/cm/views/{$path}.php";
-    }
-    
-    public function setViews($key, $val = NULL)
-    {
-        $this->views[$key] = $val;
+        $this->_paths[] = rtrim($path, '/');
+        krsort($this->_paths);
     }
     
     public function load($file, $vars = NULL)
@@ -70,28 +61,28 @@ class Core_View
 		return ob_get_clean();
 	}
 	
-	public function render($file = NULL)
+	public function render($name = NULL, $vars = NULL)
 	{
-	    if ($this->_layout !== NULL) {
-	        $buffer = $this->load($this->_layout, $this->views);
-	    } else {
-	        if ($file === NULL) {
-	            $file = SYS_ROOT ."/app/cm/views/index/index.php";
-	        }
-	        $buffer = $this->load($file);
-	        unset($file);
-	    }
+	    $buffer = "";
+	  
+	    foreach ($this->_paths as $val) {
+            $file = $val."/{$name}.php";            
+            if (file_exists($file)) {
+                $buffer = $this->load($file, $vars);
+	            unset($file);
+            }
+        }	        
 	    
 	    return $buffer;
 	}
 	
-	public function clear()
+	/** public function clear()
     {
         $vars = get_object_vars($this);
-        foreach ($vars as $key => $value) {
+        foreach ($vars as $key => $val) {
             if ('_' != substr($key, 0, 1)) {
                 unset($this->$key);
             }
         }
-    }
+    } */
 }

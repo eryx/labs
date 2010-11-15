@@ -33,9 +33,10 @@ class Core_Controller
 	
 	public function __construct($reqs = NULL)
     {
-        $this->view = new Core_View();
-        
         $this->reqs = $reqs;
+        
+        $this->view = new Core_View();
+        $this->view->setPath(SYS_ROOT."app/{$reqs->mod}/views/");
         
         $this->init();
     }
@@ -60,15 +61,12 @@ class Core_Controller
         }
     }
 	
-    public function render($path = NULL)
+    public function response($name = NULL)
 	{
-	    if ($path === NULL) {
-	        $path = SYS_ROOT."app/{$this->reqs->mod}/views/{$this->reqs->ctr}/{$this->reqs->act}.php";
-	    } else {
-	        $path = SYS_ROOT."app/{$this->reqs->mod}/views/{$name}.php";
+	    if ($name === NULL) {
+	        $name = "{$this->reqs->ctr}/{$this->reqs->act}";
 	    }
-	    
-    	print $this->view->render($path);
+    	print $this->view->render($name);
 	}
 	
 	public function initdb()

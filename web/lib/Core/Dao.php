@@ -305,7 +305,7 @@ class Core_DaoTable extends Zend_Db_Table_Abstract
         return $rs;
     }
     
-    public function getList(array $where, $order = array(), $limit = 10, $offset = 0)
+    public function getList($where = array(), $order = array(), $limit = 10, $offset = 0)
     {
         $db = $this->getAdapter();
         $select = $db->select();

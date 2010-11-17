@@ -40,16 +40,33 @@ class IndexController extends Core_Controller
     }
     
     public function indexAction()
-    {   
+    {
+        $conf = require SYS_ROOT."/conf/cm.{$this->reqs->instance}.inc.php";
+        $conf = $conf[$this->reqs->method];
+
+        foreach ($conf['views'] as $v) {
+        
+            $datax = $v['data']['datax'];            
+            $db = Core_Dao::factory(array('name' => $datax));
+            $rs = $db->getList();
+
+            $this->view->{$v['name']} = $this->view->render($v['view'], 
+                array($v['data']['output'] => $rs));
+            
+            unset($db, $rs);
+        }
+        
+        $this->response('list');
+    }
+    
+    public function testAction()
+    {
         //
         $data['feeds'][] = array('title' => 'Title 1');
         $data['feeds'][] = array('title' => 'Title 2');
         $data = $this->view->render("index/index", $data);
         $this->view->content = $data;
-        
-        $db = Core_Dao::factory(array('name' => 'user', 'primary' => 'uid'));
-        //$rs = $db->getList(array('uname' => 'admin'));
         //
-        $this->response('layout');
+        $this->response('list');
     }
 }

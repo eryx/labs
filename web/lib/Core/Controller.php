@@ -30,6 +30,8 @@ class Core_Controller
     public $view    = NULL;
     
     public $reqs    = NULL;
+    
+    public $session = NULL;
 	
 	public function __construct($reqs = NULL)
     {
@@ -58,6 +60,8 @@ class Core_Controller
         
         if (method_exists($this, $action)) {
             $this->$action();
+        } else if (method_exists($this, 'indexAction')) {
+            $this->indexAction();
         }
     }
 	

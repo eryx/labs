@@ -39,6 +39,11 @@ class Core_View
         }
     }
     
+    public function __get($key)
+    {
+        return NULL;
+    }
+    
     public function setPath($path)
     {
         $this->_paths[] = rtrim($path, '/');

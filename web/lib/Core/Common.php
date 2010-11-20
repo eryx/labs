@@ -14,26 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @category   Index
- * @package    Index
- * @copyright  Copyright 2004-2010 HOOTO.COM
+ * @category   Core
+ * @package    Core_Session
+ * @copyright  Copyright 2010 HOOTO.COM
  * @license    http://www.apache.org/licenses/LICENSE-2.0
- * @version    $Id: index.php 856 2010-05-07 16:05:39Z evorui $
+ * @version    $Id: Instance.php 834 2010-03-22 16:26:33Z onerui $
  */
+ 
+/** ensure this file is being included by a parent file */
+defined('SYS_ROOT') or die('Access Denied!');
 
-define('START_TIME', microtime(true));
-define('START_MEMORY_USAGE', memory_get_usage());
-
-define('DS', DIRECTORY_SEPARATOR);
-define('SYS_ROOT', realpath('..'). DS);
-
-
-set_include_path(implode(PATH_SEPARATOR, 
-    array(SYS_ROOT.'lib', SYS_ROOT.'app', get_include_path())));
-
-
-require SYS_ROOT.'config.inc.php';
-require 'Core/Boot.php';
-
-echo "<div>". (microtime(true) - START_TIME) ."</div>";
-echo "<div>". (memory_get_usage() - START_MEMORY_USAGE) ."</div>";
+class Core_Object
+{
+    public function __set($key, $val)
+    {
+        if ('_' != substr($key, 0, 1)) {
+            $this->$key = $val;
+        }
+    }
+    
+    public function __get($key)
+    {
+        return NULL;
+    }
+}

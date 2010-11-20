@@ -38,6 +38,10 @@ class Core_Request
         if (isset($_SERVER['REDIRECT_URL'])) {
             $this->uri = trim($_SERVER['REDIRECT_URL'], '/');
         }
+        
+        foreach ($_REQUEST as $key => $val) {
+            $this->$key = $val;
+        }
     }
     
     public function __set($key, $val)

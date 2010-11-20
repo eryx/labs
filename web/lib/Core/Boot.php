@@ -61,13 +61,17 @@ if (ini_get('magic_quotes_gpc')) {
 	array_walk_recursive($_FILES, 'array_stripslashes_files');
 }
 
+require_once "Core/Common.php";
 
 function __autoload($class) {
-    $class = str_replace('_', '/', $class);          
+    $class = str_replace('_', '/', $class);
+    if (preg_match("#^(.*)/Model/(.*)#i", $class, $regs)) {
+        $class = strtolower($regs[1]."/models/").$regs[2];
+    }
     require_once ($class .".php");
 }
 //spl_autoload_register('__autoload');
-      
+
 try {
     
     $reqs = new Core_Request();
@@ -75,13 +79,19 @@ try {
         $reqs->router($config['routes']);
     }
 
-    $ctr = ucfirst($reqs->ctr).'Controller';
-    $file = SYS_ROOT ."app/{$reqs->mod}/controllers/{$ctr}.php";
-    if (!file_exists($file)) {
+    $ctr = str_replace(array('-', '.'), ' ', $reqs->ctr);
+    $ctr = str_replace(' ', '', ucwords($ctr)).'Controller';
+    $path = SYS_ROOT ."app/{$reqs->mod}/controllers/";
+    
+    if (file_exists($path."{$ctr}.php")) {
+        require_once $path."{$ctr}.php";
+    } else if (file_exists($path."IndexController.php")) {
+        require_once $path."IndexController.php";
+        $ctr = "IndexController";
+    } else {
         throw new Exception($file);
     }
     
-    require_once $file;
     $controller = new $ctr($reqs);           
     $controller->dispatch();
     

@@ -16,6 +16,10 @@ $config = array();
 $config['baseurl'] = '';
 
 $config['routes'] = array(
+    array('_route' => 'doc/:act',
+        'mod' => 'cm', 'ctr' => 'index', 'act' => 'index', 'inst' => 'doc'),
+    array('_route' => 'link/:act',
+        'mod' => 'cm', 'ctr' => 'index', 'act' => 'index', 'inst' => 'link'),
     array('_route' => 'search/:method',
         'mod' => 'cm', 'ctr' => 'index', 'act' => 'index',
         'instance' => 'search', 'method' => 'list'),

@@ -41,6 +41,52 @@ class IndexController extends Core_Controller
     
     public function indexAction()
     {
+        $c = require SYS_ROOT."/conf/cm.php";
+        
+        if (!in_array($this->reqs->inst, $c['types'])) {
+            return $this->errorAction();
+        }
+        $this->view->inst = $this->reqs->inst;
+        
+        if (!isset($c['pagelets'][$this->reqs->act])) {
+            return $this->errorAction();
+        }
+        $this->view->act = $this->reqs->act;
+
+        foreach ($c['pagelets'][$this->reqs->act]['views'] as $v) {
+        
+            $datax = isset($v['entry']) ? $v['entry'] : 'data_entry';
+
+            $db = Core_Dao::factory(array('name' => $datax));
+            $where = array();
+
+            if (isset($v['query'])) {
+                foreach ($v['query'] as $key => $val) {
+                    if (isset($this->reqs->{$key})) {
+                        $where[$key] = $this->reqs->{$key};
+                    }
+                }
+            }
+            $order = isset($v['sortby']) ? $v['sortby'] : array();
+            $start = isset($this->reqs->start) ? $this->reqs->start : 0;
+            $rs = $db->getList($where, $order, 10, $start);
+
+            $this->view->{$v['name']} = $this->view->render($v['view'], 
+                array($v['output'] => $rs));
+            
+            unset($db, $rs);
+        }
+        
+        $this->response($c['pagelets'][$this->reqs->act]['layout']);
+    }
+    
+    public function errorAction()
+    {
+        echo 'ERROR';
+    }
+    
+    public function testAction()
+    {
         $conf = require SYS_ROOT."/conf/cm.{$this->reqs->instance}.inc.php";
         $conf = $conf[$this->reqs->method];
 
@@ -56,17 +102,6 @@ class IndexController extends Core_Controller
             unset($db, $rs);
         }
         
-        $this->response('list');
-    }
-    
-    public function testAction()
-    {
-        //
-        $data['feeds'][] = array('title' => 'Title 1');
-        $data['feeds'][] = array('title' => 'Title 2');
-        $data = $this->view->render("index/index", $data);
-        $this->view->content = $data;
-        //
         $this->response('list');
     }
 }

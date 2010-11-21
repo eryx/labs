@@ -81,21 +81,19 @@ try {
 
     $ctr = str_replace(array('-', '.'), ' ', $reqs->ctr);
     $ctr = str_replace(' ', '', ucwords($ctr)).'Controller';
-    $path = SYS_ROOT ."app/{$reqs->mod}/controllers/";
+    $pat = SYS_ROOT ."app/{$reqs->mod}/controllers/";
     
-    if (file_exists($path."{$ctr}.php")) {
-        require_once $path."{$ctr}.php";
-    } else if (file_exists($path."IndexController.php")) {
-        require_once $path."IndexController.php";
+    if (file_exists($pat."{$ctr}.php")) {
+        require_once $pat."{$ctr}.php";
+    } else if (file_exists($pat."IndexController.php")) {
+        require_once $pat."IndexController.php";
         $ctr = "IndexController";
     } else {
-        throw new Exception($file);
+        throw new Exception('Invalid Request');
     }
     
     $controller = new $ctr($reqs);           
     $controller->dispatch();
-    
-    unset($config, $reqs, $file, $controller);
      
 } catch (Exception $e) {
     echo $e->getMessage();

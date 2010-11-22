@@ -55,11 +55,13 @@ class IndexController extends Core_Controller
 
         foreach ($c['pagelets'][$this->reqs->act]['views'] as $v) {
         
-            $datax = isset($v['entry']) ? $v['entry'] : 'data_entry';
+            $table = isset($v['table']) ? $v['table'] : 'data_entry';
 
-            $db = Core_Dao::factory(array('name' => $datax));
+            $db = Core_Dao::factory(array('name' => $table));
             $where = array();
-
+            $output = array();
+            $limit = 10;
+            
             if (isset($v['query'])) {
                 foreach ($v['query'] as $key => $val) {
                     if (isset($this->reqs->{$key})) {
@@ -67,13 +69,35 @@ class IndexController extends Core_Controller
                     }
                 }
             }
-            $order = isset($v['sortby']) ? $v['sortby'] : array();
-            $start = isset($this->reqs->start) ? $this->reqs->start : 0;
-            $rs = $db->getList($where, $order, 10, $start);
-
-            $this->view->{$v['name']} = $this->view->render($v['view'], 
-                array($v['output'] => $rs));
             
+            if ($v['output'] == 'entry') {
+                if (isset($where['id'])) {
+                    $rs = $db->getById($where['id']);
+                } else {
+                    $rs = array();
+                }
+            } else {
+                $order = isset($v['sortby']) ? $v['sortby'] : array();
+                $p  = isset($this->reqs->p) ? intval($this->reqs->p) : 1;
+                if ($p < 1) {
+                    $p = 1;
+                }
+                $rs = $db->getList($where, $order, $limit, ($p - 1) * $limit);
+                
+                if (isset($v['pager'])) {
+                    $count = $db->getCount($where);
+                }
+            }
+            
+            $output[$v['output']] = $rs;
+            
+            if (isset($v['pager'])) {
+                $count = $db->getCount($where);
+                $output['pager'] = Core_Util_Pager::get($p, $count, $limit);
+            }
+
+            $this->view->{$v['laykey']} = $this->view->render($v['view'], $output);
+
             unset($db, $rs);
         }
         
@@ -92,7 +116,7 @@ class IndexController extends Core_Controller
 
         foreach ($conf['views'] as $v) {
         
-            $datax = $v['data']['datax'];            
+            $datax = $v['data']['datax'];
             $db = Core_Dao::factory(array('name' => $datax));
             $rs = $db->getList();
 

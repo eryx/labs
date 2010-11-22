@@ -18,14 +18,15 @@ $config['types'] = array('doc', 'link');
 $config['pagelets']['index'] = array(
     'layout' => 'list',
     'views' => array(
-        array('name' => 'content',
-            'view' => 'entry/list',
+        array('laykey' => 'content',
+            'view' => 'feeds/simple',
             'output' => 'feeds',
-            'query' => array('p' => NULL, 'type' => NULL, 'start' => NULL),
+            'query' => array('type' => NULL),
             'sortby' => array('published DESC'),
+            'pager' => true,
         ),
-        array('name' => 'types',
-            'entry' => 'data_type',
+        array('laykey' => 'types',
+            'table' => 'data_type',
             'view' => 'list/types',
             'output' => 'feeds',
         )
@@ -35,9 +36,9 @@ $config['pagelets']['index'] = array(
 $config['pagelets']['view'] = array(
     'layout' => 'list',
     'views' => array(
-        array('name' => 'content',
+        array('laykey' => 'content',
             'view' => 'entry/view',
-            'output' => 'feeds',
+            'output' => 'entry',
             'query' => array('id' => NULL),
         ),
     )

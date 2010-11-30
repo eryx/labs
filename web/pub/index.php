@@ -32,7 +32,7 @@ set_include_path(implode(PATH_SEPARATOR,
     array(SYS_ROOT.'lib', SYS_ROOT.'app', get_include_path())));
 
 
-require SYS_ROOT.'config.inc.php';
+require SYS_ROOT.'conf/config.inc.php';
 require 'Core/Boot.php';
 
 echo "<div>". (microtime(true) - START_TIME) ."</div>";

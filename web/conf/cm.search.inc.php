@@ -10,7 +10,7 @@ $config['list'] = array(
         'view' => 'list/simple',
         'data' => array('api' => 'default',
             'datax' => 'data_entry',
-            'output' => 'feeds'),
+            'output' => 'feed'),
         'query' => array('q' => ':q',
             'attr' => array(
                 'uid' => ':uid',
@@ -28,7 +28,7 @@ $config['list'] = array(
         'view' => 'list/types',
         'data' => array('api' => 'default',
             'datax' => 'data_type',
-            'output' => 'feeds'),
+            'output' => 'feed'),
         'query' => array(
             'attrs' => array('type' => 'type')
         ),

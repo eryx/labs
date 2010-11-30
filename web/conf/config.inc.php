@@ -2,7 +2,7 @@
 defined('SYS_ROOT') or die('Access Denied!');
 
 
-/*
+/**
  * Set the server timezone
  * see: http://us3.php.net/manual/en/timezones.php
  */
@@ -16,12 +16,10 @@ $config = array();
 $config['baseurl'] = '';
 
 $config['routes'] = array(
-    array('_route' => 'doc/:act',
-        'mod' => 'cm', 'ctr' => 'index', 'act' => 'index', 'inst' => 'doc'),
-    array('_route' => 'link/:act',
-        'mod' => 'cm', 'ctr' => 'index', 'act' => 'index', 'inst' => 'link'),
+    array('_route' => 'doc/:method',
+        'mod' => 'cm', 'ctr' => 'app', 'act' => 'index', 'inst' => 'doc'),
     array('_route' => 'search/:method',
-        'mod' => 'cm', 'ctr' => 'index', 'act' => 'index',
+        'mod' => 'cm', 'ctr' => 'app', 'act' => 'index',
         'instance' => 'search', 'method' => 'list'),
     array('_route' => ':mod/:ctr/:act', 
         'mod' => 'cm', 'ctr' => 'index', 'act' => 'index'),

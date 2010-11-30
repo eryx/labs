@@ -66,7 +66,7 @@ require_once "Core/Common.php";
 function __autoload($class) {
     $class = str_replace('_', '/', $class);
     if (preg_match("#^(.*)/Model/(.*)#i", $class, $regs)) {
-        $class = strtolower($regs[1]."/models/").$regs[2];
+        $class = strtolower($regs[1]).'/models/'.$regs[2];
     }
     require_once ($class .".php");
 }

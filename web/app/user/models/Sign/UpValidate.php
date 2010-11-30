@@ -50,13 +50,23 @@ class User_Model_Sign_UpValidate
         
         $params['uname'] = strtolower(trim($params['uname']));
         
-		if (!preg_match('/^[a-z]{1,1}[a-z0-9]{2,15}$/', $params['uname'])) {
-		    $msg = 'Invalid Username';
+		if (strlen($params['uname']) < 5 || strlen($params['uname']) > 16) {
+		    $msg = 'Your Username must be between 5 and 16 characters long';
+            return false;
+		}
+		
+		if (!preg_match('/^[a-z]{1,1}$/', substr($params['uname'], 0, 1))) {
+		    $msg = 'Your Username must begin with a letter';
+            return false;
+		}
+		
+		if (!preg_match('/^[a-z0-9]{1,16}$/', $params['uname'])) {
+		    $msg = 'Only letters (a-z), numbers (0-9) are allowed';
             return false;
 		}
 		
 		if (!Zend_Validate::is($params['pass'], 'StringLength', array(6, 32))) {
-            $msg = 'Password must between 6 and 32 characters long';
+            $msg = 'Password must be between 6 and 32 characters long';
             return false;
         }
         

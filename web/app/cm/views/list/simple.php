@@ -1,4 +1,4 @@
 <?php
-foreach ($feeds as $entry) {
+foreach ($feed as $entry) {
     echo "<div>{$entry['title']}</div>";
 }

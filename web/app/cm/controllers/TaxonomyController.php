@@ -18,29 +18,41 @@
  * @package    Cm_Controller
  * @copyright  Copyright 2010 HOOTO.COM
  * @license    http://www.apache.org/licenses/LICENSE-2.0
- * @version    $Id: IndexController.php 856 2010-05-07 16:05:39Z evorui $
+ * @version    $Id: TaxonomyController.php 856 2010-05-07 16:05:39Z evorui $
  */
  
 /** ensure this file is being included by a parent file */
 defined('SYS_ROOT') or die('Access Denied!');
 
 /**
- * Class IndexController
+ * Class TaxonomyController
  *
  * @category   Cm
- * @package    IndexController
+ * @package    TaxonomyController
  * @copyright  Copyright 2010 HOOTO.COM
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  */
-class IndexController extends Core_Controller
+class TaxonomyController extends Core_Controller
 {
     public function init()
     {
         $this->initdb();
     }
     
-    
     public function indexAction()
+    {
+        $db = Core_Dao::factory(array('name' => 'taxonomy_vocabulary'));
+        $this->view->feed = $db->getList(array(), array('updated DESC'), 999);
+
+        $this->response('taxonomy/index');
+    }
+    
+    public function vocabularyAction()
+    {
+        
+    }
+    
+    public function tmpAction()
     {
         $c = require SYS_ROOT."/conf/cm.php";
         

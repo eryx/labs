@@ -30,18 +30,12 @@
     </div> 
 </div> 
  
-<table class="wrapper">
-    <tr>
-        <?php if ($this->types !== NULL) { ?>
-        <td width="220px">
-        <?php print $this->types; ?>
-        </td>
-        <?php } ?>
-        <td>
-        <?php print $this->content; ?>
-        </td>
-    </tr>
-</table>
+ 
+<div class="wrapper">
+
+<?php print $this->content; ?>
+
+</div>
 
 <div id="footer" class="wrapper">
     <p>Footer</p>

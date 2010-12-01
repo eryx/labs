@@ -31,25 +31,40 @@ $config['type']['link']['content']['lable'] = 'Url';
 
 // default page config
 $config['pagelets']['index'] = array(
-    'layout' => 'layout',
+    'layout' => 'app/layout',
     'views' => array(
-        array('laykey' => 'content',
-            'view' => 'app/feed',
-            'output' => 'feed',
+        array('pagelet' => 'content',
+            'script' => 'app/feed',
+            'params' => array(
+                'data_base' => 'data_entry',
+                'query_set' => array(
+                    'types' => array('doc', 'video', 'blog')
+                )
+            )
         ),
-        array('laykey' => 'types',
-            'view' => 'app/feed-type',
-            'output' => 'feed',
+        array('pagelet' => 'types',
+            'script' => 'app/feed-type',
+            'params' => array(
+                'data_base' => 'data_type',
+                'query_set' => array(
+                    'types' => array('doc', 'video', 'blog')
+                )    
+            )
         )
     )
 );
 
 $config['pagelets']['view'] = array(
-    'layout' => 'layout',
+    'layout' => 'app/layout',
     'views' => array(
-        array('laykey' => 'content',
-            'view' => 'app/entry',
-            'output' => 'entry',
+        array('pagelet' => 'content',
+            'script' => 'app/entry',
+            'params' => array(
+                'data_base' => 'data_entry',
+                'query_set' => array(
+                    'types' => array('doc', 'video', 'blog')
+                )
+            )
         ),
     )
 );

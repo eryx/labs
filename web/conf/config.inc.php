@@ -20,7 +20,7 @@ $config['routes'] = array(
         'mod' => 'cm', 'ctr' => 'app', 'act' => 'index', 'inst' => 'doc'),
     array('_route' => 'search/:method',
         'mod' => 'cm', 'ctr' => 'app', 'act' => 'index',
-        'instance' => 'search', 'method' => 'list'),
+        'inst' => 'search', 'method' => 'index'),
     array('_route' => ':mod/:ctr/:act', 
         'mod' => 'cm', 'ctr' => 'index', 'act' => 'index'),
 );

@@ -41,22 +41,30 @@ class AppController extends Core_Controller
     
     public function indexAction()
     {
-        $c = require SYS_ROOT."/conf/cm.php";
+        $cfg = require SYS_ROOT."/conf/cm.php";
         
-        if (!in_array($this->reqs->inst, $c['types'])) {
+        /*if (!in_array($this->reqs->inst, $cfg['types'])) {
             return $this->errorAction();
-        }
+        }*/
         $this->view->inst = $this->reqs->inst;
         
-        if (!isset($c['pagelets'][$this->reqs->act])) {
+        if (!isset($cfg['pagelets'][$this->reqs->act])) {
             return $this->errorAction();
         }
         $this->view->act = $this->reqs->act;
 
-        foreach ($c['pagelets'][$this->reqs->act]['views'] as $v) {
-            $this->view->{$v['laykey']} = $this->view->render($v['view']);
+        $params = array('reqs' => $this->reqs);
+        foreach ($cfg['pagelets'][$this->reqs->method]['views'] as $v) {
+            
+            if (isset($v['params'])) {
+                $params['params'] = $v['params'];
+            } else {
+                $params['params'] = array();
+            }
+            
+            $this->view->{$v['pagelet']} = $this->view->render($v['script'], $params);
         }
         
-        $this->response($c['pagelets'][$this->reqs->act]['layout']);
+        $this->response($cfg['pagelets'][$this->reqs->act]['layout']);
     }
 }

@@ -76,4 +76,63 @@ class ProfileController extends Core_Controller
         
         $this->response('layout');
     }
+    
+    public function avatarAction()
+    {
+        if (preg_match('#^(.+)/profile/avatar/(.+)-(.+).png$#i', $this->reqs->uri, $regs)) {   
+            $uname = $regs[2];
+            $wsize = $regs[3];
+        } else {
+            $uname = "guest";
+            $wsize = "w100";
+        }
+        
+        if (!in_array($wsize, array("w100", "w40"))) {
+            $wsize = "w100";
+        }
+        
+        $des = str_split($uname);
+        $path = '/data/user/'.$des['0'].'/'.$des['1'].'/'.$des['2'].'/'.$uname;
+    
+        if (!file_exists(SYS_ROOT.$path."/$wsize.png")) {
+            $file = SYS_ROOT."/data/user/$wsize.png";
+        } else {
+            $file = SYS_ROOT.$path."/$wsize.png";
+        }
+
+        $media = array('name' => $uname,
+            'media_name'=> $uname.'-'.$wsize.'.png',
+            'imagePath' => $file);
+
+        $this->_output($media);       
+        exit;
+    }
+    
+    private function _output($media)
+    {
+        //ob_end_clean();
+        $ims = getimagesize($media['imagePath']);
+
+        //header("Cache-Control: private");
+        header("Pragma: cache");
+        header("Expires: " . gmdate("D, d M Y H:i:s",time() + 36000) . " GMT");
+        //header("Last-Modified: " . gmdate("D, d M Y H:i:s",strtotime($media['modified'])) . " GMT");
+        header("Content-type: ".$ims['mime']);
+
+        /*$validator = new Zend_Validate_File_IsImage();
+        if ($validator->isValid($media['imagePath'], array('type' => $ims['mime']))) {
+            header("Content-Disposition: inline; filename=".$media['media_name']);
+        } else {
+            header('Content-Disposition: attachment; filename='.$media['media_name']);
+        }*/
+        header("Content-Disposition: inline; filename=".$media['media_name']);
+        header("Content-Length: ".filesize($media['imagePath']));    
+
+        $fp = fopen($media['imagePath'], "rb"); 
+
+        fpassthru($fp);
+        fclose($fp);
+
+        exit;        
+    }
 }

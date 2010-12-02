@@ -23,13 +23,41 @@ $count = $db->getCount($where);
 $pager = Core_Util_Pager::get($p, $count, $limit);
 $pagerurl = "/{$this->inst}/{$this->act}/?";
 
-foreach ($feed as $entry) {
-    echo "<h3><a href=\"/{$this->inst}/view/?id={$entry['id']}\">{$entry['title']}</a></h3>";
-    echo "<div>{$entry['summary']}</div>";
-    echo "<div>{$entry['content']}</div>";
+foreach ($feed as $key => $entry) {
+    $feed[$key]['link'] = "/{$this->inst}/view/?id={$entry['id']}";
+    $feed[$key]['avatar'] = "/user/profile/avatar/{$entry['uname']}-w40.png";
+    $feed[$key]['link_profile'] = "/user/profile/{$entry['uname']}";
+    $feed[$key]['terms'] = explode(",", $entry['terms']);
 }
 
 ?>
+
+<dl class="entrylist">
+  <?php foreach ($feed as $entry): ?>
+  <dt>
+    <a href="<?php echo $entry['link']?>" target="_blank"><?php echo $entry['title']?></a> 
+    <span class="cgray">[<?=$entry['type']?>]</span>
+  </dt>
+  <dd>
+    <div class="entryinfo">
+      <img src="<?=$entry['avatar']?>" title="<?=$entry['uname']?>" width="18px" height="18px"/> <a href="<?php echo $entry['link_profile']?>"><b><?=$entry['uname']?></b></a> on <?php echo date('Y-m-d', strtotime($entry['created']));?>
+                            
+      <?php if (count($entry['terms']) > 0) { ?>
+      <img src="/_cm/img/tag_blue.png" align="absmiddle" /> 
+      <?php }
+        foreach ((array)$entry['terms'] as $term) { ?> 
+        &nbsp;<a href="#<?=$term?>"><?=$term?></a>
+      <?php } ?>
+    </div>
+   
+    <div class="entrybody"><?=$entry['summary']?></div>
+                    
+    <div class="bottominfo">
+      <a href="<?=$entry['link']?>" target="_blank">&#187; Detail</a>
+    </div>
+  </dd>
+  <?php endforeach; ?>
+</dl>                   
 <ul class="pager">
     <li><?php echo 'Items'.' '.$pager['itemFrom'].' - '.$pager['itemTo'].' of '.$pager['itemCount']; ?></li>    
     <?php if (isset($pager['first'])) { ?>

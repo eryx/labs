@@ -29,20 +29,20 @@
         </ul> 
     </div> 
 </div> 
- 
- 
-<table class="wrapper">
-    <tr>
-        <?php if ($this->types !== NULL) { ?>
-        <td width="220px">
-        <?php print $this->types; ?>
-        </td>
-        <?php } ?>
-        <td>
-        <?php print $this->content; ?>
-        </td>
-    </tr>
-</table>
+
+<div class="wrapper centerbox" style="margin:30px;">
+  <?php if ($this->types !== NULL) { ?>
+  <div class="sidebox">
+    <?php print $this->types; ?>
+  </div>
+  <div class="contentbox">
+    <?php print $this->content; ?>
+  </div>
+  <?php
+  } else { 
+    print $this->content; 
+  } ?>
+</div>
 
 <div id="footer" class="wrapper">
     <p>Footer</p>

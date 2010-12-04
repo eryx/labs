@@ -14,6 +14,7 @@ $feed = $db->getList($where, $order, 99);
 <div class="sideblock">
   <h3>Content</h3>
   <ul>
+    <li><a class="<?php if (!isset($reqs->type)) echo 'current'?>" href="/<?php echo $reqs->inst?>/<?php echo $reqs->method?>/">所有</a></li>
     <?php foreach ($feed as $entry) { 
     $class = (isset($reqs->type) && $reqs->type == $entry['id']) ? "current" : "";
     ?>

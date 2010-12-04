@@ -8,16 +8,41 @@ $id = isset($reqs->id) ? $reqs->id : '';
 
 $entry = $db->getById($id);
 
-?>
-
-<h3><?php echo $entry['title']?></h3>
-<div>published by <?php echo $entry['uname']?> on <?php echo $entry['published']?></div>
-<p><?php echo $entry['summary']?></p>
-<p><?php echo $entry['content']?></p>
-<?php 
-if ($entry['cat'] > 0) { 
+if ($entry['cat'] > 0) {
     $db = Core_Dao::factory(array('name' => 'taxonomy_term_user'));    
     $cat_entry = $db->getById($entry['cat']);
-    echo "<div>Category: <a href=\"/{$this->inst}/term/{$cat_entry['id']}\">{$cat_entry['title']}</a></div>";
+} else {
+    $cat_entry = array();
 }
+if (strlen($entry['terms'])) {
+    $entry['terms'] = explode(",", $entry['terms']);
+} else {
+    $entry = array();
+}
+$entry['published'] = date("Y:m:d h:i", strtotime($entry['published']));
+$entry['updated']   = date("Y:m:d h:i", strtotime($entry['updated']));
 ?>
+
+<div class="entry-view">
+    <div class="entry-header">
+        <h1 class="entry-title"><?=$entry['title']?></h1>
+   	    <div class="entry-info">
+   	        <img src="/_cm/img/date.png" align="absmiddle" title="Created" /> <?=$entry['published']?>&nbsp;&nbsp;
+            <?php if (count($cat_entry) > 1) { ?>
+            <img src="/_cm/img/folder.png" align="absmiddle" title="Category" /> <a href="/<?php echo $this->inst?>/term/<?php echo $cat_entry['id']?>"><?=$cat_entry['title']?></a>
+            <?php } ?>
+        </div>
+    </div>
+   	<div class="entry-content"><?=$entry['content']?></div>
+   	<?php
+   	if (count($entry['terms']) > 0) {
+   	?>
+    <div class="clear_both">
+        <img src="/_cm/img/tag_blue.png" align="absmiddle" title="Tags" /> Tags:
+        <?php foreach ($entry['terms'] as $term): ?> 
+            &nbsp;&nbsp;<a href="#<?=$term?>"><?=$term?></a>
+       	<?php endforeach; ?>
+    </div>
+    <?php } ?>
+</div>
+    

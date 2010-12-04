@@ -49,7 +49,6 @@ a:visited {color:#377cbd;}
 a:hover {color:#f00;}
 a:active {color:#004a9c; text-decoration:none;}
 
-
 /** common */
 .centerall {width:100%; clear:both; margin:auto; text-align:left;}
 .wrapper {width:980px; margin:0 auto; clear:both;}
@@ -63,6 +62,22 @@ a:active {color:#004a9c; text-decoration:none;}
 
 .clearstyle {margin:0; padding:0; border:0; background-color:''; color:'';}
 .clearboth {clear:both;}
+
+input {
+    border: 1px #c6d9e9 solid;
+	padding: 5px;
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+
+/** pager */
+ul.pager {margin:10px 0; padding:0px; list-style:none; font-size:105%; font-weight:bolder;}
+ul.pager li {display:inline; list-style:none; text-align:center; line-height:200%;}
+ul.pager li a {padding:0 5px; text-decoration:none; color:#0063dc;}
+ul.pager li a:hover {color:#d54e21; text-decoration:underline;}
+ul.pager li a.current {color:#d54e21;}
 
 /** Center block */
 .centerbox {
@@ -85,24 +100,20 @@ a:active {color:#004a9c; text-decoration:none;}
 
 /** feed-sideblock */
 .sideblock {
-    margin-top:20px;
+    margin-bottom:10px;
 	-moz-border-radius: 3px;
 	-khtml-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 	border: 1px #c6d9e9 solid;
-	padding:5px;
+	padding:5px 5px 10px 5px;
 }
 .sideblock h3 {
-	margin: 5px;
+	margin: 5px 0;
 	padding: 5px 0;
 	font-size: 18px;
 	font-weight: bold;
 	border-bottom: 1px #c6d9e9 solid;
-}
-.sideblock ul {
-    margin: 5px;
-	padding-left: 20px;
 }
 .sideblock li {
 	padding: 3px 0px;
@@ -229,9 +240,72 @@ dl.entrylist {
     margin-bottom: 20px;
 }
 
-/** pager */
-ul.pager {margin:10px 0; padding:0px; list-style:none; font-size:105%; font-weight:bolder;}
-ul.pager li {display:inline; list-style:none; text-align:center; line-height:200%;}
-ul.pager li a {padding:0 5px; text-decoration:none; color:#0063dc;}
-ul.pager li a:hover {color:#d54e21; text-decoration:underline;}
-ul.pager li a.current {color:#d54e21;}
+
+/** entry */
+.entry-view {
+    padding: 10px;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: #c6d9e9 1px solid;
+}
+.entry-view .entry-header {
+    line-height: 200%;
+}
+.entry-view .entry-title {
+    padding: 10px 0px 10px 0px;
+}
+.entry-view .entry-info {
+    padding: 4px;
+    border-top: #c6d9e9 1px solid;
+    border-bottom: #c6d9e9 1px solid;
+    background-color: #f8f8f8;
+}
+.entry-content {padding:10px; line-height:180%;}
+.entry-content p {padding:10px 0px;}
+.entry-content a {color:#d54e21; font-weight:bolder; text-decoration:underline;}
+.entry-content a:hover {color:#555555; background-color: #eeeeee;}
+
+
+
+/**
+ *  node-comment-list
+ */
+#node-comment-list {
+    margin: 20px 0px 20px 0px; padding: 10px;
+	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	border: #83d13d 1px solid;
+	color: green;
+}
+#node-comment-list .node-comment-view {
+    margin: 10px 0 20px 0;
+    border-top: #83d13d 1px solid;
+    width: 100%;
+}
+#node-comment-list p {padding: 4px 10px 4px 30px;}
+#node-comment-list .nodeCommentInfo {
+    clear: both; float: right;
+}
+
+/**
+ *  node-comment-submit
+ */
+#node-comment-submit {
+    margin: 20px 0px 20px 0px; padding: 10px;
+	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	border: #d54e21 1px solid;
+	color: #d54e21;
+}
+#node-comment-submit .node-comment-htitle {
+    border-bottom: #d54e21 1px solid;
+}
+
+
+

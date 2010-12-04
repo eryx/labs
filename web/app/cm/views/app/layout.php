@@ -30,10 +30,13 @@
     </div> 
 </div> 
 
-<div class="wrapper centerbox" style="margin:30px;">
+<div class="wrapper" style="padding-top:30px;">
   <?php if ($this->types !== NULL) { ?>
   <div class="sidebox">
-    <?php print $this->types; ?>
+    <?php 
+    print $this->search;
+    print $this->types;
+    ?>
   </div>
   <div class="contentbox">
     <?php print $this->content; ?>

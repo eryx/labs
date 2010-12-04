@@ -10,6 +10,8 @@ $limit = 10;
 $type = isset($reqs->type) ? $reqs->type : NULL;
 if ($type === NULL) {
     $where['in.type'] = $params['query_set']['types'];
+} else {
+    $where['type'] = $type;
 }
 
 $order = isset($reqs->sortby) ? $reqs->sortby : array();

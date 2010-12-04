@@ -42,6 +42,9 @@ $config['pagelets']['index'] = array(
                 )
             )
         ),
+        array('pagelet' => 'search',
+            'script' => 'app/side-search',
+        ),
         array('pagelet' => 'types',
             'script' => 'app/feed-type',
             'params' => array(
@@ -50,7 +53,7 @@ $config['pagelets']['index'] = array(
                     'types' => array('doc', 'video', 'blog')
                 )    
             )
-        )
+        ),
     )
 );
 

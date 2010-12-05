@@ -22,6 +22,10 @@ body {
   word-wrap:break-word; /* fix for long text breaking sidebar float in IE */
 }
 
+html, body {
+	height:100%;
+}
+
 h1 {font-size:200%;}
 h2 {font-size:150%;}
 h3 {font-size:117%;}
@@ -78,6 +82,28 @@ ul.pager li {display:inline; list-style:none; text-align:center; line-height:200
 ul.pager li a {padding:0 5px; text-decoration:none; color:#0063dc;}
 ul.pager li a:hover {color:#d54e21; text-decoration:underline;}
 ul.pager li a.current {color:#d54e21;}
+
+/** id:bodywrap */
+#bodywrap {
+	position:relative;
+	min-height:100%;
+}
+#bodycontent{
+	padding-bottom:55px;
+}
+
+/** id:footer */
+#footer {
+	clear:both;
+	height:45px; margin-top:-45px;
+	position:relative;
+	font-size:10px; 
+	background-color:#464646; color:#ffffff;
+}
+#footer div {padding:5px;}
+#footer .sidel {clear: left; float: left;}
+#footer .sider {clear: right; float: right;}
+#footer a {color:#ffffff;}
 
 /** Center block */
 .centerbox {
@@ -196,10 +222,6 @@ ul.pager li a.current {color:#d54e21;}
 	border-bottom-color:#ffffff;
 }
 
-/** id:footer */
-#footer {margin-top:40px; padding:2px; color:#464646; font-size: 12px;}
-#footer a {color:#464646;}
-#footer .line {border-top:1px solid #c6d9e9;}
 
 /** entry */
 

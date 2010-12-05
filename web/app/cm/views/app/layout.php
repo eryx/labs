@@ -2,11 +2,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <title><?php echo $this->headtitle?></title>
     <link rel="stylesheet" href="/_cm/css/common.css" type="text/css" media="all" />
 </head>
 <body>
 
+<div id="bodywrap">
+    <div id="bodycontent">
+    
 <table id="topnav" border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td align="left">
@@ -21,14 +24,14 @@
 
 <div class="centerall" style="background: url(/_cm/img/navline-px.png) #e4f2fd bottom repeat-x;"> 
     <div class="wrapper"> 
-        <div class="logo">Header</div>
+        <div class="logo"><img src="/_cm/img/logo.png" title="HOOTO CMF v6"/></div>
         <ul id="homenav"> 
             <li><a href="#" class="current">Home</a></li> 
             <li><a href="#" >Explore</a></li> 
             <li><a href="#" >Register</a></li> 
         </ul> 
     </div> 
-</div> 
+</div>
 
 <div class="wrapper" style="padding-top:30px;">
   <?php if ($this->types !== NULL) { ?>
@@ -47,8 +50,15 @@
   } ?>
 </div>
 
-<div id="footer" class="wrapper">
-    <p>Footer</p>
 </div>
+</div>
+
+<div id="footer">
+  <div class="wrapper">
+    <div class="sidel">HOOTO CMF 6.x-dev</div>
+    <div class="sider" id="htdebug"></div>
+  </div>
+</div>
+
 </body>
 </html>

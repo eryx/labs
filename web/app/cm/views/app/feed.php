@@ -19,6 +19,9 @@ $p  = isset($reqs->p) ? intval($reqs->p) : 1;
 if ($p < 1) {
     $p = 1;
 }
+if (isset($reqs->q)) {
+    $where['like.title'] = "%{$reqs->q}%";
+}
 $feed = $db->getList($where, $order, $limit, ($p - 1) * $limit);
 
 $count = $db->getCount($where);
@@ -59,7 +62,12 @@ foreach ($feed as $key => $entry) {
     </div>
   </dd>
   <?php endforeach; ?>
-</dl>                   
+</dl>
+<?php 
+if ($count == 0) {
+    return;
+}
+?>
 <ul class="pager">
     <li><?php echo 'Items'.' '.$pager['itemFrom'].' - '.$pager['itemTo'].' of '.$pager['itemCount']; ?></li>    
     <?php if (isset($pager['first'])) { ?>

@@ -35,5 +35,7 @@ set_include_path(implode(PATH_SEPARATOR,
 require SYS_ROOT.'conf/config.inc.php';
 require 'Core/Boot.php';
 
-echo "<div>". (microtime(true) - START_TIME) ."</div>";
-echo "<div>". (memory_get_usage() - START_MEMORY_USAGE) ."</div>";
+echo "<script> document.getElementById('htdebug').innerText = '"
+    . round((microtime(true) - START_TIME), 3) * 1000 ." ms, "
+    . round((memory_get_usage() - START_MEMORY_USAGE) / 1024, 0) ." KB'; </script>";
+

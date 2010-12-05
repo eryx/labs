@@ -51,6 +51,11 @@ class Core_Request
         }
     }
     
+    public function __get($key)
+    {
+        return NULL;
+    }
+    
     public function router($routes = array())
     {
         $uri = $this->uri == '' ? array() : explode('/', $this->uri);

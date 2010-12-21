@@ -1,0 +1,26 @@
+
+#nodeedit textarea {margin:0;padding:0;}
+#nodeedit textarea {margin:0;padding:0;}
+
+/**
+ *  layout
+ */
+.edit_frame {width:100%; min-width:980px;}
+
+
+.edit_item {padding:20px 0px 2px 0px;}
+.edit_item_left {clear: left; float: left;}
+.edit_item_right {clear: right; float: right;}
+
+.edit_item_info {padding:10px 0px 2px 0px;}
+.edit_item_title {padding:10px 0px 2px 0px; font-size:150%; font-weight:bold;}
+.edit_item_input {width:auto;padding:3px;min-width:400px; font-size:150%;}
+
+.edit_option_box {margin-top:20px; border: #c6d9e9 1px solid;}
+.edit_option_title {border-bottom: #f2f2f2 2px solid; padding:5px; font-size:140%; font-weight:bold;}
+.edit_option_list {padding:10px 0px 10px 20px;}
+
+.edit_button_commit {padding:3px; background-color:#e4f2fd; text-align:right;}
+
+
+

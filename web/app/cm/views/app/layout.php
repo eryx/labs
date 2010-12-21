@@ -2,8 +2,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?php echo $this->headtitle?></title>
+    <title><?php echo $this->headtitle; ?></title>
     <link rel="stylesheet" href="/_cm/css/common.css" type="text/css" media="all" />
+    <?php echo $this->headlink; ?>
 </head>
 <body>
 

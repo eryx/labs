@@ -27,7 +27,7 @@ final class Core_Config
             return self::$_configs[$name];
         }
 
-        if (file_exists(ROOT_PATH."/conf/{$name}.php")) {
+        if (file_exists(SYS_ROOT."/conf/{$name}.php")) {
             self::$_configs[$name] = require SYS_ROOT."/conf/{$name}.php";
             return self::$_configs[$name];
         }

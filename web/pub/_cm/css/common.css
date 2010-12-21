@@ -67,9 +67,19 @@ a:active {color:#004a9c; text-decoration:none;}
 .clearstyle {margin:0; padding:0; border:0; background-color:''; color:'';}
 .clearboth {clear:both;}
 
-input {
+input,select {
     border: 1px #c6d9e9 solid;
 	padding: 5px;
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	font-weight:bolder;
+	background-color:#ffffff;
+}
+
+textarea {
+    border: 1px #c6d9e9 solid;
 	-moz-border-radius: 2px;
 	-khtml-border-radius: 2px;
 	-webkit-border-radius: 2px;

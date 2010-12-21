@@ -33,6 +33,8 @@ class Core_Request
     public $ctr     = 'error';
     public $act     = 'index';
     
+    public $params  = array();
+    
     public function __construct()
     {
         if (isset($_SERVER['REDIRECT_URL'])) {
@@ -40,7 +42,8 @@ class Core_Request
         }
         
         foreach ($_REQUEST as $key => $val) {
-            $this->$key = $val;
+            $this->$key = $val; // TODO DELETE
+            $this->params[$key] = $val;
         }
     }
     

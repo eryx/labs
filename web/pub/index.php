@@ -22,7 +22,7 @@
  */
 
 define('START_TIME', microtime(true));
-define('START_MEMORY_USAGE', memory_get_usage());
+define('START_MEMORY_USAGE', memory_get_usage(TRUE));
 
 define('DS', DIRECTORY_SEPARATOR);
 define('SYS_ROOT', realpath('..'). DS);

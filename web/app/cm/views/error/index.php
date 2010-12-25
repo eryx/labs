@@ -3,24 +3,27 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>An error occurred</title>
-  <link rel="stylesheet" href="/css/common.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="/css/error.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="/_cm/css/error.css" type="text/css" media="all" />
 </head>
 <body>
-<div class="errorbody">
+
 <div class="errorbox">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td class="msgicon" valign="top">
-      <img src="/img/notice-large.png" />
-    </td>
-    <td>
-      <h1 class="msgtitle">An error occurred</h1>
-      <p class="msgbody"><b>... ...</b></p>
-    </td>
-  </tr>
+    <tr>
+      	<td class="msgicon" align="left" valign="top">
+      	    <img src="/_cm/img/<?=$this->message['type']?>-large.png" border="0" />
+      	</td>
+      	<td>
+      	    <div class="msgbody"><?=$this->message['body']?></div>
+      	    <ul>
+      	        <?php foreach ($this->message['links'] as $link): ?> 
+      	        <li>&#8250; <a href="<?=$link['url']?>"><?=$link['title']?></a></li>
+      	        <?php endforeach; ?>
+      	    </ul>
+      	</td>
+    </tr>
 </table>
 </div>
-</div>
+
 </body>
 </html>

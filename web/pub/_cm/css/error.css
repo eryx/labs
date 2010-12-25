@@ -1,15 +1,15 @@
 /** default/error */
 body {
+    padding:100px;
     background-color: #e4f2fd;
     color: #003399;
     text-align: left;
 }
-.errorbody {
-    padding: 50px;
-}
+
 .errorbox {
+    text-align:left;
     margin-bottom: 20px;
-    padding: 10px 20px;
+    padding: 10px;
     background-color: #ffffff;
     border: #c6d9e9 2px solid;
   	-moz-border-radius: 4px;
@@ -18,20 +18,23 @@ body {
 	border-radius: 4px;
 	min-width: 600px;
 }
-.msgicon {
-    padding-top: 20px;
-    padding-left: 20px;
-    width: 90px;
+.errorbox .msgicon {
+    width: 80px;
+    padding: 10px 0 0 10px;
 }
-.msgtitle {
-    padding-top: 20px;
-    padding-bottom: 10px;
-    border-bottom: #c6d9e9 1px solid;
-    font-size: 26px;
+.errorbox .msgbody {
+    padding-top:10px;
+    font-size:20px;
+    font-weight:bold; 
+    border-bottom:#c6d9e9 1px solid;
 }
-.msgbody {
-    padding-top: 20px;
-    padding-bottom: 10px;
-    line-height: 160%;
+.errorbox ul {
+    padding:20px 0px 20px 5px;
+}
+.errorbox ul li {
+    list-style-type:none;
+}
+.errorbox a {
+    text-decoration:underline;
 }
 

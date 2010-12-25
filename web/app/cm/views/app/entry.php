@@ -21,6 +21,8 @@ if (strlen($entry['terms'])) {
 }
 $entry['published'] = date("Y:m:d h:i", strtotime($entry['published']));
 $entry['updated']   = date("Y:m:d h:i", strtotime($entry['updated']));
+$entry['content']   = Core_Util_Format::ubb2html(Core_Util_Format::textHtmlFilter($entry['content']));
+$this->headtitle = $entry['title'];
 ?>
 
 <div class="entry-view">

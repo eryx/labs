@@ -128,4 +128,34 @@ class NodeController extends Core_Controller
         $this->view->message = Core_Message::get('success', 'Success');
         $this->editAction();
     }
+    
+    public function delAction()
+    {
+        $links = array(array(
+            'url' => 'javascript:history.back();',
+            'title' => 'Back',
+        ));
+        
+        if (!isset($this->reqs->params['id'])) {
+            $this->view->message = Core_Message::get('error', "ID can not be null", $links);
+            return $this->response("error/index");
+        }
+        
+        try {
+            $dbentry= Core_Dao::factory(array('name' => 'data_entry'));
+            $entry  = $dbentry->getById($this->reqs->params['id']);
+            if (!isset($entry['id'])) {
+                throw new Exception('Entry not found');
+            }
+            
+            $dbentry->delete(array('id' => $this->reqs->params['id']));
+            
+        } catch (Exception $e) {
+            $this->view->message = Core_Message::get('error', $e->getMessage());
+            return $this->response("error/index");
+        }
+        
+        $this->view->message = Core_Message::get('success', 'Success');
+        $this->response("error/index");
+    }
 }

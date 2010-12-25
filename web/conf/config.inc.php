@@ -18,9 +18,9 @@ $config['baseurl'] = '';
 $config['routes'] = array(
     array('_route' => 'doc/:method',
         'mod' => 'cm', 'ctr' => 'app', 'act' => 'index', 'inst' => 'doc'),
-    array('_route' => 'search/:method',
+    array('_route' => 'portal/:method',
         'mod' => 'cm', 'ctr' => 'app', 'act' => 'index',
-        'inst' => 'search', 'method' => 'index'),
+        'inst' => 'portal', 'method' => 'index'),
     array('_route' => ':mod/:ctr/:act', 
         'mod' => 'cm', 'ctr' => 'index', 'act' => 'index'),
 );

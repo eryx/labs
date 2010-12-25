@@ -260,16 +260,19 @@ dl.entrylist {
     font-size: 120%;
     font-weight: bold;
 }
-
 .entrylist dd a {
     color: green;
 }
-
 .entrylist dd .bottominfo {
     padding: 1px; 
     text-align: right; 
     border-bottom: #c6d9e9 2px solid;
     margin-bottom: 20px;
+}
+.entrylist .entrybody {
+    color: #21759B;
+    line-height: 180%;
+    padding-top: 10px;
 }
 
 

@@ -1,8 +1,37 @@
+
+* taxon/categories
+* taxon/terms
+
+* user/session
+* home/user
+* home/user/blog
+* home/user/instance
+
 * comment
-* user space
 * taxon-ui
 
-* any-type-cfg
+! any-type-cfg
+
+* manage-list
 * manage-add/edit
-* manage-delete
+* manage-save
+* manage-del
+
+* taxon/index
+
+* taxon/cat/list
+* taxon/cat/edit
+* taxon/cat/multi-tree
+
+* taxon/term/list
+
+* node/archives
+* node/comment
+* node/safe-code
+
+* storage/media-index
+* storage/media-upload
+* storage/media-images
+* storage/media-plugin
+
 

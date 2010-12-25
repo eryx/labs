@@ -33,6 +33,11 @@ foreach ($feed as $key => $entry) {
     $feed[$key]['avatar'] = "/user/profile/avatar/{$entry['uname']}-w40.png";
     $feed[$key]['link_profile'] = "/user/profile/{$entry['uname']}";
     $feed[$key]['terms'] = explode(",", $entry['terms']);
+    if (strlen($entry['summary']) > 1) {
+        $feed[$key]['summary'] = Core_Util_Format::ubb2html(Core_Util_Format::textHtmlFilter($entry['summary']));
+    } else {
+        $feed[$key]['summary'] = Core_Util_Format::autoParagraph(Core_Util_Format::cutstr(Core_Util_Format::ubbClear($entry['content']), 400));
+    }
 }
 
 ?>
@@ -58,6 +63,8 @@ foreach ($feed as $key => $entry) {
     <div class="entrybody"><?=$entry['summary']?></div>
                     
     <div class="bottominfo">
+      <a href="/cm/node/del?id=<?php echo $entry['id']?>">&#187; Delete</a>
+      <a class="cgray" href="/cm/node/edit?id=<?php echo $entry['id']?>">&#187; Edit</a>
       <a href="<?=$entry['link']?>" target="_blank">&#187; Detail</a>
     </div>
   </dd>

@@ -131,5 +131,98 @@ final class Core_Util_Format
         
         return preg_replace($farr, $tarr, $text);
     }
+    
+    public static function ubb2html($str, $order="") 
+    {
+        $match = array(
+            "%\[b\](.*?)\[\/b\]%si",
+            "%\[center\](.*?)\[\/center\]%si",
+            "%\[url\](.*?)\[\/url\]%si",
+            "%\[url=(.*?)\](.*?)\[\/url\]%si",
+            "%\[img\](.*?)\[\/img\]%si",
+            "%\[fieldset=(.*?)\](.*?)\[\/fieldset\]%si"
+        );
+        $replace = array(
+            "<b>$1</b>",
+            "<center>$1</center>",
+            "<a href=\"$1\" target=_blank>$1</a>",
+            "<a href=\"$1\" target=_blank>$2</a>",
+            "<a href=\"$1\" target=\"_blank\"><img src=\"$1\" border=\"0\" onload=\"javascript:if(this.width>800)this.width=800\" title=\"点击这里用新窗口浏览图片\"></a>",
+            "<fieldset><legend>$1</legend><blockquote>$2</blockquote></fieldset>"
+        );
+    
+        $str = preg_replace($match, $replace, $str);
 
+        return $str ;
+    }
+
+    public function ubbClear($str)
+    {
+        $match = array(
+            "%\[b\](.*?)\[\/b\]%si",
+            "%\[center\](.*?)\[\/center\]%si",
+            "%\[url\](.*?)\[\/url\]%si",
+            "%\[url=(.*?)\](.*?)\[\/url\]%si",
+            "%\[img\](.*?)\[\/img\]%si",
+            "%\[fieldset=(.*?)\](.*?)\[\/fieldset\]%si"
+        );
+        $replace = array(
+            "$1",
+            "$1",
+            "$1",
+            "$1",
+            "",
+            "$2"
+        );
+        $str = preg_replace($match, $replace, $str);
+        return $str;
+    }
+    
+    /**
+     * function cutstr()
+     * from Discuz_5.5.0_SC_UTF8
+     */
+    function cutstr($string, $length, $dot = ' ...') {
+
+	    if (strlen($string) <= $length) {
+	    	return $string;
+	    }
+	
+	    $string = str_replace(array('&amp;', '&quot;', '&lt;', '&gt;'), array('&', '"', '<', '>'), $string);
+	    $strcut = '';
+	    if (true) { // fix utf-8
+	    	$n = $tn = $noc = 0;
+	    	while ($n < strlen($string)) {
+	    		$t = ord($string[$n]);
+	    		if ($t == 9 || $t == 10 || (32 <= $t && $t <= 126)) {
+	    			$tn = 1; $n++; $noc++;
+	    		} elseif (194 <= $t && $t <= 223) {
+	    			$tn = 2; $n += 2; $noc += 2;
+	    		} elseif (224 <= $t && $t < 239) {
+	    			$tn = 3; $n += 3; $noc += 2;
+	    		} elseif (240 <= $t && $t <= 247) {
+	    			$tn = 4; $n += 4; $noc += 2;
+	    		} elseif (248 <= $t && $t <= 251) {
+	    			$tn = 5; $n += 5; $noc += 2;
+	    		} elseif ($t == 252 || $t == 253) {
+	    			$tn = 6; $n += 6; $noc += 2;
+	    		} else {
+	    			$n++;
+	    		}
+	    		if ($noc >= $length) {
+	    			break;
+	    		}
+	    	}
+	    	if ($noc > $length) {
+	    		$n -= $tn;
+	    	}
+	    	$strcut = substr($string, 0, $n);
+	    } else {
+	    	for ($i = 0; $i < $length - strlen($dot) - 1; $i++) {
+	    		$strcut .= ord($string[$i]) > 127 ? $string[$i].$string[++$i] : $string[$i];
+	    	}
+	    }
+	    // $strcut = str_replace(array('&', '"', '<', '>'), array('&amp;', '&quot;', '&lt;', '&gt;'), $strcut);
+	    return $strcut.$dot;
+    }
 }

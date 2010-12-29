@@ -1,6 +1,11 @@
 
-* taxon/categories
-* taxon/terms
+* taxon/index
+
+* taxon/cat/list
+* taxon/cat/edit
+* taxon/cat/multi-tree
+
+* taxon/term/list
 
 * user/session
 * home/user
@@ -16,14 +21,6 @@
 * manage-add/edit
 * manage-save
 * manage-del
-
-* taxon/index
-
-* taxon/cat/list
-* taxon/cat/edit
-* taxon/cat/multi-tree
-
-* taxon/term/list
 
 * node/archives
 * node/comment

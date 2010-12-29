@@ -1,8 +1,13 @@
 <?php
 
-$table = isset($params['data_base']) ? $params['data_base'] : 'data_entry';
+$acturl = "/{$this->inst}/{$this->act}/?";
 
-$db = Core_Dao::factory(array('name' => $table));
+$p  = isset($reqs->p) ? intval($reqs->p) : 1;
+$pagerurl = $acturl;
+
+
+$db     = Core_Dao::factory(array('name' => 'data_entry'));
+$dbterm = Core_Dao::factory(array('name' => 'taxonomy_term_user'));    
 
 $where = array();
 $limit = 10;
@@ -12,27 +17,41 @@ if ($type === NULL) {
     $where['in.type'] = $params['query_set']['types'];
 } else {
     $where['type'] = $type;
+    $pagerurl .= "&type={$type}";
+}
+
+if (isset($reqs->params['cat'])) {
+    $where['cat'] = intval($reqs->params['cat']);
+    $pagerurl .= "&cat={$reqs->params['cat']}";
+}
+
+if (isset($reqs->params['term'])) {
+    $where['like.terms'] = "%{$reqs->params['term']}%";
+    $pagerurl .= "&term={$reqs->params['term']}";
 }
 
 $order = isset($reqs->sortby) ? $reqs->sortby : array();
-$p  = isset($reqs->p) ? intval($reqs->p) : 1;
-if ($p < 1) {
-    $p = 1;
-}
+
 if (isset($reqs->q)) {
     $where['like.title'] = "%{$reqs->q}%";
+    $pagerurl .= "&q={$reqs->q}";
 }
 $feed = $db->getList($where, $order, $limit, ($p - 1) * $limit);
 
 $count = $db->getCount($where);
 $pager = Core_Util_Pager::get($p, $count, $limit);
-$pagerurl = "/{$this->inst}/{$this->act}/?";
+
 
 foreach ($feed as $key => $entry) {
     $feed[$key]['link'] = "/{$this->inst}/view/?id={$entry['id']}";
     $feed[$key]['avatar'] = "/user/profile/avatar/{$entry['uname']}-w40.png";
     $feed[$key]['link_profile'] = "/user/profile/{$entry['uname']}";
     $feed[$key]['terms'] = explode(",", $entry['terms']);
+    
+    if ($entry['cat'] > 0) {
+        $feed[$key]['_cat_entry'] = $dbterm->getById($entry['cat']);
+    }
+    
     if (strlen($entry['summary']) > 1) {
         $feed[$key]['summary'] = Core_Util_Format::ubb2html(Core_Util_Format::textHtmlFilter($entry['summary']));
     } else {
@@ -51,13 +70,15 @@ foreach ($feed as $key => $entry) {
   <dd>
     <div class="entryinfo">
       <img src="<?=$entry['avatar']?>" title="<?=$entry['uname']?>" width="18px" height="18px"/> <a href="<?php echo $entry['link_profile']?>"><b><?=$entry['uname']?></b></a> on <?php echo date('Y-m-d', strtotime($entry['created']));?>
-                            
+      <?php if (isset($entry['_cat_entry']['id'])) { ?>
+      &nbsp; <img src="/_cm/img/folder.png" align="absmiddle" title="Category" />&nbsp; <a href="<?php echo $acturl?>cat=<?php echo $entry['_cat_entry']['id']?>"><?=$entry['_cat_entry']['title']?></a>
+      <?php } ?>                      
       <?php if (count($entry['terms']) > 0) { ?>
-      <img src="/_cm/img/tag_blue.png" align="absmiddle" /> 
-      <?php }
+      &nbsp; <img src="/_cm/img/tag_blue.png" align="absmiddle" /> 
+      <?php
         foreach ((array)$entry['terms'] as $term) { ?> 
-        &nbsp;<a href="#<?=$term?>"><?=$term?></a>
-      <?php } ?>
+        &nbsp;<a href="<?php echo $acturl?>term=<?php echo $term?>"><?=$term?></a>
+      <?php } } ?>
     </div>
    
     <div class="entrybody"><?=$entry['summary']?></div>
@@ -78,14 +99,14 @@ if ($count == 0) {
 <ul class="pager">
     <li><?php echo 'Items'.' '.$pager['itemFrom'].' - '.$pager['itemTo'].' of '.$pager['itemCount']; ?></li>    
     <?php if (isset($pager['first'])) { ?>
-    <li><a href="<?=$pagerurl?>p=<?=$pager['first']?>">First</a></li>
+    <li><a href="<?=$pagerurl?>&p=<?=$pager['first']?>">First</a></li>
     <?php } if (isset($pager['previous'])) { ?>
-    <li><a href="<?=$pagerurl?>p=<?=$pager['previous']?>">Previous</a></li>
+    <li><a href="<?=$pagerurl?>&p=<?=$pager['previous']?>">Previous</a></li>
     <?php } foreach ($pager['list'] as $page) { ?>
-    <li><a href="<?=$pagerurl?>p=<?=$page['page']?>" <?php if ($page['isCurrent']) {echo 'class="current"';}?>><?=$page['page']?></a></li>
+    <li><a href="<?=$pagerurl?>&p=<?=$page['page']?>" <?php if ($page['isCurrent']) {echo 'class="current"';}?>><?=$page['page']?></a></li>
     <?php } if (isset($pager['next'])) { ?>
-    <li><a href="<?=$pagerurl?>p=<?=$pager['next']?>">Next</a></li>
+    <li><a href="<?=$pagerurl?>&p=<?=$pager['next']?>">Next</a></li>
     <?php } if (isset($pager['last'])) { ?>
-    <li><a href="<?=$pagerurl?>p=<?=$pager['last']?>">Last</a></li>
+    <li><a href="<?=$pagerurl?>&p=<?=$pager['last']?>">Last</a></li>
     <?php } ?>
 </ul>

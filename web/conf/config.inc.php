@@ -25,6 +25,7 @@ $config['routes'] = array(
         'mod' => 'cm', 'ctr' => 'index', 'act' => 'index'),
 );
 
-$config['database'] = array('adapter' => 'pdo_sqlite',
-    'params' => array('dbname' => SYS_ROOT .'data/database.sqlite')
+$config['database'] = array('adapter' => 'pdo_mysql',
+    //'params' => array('dbname' => SYS_ROOT .'data/database.sqlite')
+    'params' => array('host' => '127.0.0.1', 'dbname' => 'hooto_v5', 'username' => 'root', 'password' => '123456', 'charset' => 'utf8')
 );

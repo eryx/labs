@@ -41,9 +41,11 @@ class Core_Request
             $this->uri = trim($_SERVER['REDIRECT_URL'], '/');
         }
         
+        $this->vars = new Core_Object();
+        
         foreach ($_REQUEST as $key => $val) {
-            $this->$key = $val; // TODO DELETE
-            $this->params[$key] = $val;
+            $this->$key = $val;
+            $this->params[$key] = $val; // TODO DELETE
         }
     }
     

@@ -31,10 +31,10 @@ $config['type']['link']['content']['lable'] = 'Url';
 
 // default page config
 $config['pagelets']['index'] = array(
-    'layout' => 'app/layout',
+    'layout' => 'user/layout',
     'views' => array(
         array('pagelet' => 'content',
-            'script' => 'app/feed',
+            'script' => 'user/feed',
             'params' => array(
                 'data_base' => 'data_entry',
                 'query_set' => array(
@@ -43,10 +43,10 @@ $config['pagelets']['index'] = array(
             )
         ),
         array('pagelet' => 'search',
-            'script' => 'app/side-search',
+            'script' => 'user/side-search',
         ),
         array('pagelet' => 'types',
-            'script' => 'app/feed-type',
+            'script' => 'user/feed-type',
             'params' => array(
                 'data_base' => 'data_type',
                 'query_set' => array(
@@ -58,10 +58,10 @@ $config['pagelets']['index'] = array(
 );
 
 $config['pagelets']['view'] = array(
-    'layout' => 'app/layout',
+    'layout' => 'user/layout',
     'views' => array(
         array('pagelet' => 'content',
-            'script' => 'app/entry',
+            'script' => 'user/entry',
             'params' => array(
                 'data_base' => 'data_entry',
                 'query_set' => array(
@@ -71,5 +71,6 @@ $config['pagelets']['view'] = array(
         ),
     )
 );
+
 
 return $config;

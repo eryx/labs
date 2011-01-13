@@ -1,11 +1,7 @@
 
-* taxon/index
-
-* taxon/cat/list
-* taxon/cat/edit
-* taxon/cat/multi-tree
-
-* taxon/term/list
+* taxon/cat
+* taxon/cat-tree
+* taxon/tag
 
 * user/session
 * home/user
@@ -13,14 +9,11 @@
 * home/user/instance
 
 * comment
-* taxon-ui
-
-! any-type-cfg
 
 * manage-list
 * manage-add/edit
-* manage-save
 * manage-del
+* manage-taxon
 
 * node/archives
 * node/comment
@@ -30,5 +23,7 @@
 * storage/media-upload
 * storage/media-images
 * storage/media-plugin
+
+* sys-product
 
 

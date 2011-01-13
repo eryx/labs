@@ -38,3 +38,11 @@ class Core_Object
         return NULL;
     }
 }
+
+class Core_User
+{
+    public static function name2id($uname)
+    {
+        return substr(md5($uname), 0, 6);
+    }
+}

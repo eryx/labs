@@ -1,0 +1,21 @@
+
+
+/** Center block */
+.centerbox {
+	clear: both;
+	margin: auto;
+	text-align: left;
+	width: 980px;
+	color: #000099;
+}
+.sidebox {
+	clear: right;
+	float: right;
+	width: 220px;
+}
+.contentbox {
+	clear: left;
+	float: left;
+	width: 730px;
+}
+
